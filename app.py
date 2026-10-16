@@ -238,7 +238,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# YouTube Link Dönüştürücü
 def format_youtube_embed(url):
     if "watch?v=" in url:
         v_id = url.split("watch?v=")[1].split("&")[0]
@@ -446,7 +445,7 @@ else:
                             "genre": final_genre,
                             "imdb": n_imdb,
                             "desc": n_desc,
-                            "is_active": n_active, # Varsayılan olarak Açık/Aktif
+                            "is_active": n_active,
                             "is_featured": n_featured
                         }
                         st.session_state.movies.append(new_m)
@@ -527,7 +526,6 @@ else:
         </div>
     """, unsafe_allow_html=True)
 
-    # Oynatıcı Fonksiyonu
     def render_custom_player(video_url):
         if "drive.google.com" in video_url:
             embed_url = video_url
@@ -556,11 +554,9 @@ else:
             """
             st.components.v1.html(player_html, height=670)
 
-    # HERKES İÇİN FİLM LİSTELEME
     categories = sorted(list(set(m.get("genre", "Diğer") for m in st.session_state.movies if m.get("is_active", True) or st.session_state.admin_logged)))
 
     for cat in categories:
-        # Yönetici değilse sadece is_active=True olan filmleri filtrele
         cat_movies = [m for m in st.session_state.movies if m.get("genre", "Diğer") == cat and (m.get("is_active", True) or st.session_state.admin_logged)]
         
         if search_query:
