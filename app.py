@@ -10,8 +10,9 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- DOSYA TABANLI VERİ YÖNETİMİ ---
+# --- DOSYA TABANLI VERİ YÖNETİMİ (Filmler ve Profiller) ---
 DB_FILE = "movies.json"
+PROFILE_FILE = "profiles.json"
 
 default_movies = [
     {
@@ -34,30 +35,39 @@ default_movies = [
     }
 ]
 
-def load_movies():
-    if os.path.exists(DB_FILE):
+default_profiles = [
+    {"name": "Volkan", "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80"},
+    {"name": "Aile", "avatar": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=300&auto=format&fit=crop&q=80"},
+    {"name": "Misafir", "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=300&auto=format&fit=crop&q=80"}
+]
+
+def load_data(filename, default_val):
+    if os.path.exists(filename):
         try:
-            with open(DB_FILE, "r", encoding="utf-8") as f:
+            with open(filename, "r", encoding="utf-8") as f:
                 content = f.read().strip()
                 if not content:
-                    save_movies(default_movies)
-                    return default_movies
+                    save_data(filename, default_val)
+                    return default_val
                 return json.loads(content)
         except Exception:
-            save_movies(default_movies)
-            return default_movies
+            save_data(filename, default_val)
+            return default_val
     else:
-        save_movies(default_movies)
-        return default_movies
+        save_data(filename, default_val)
+        return default_val
 
-def save_movies(movies_list):
-    with open(DB_FILE, "w", encoding="utf-8") as f:
-        json.dump(movies_list, f, ensure_ascii=False, indent=4)
+def save_data(filename, data_list):
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(data_list, f, ensure_ascii=False, indent=4)
 
 if "movies" not in st.session_state:
-    st.session_state.movies = load_movies()
+    st.session_state.movies = load_data(DB_FILE, default_movies)
 
-# --- GELİŞMİŞ NETFLİX CSS & HOVER ANİMASYONLARI ---
+if "profiles" not in st.session_state:
+    st.session_state.profiles = load_data(PROFILE_FILE, default_profiles)
+
+# --- NETFLİX CSS & KARE PROFİL KARTLARI ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap');
@@ -90,7 +100,7 @@ st.markdown("""
         justify-content: center;
         align-items: center;
         z-index: 99999;
-        animation: fadeOut 0.5s ease 2s forwards;
+        animation: fadeOut 0.5s ease 1.5s forwards;
     }
 
     @keyframes fadeOut {
@@ -102,13 +112,49 @@ st.markdown("""
         font-size: 130px;
         color: #E50914;
         letter-spacing: 10px;
-        animation: scaleUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation: scaleUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     @keyframes scaleUp {
         0% { transform: scale(0.4); opacity: 0; filter: blur(12px); }
-        50% { transform: scale(1.1); opacity: 1; filter: blur(0px); }
+        60% { transform: scale(1.1); opacity: 1; filter: blur(0px); }
         100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* NETFLİX TARZI KARE PROFİL KARTLARI */
+    .profile-card {
+        text-align: center;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transition: transform 0.25s ease;
+    }
+
+    .profile-img {
+        width: 130px;
+        height: 130px;
+        border-radius: 6px;
+        object-fit: cover;
+        border: 3px solid transparent;
+        transition: all 0.25s ease;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .profile-card:hover .profile-img {
+        border-color: #ffffff;
+        transform: scale(1.06);
+        box-shadow: 0 8px 20px rgba(229, 9, 20, 0.4);
+    }
+
+    .profile-name {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #b3b3b3;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+
+    .profile-card:hover .profile-name {
+        color: #ffffff;
     }
 
     /* Hero Banner */
@@ -146,7 +192,7 @@ st.markdown("""
         color: #E5E5E5;
     }
 
-    /* FİLİM KARTLARI ÜZERİNE GELİNCE BÜYÜME (HOVER) EFEKTİ */
+    /* Film Kartları Hover Efekti */
     div[data-testid="column"] img {
         border-radius: 6px;
         transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
@@ -179,22 +225,6 @@ st.markdown("""
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(229, 9, 20, 0.5);
     }
-
-    /* Profil Butonları */
-    .profile-btn div.stButton > button {
-        background-color: transparent;
-        border: 2px solid #555;
-        color: #fff;
-        font-size: 18px;
-        font-weight: 500;
-        border-radius: 8px;
-        padding: 14px;
-    }
-    .profile-btn div.stButton > button:hover {
-        border-color: #fff;
-        background-color: rgba(255,255,255,0.1);
-        transform: scale(1.05);
-    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -213,35 +243,26 @@ if st.session_state.profile is None:
         </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<br><br><br>", unsafe_allow_html=True)
     st.markdown("<h1 style='font-family: Bebas Neue; font-size: 75px; text-align: center; color: #E50914; margin-bottom: 0; letter-spacing: 4px;'>VSELIX</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center; color: #b3b3b3; font-weight: 400; margin-bottom: 40px; font-size: 24px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: #b3b3b3; font-weight: 400; margin-bottom: 35px; font-size: 24px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
     
-    col_emp1, c1, c2, c3, c_emp2 = st.columns([2, 1, 1, 1, 2])
+    # Profilleri yan yana esnek sütunlarda gösterelim
+    num_profiles = len(st.session_state.profiles)
+    cols = st.columns(num_profiles if num_profiles > 0 else 1)
     
-    with c1:
-        st.markdown("<div style='text-align: center; font-size: 45px; margin-bottom: 10px;'>👨‍💻</div>", unsafe_allow_html=True)
-        st.markdown('<div class="profile-btn">', unsafe_allow_html=True)
-        if st.button("Volkan"):
-            st.session_state.profile = "Volkan"
-            st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
-            
-    with c2:
-        st.markdown("<div style='text-align: center; font-size: 45px; margin-bottom: 10px;'>👩‍👩‍👦</div>", unsafe_allow_html=True)
-        st.markdown('<div class="profile-btn">', unsafe_allow_html=True)
-        if st.button("Aile"):
-            st.session_state.profile = "Aile"
-            st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
-            
-    with c3:
-        st.markdown("<div style='text-align: center; font-size: 45px; margin-bottom: 10px;'>🍿</div>", unsafe_allow_html=True)
-        st.markdown('<div class="profile-btn">', unsafe_allow_html=True)
-        if st.button("Misafir"):
-            st.session_state.profile = "Misafir"
-            st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
+    for idx, prof in enumerate(st.session_state.profiles):
+        with cols[idx]:
+            # Görsel ve ismi tıklanabilir buton mantığıyla entegre edelim
+            st.markdown(f"""
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <img src="{prof['avatar']}" style="width: 130px; height: 130px; border-radius: 6px; object-fit: cover; border: 3px solid #333; margin-bottom: 8px;">
+                    <span style="color: #fff; font-weight: 600; font-size: 16px;">{prof['name']}</span>
+                </div>
+            """, unsafe_allow_html=True)
+            if st.button(f"Seç: {prof['name']}", key=f"prof_btn_{idx}"):
+                st.session_state.profile = prof['name']
+                st.rerun()
 
 # --- 2. ANA UYGULAMA EKRANI ---
 else:
@@ -251,6 +272,21 @@ else:
             st.session_state.profile = None
             st.rerun()
         
+        st.divider()
+        st.markdown("### ⚙️ Profil Yönetimi")
+        with st.form("new_profile_form"):
+            new_p_name = st.text_input("Yeni Profil Adı")
+            new_p_avatar = st.text_input("Profil Fotoğrafı (URL)", placeholder="https://...")
+            add_prof_btn = st.form_submit_button("Profil Ekle")
+            if add_prof_btn:
+                if new_p_name and new_p_avatar:
+                    st.session_state.profiles.append({"name": new_p_name, "avatar": new_p_avatar})
+                    save_data(PROFILE_FILE, st.session_state.profiles)
+                    st.success(f"'{new_p_name}' profili eklendi!")
+                    st.rerun()
+                else:
+                    st.warning("Lütfen isim ve görsel linki girin.")
+
         st.divider()
         st.markdown("### 🔐 Yönetici Paneli (Admin)")
         
@@ -290,7 +326,7 @@ else:
                         "desc": new_desc if new_desc else "Açıklama girilmedi."
                     }
                     st.session_state.movies.append(new_movie)
-                    save_movies(st.session_state.movies)
+                    save_data(DB_FILE, st.session_state.movies)
                     st.success(f"'{new_title}' başarıyla eklendi!")
                     st.rerun()
                 else:
