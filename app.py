@@ -35,14 +35,18 @@ default_movies = [
     }
 ]
 
-# Varsayılan profil resmi olmayanlar için Instagram/Netflix tarzı gri silüet avatar
+# NETFLİX ORİJİNAL RENKLİ PROFIL AVATARLARI (İnsan resimleri tamamen kaldırıldı)
 default_avatar = "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
 
 default_profiles = [
-    {"name": "Volkan", "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80"},
-    {"name": "Aile", "avatar": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=300&auto=format&fit=crop&q=80"},
-    {"name": "Misafir", "avatar": default_avatar}
+    {"name": "Volkan", "avatar": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"},
+    {"name": "Aile", "avatar": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png"},
+    {"name": "Misafir", "avatar": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png"}
 ]
+
+def save_data(filename, data_list):
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(data_list, f, ensure_ascii=False, indent=4)
 
 def load_data(filename, default_val):
     if os.path.exists(filename):
@@ -52,17 +56,19 @@ def load_data(filename, default_val):
                 if not content:
                     save_data(filename, default_val)
                     return default_val
-                return json.loads(content)
+                data = json.loads(content)
+                # Eski insan resimleri kalmışsa otomatik temizle
+                if filename == PROFILE_FILE:
+                    for p in data:
+                        if "unsplash.com" in p.get("avatar", ""):
+                            p["avatar"] = default_avatar
+                return data
         except Exception:
             save_data(filename, default_val)
             return default_val
     else:
         save_data(filename, default_val)
         return default_val
-
-def save_data(filename, data_list):
-    with open(filename, "w", encoding="utf-8") as f:
-        json.dump(data_list, f, ensure_ascii=False, indent=4)
 
 if "movies" not in st.session_state:
     st.session_state.movies = load_data(DB_FILE, default_movies)
@@ -128,15 +134,6 @@ st.markdown("""
     }
 
     /* NETFLİX PROFİL SEÇİM EKRANI STİLLERİ */
-    .profiles-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-        margin-top: 30px;
-        flex-wrap: wrap;
-    }
-
     .profile-box {
         text-align: center;
         cursor: pointer;
@@ -283,7 +280,6 @@ if st.session_state.profile is None:
     st.markdown("<h1 style='font-family: Bebas Neue; font-size: 75px; text-align: center; color: #E50914; margin-bottom: 0; letter-spacing: 4px;'>VSELIX</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center; color: #b3b3b3; font-weight: 400; margin-bottom: 30px; font-size: 26px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
     
-    # Profilleri ve Ekle butonunu yan yana ortalanmış şekilde dizelim
     total_slots = len(st.session_state.profiles) + 1
     cols = st.columns(total_slots)
     
@@ -299,7 +295,7 @@ if st.session_state.profile is None:
                 st.session_state.profile = prof['name']
                 st.rerun()
 
-    # En sağdaki "+" Profil Ekle Butonu Sütunu
+    # En sağdaki "+" Profil Ekle Butonu
     with cols[-1]:
         st.markdown(f"""
             <div class="profile-box" style="display: flex; flex-direction: column; align-items: center;">
@@ -311,7 +307,7 @@ if st.session_state.profile is None:
             st.session_state.show_add_profile = True
             st.rerun()
 
-    # Profil Ekleme Form Alanı (Açılır kapanır)
+    # Profil Ekleme Form Alanı
     if st.session_state.show_add_profile:
         st.markdown("<br>", unsafe_allow_html=True)
         col_f1, col_f2, col_f3 = st.columns([1, 2, 1])
@@ -319,7 +315,7 @@ if st.session_state.profile is None:
             st.markdown("<h4 style='text-align: center; color: #fff;'>Yeni Profil Oluştur</h4>", unsafe_allow_html=True)
             with st.form("quick_add_profile"):
                 new_name = st.text_input("Profil Adı")
-                new_avatar = st.text_input("Profil Fotoğrafı URL (Boş bırakırsan varsayılan silüet atanır)")
+                new_avatar = st.text_input("Profil Fotoğrafı URL (Boş bırakırsan varsayılan kırmızı ikon atanır)")
                 submitted = st.form_submit_button("Profili Kaydet")
                 if submitted:
                     if new_name:
@@ -423,40 +419,4 @@ else:
         </div>
     """, unsafe_allow_html=True)
 
-    if st.button("▶ Hemen İzle (Fragman Oynat)", key="hero_play"):
-        st.video("https://www.youtube.com/watch?v=zSWdZVtXT7E")
-
-    st.divider()
-
-    # Film Listeleme Fonksiyonu
-    def display_movie_grid(movie_list):
-        if not movie_list:
-            st.info("Aradığınız kriterlere uygun içerik bulunamadı.")
-            return
-
-        cols_per_row = 4
-        for i in range(0, len(movie_list), cols_per_row):
-            row_movies = movie_list[i:i + cols_per_row]
-            cols = st.columns(cols_per_row)
-            
-            for idx, movie in enumerate(row_movies):
-                if search_query and search_query.lower() not in movie["title"].lower():
-                    continue
-                
-                with cols[idx]:
-                    st.image(movie["img"], use_container_width=True)
-                    st.markdown(f"**{movie['title']}**")
-                    st.caption(f"⭐ IMDb: {movie['imdb']} | {movie['genre']}")
-                    
-                    b_key = f"btn_{movie['id']}"
-                    play_key = f"play_{movie['id']}"
-                    
-                    if st.button("▶ Fragman & Detay", key=b_key):
-                        st.session_state[play_key] = not st.session_state.get(play_key, False)
-                    
-                    if st.session_state.get(play_key, False):
-                        st.info(f"📌 **Özet:** {movie['desc']}")
-                        st.video(movie["trailer"])
-
-    st.markdown('<div class="row-title">🔥 Vselix Arşivi ve Eklenen Filmler</div>', unsafe_allow_html=True)
-    display_movie_grid(st.session_state.movies)
+    if st.button("▶ Hemen İzle (Fragman Oynat
