@@ -19,19 +19,10 @@ default_movies = [
         "id": "t1",
         "title": "Inception",
         "img": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500&auto=format&fit=crop&q=80",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4", # Örnek test videosu
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "genre": "Bilim Kurgu • Aksiyon",
         "imdb": "8.8",
         "desc": "Rüya hırsızlığı yapan ve zihinlere fikir eken yetenekli bir hırsızın son görevi."
-    },
-    {
-        "id": "t2",
-        "title": "The Dark Knight",
-        "img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=500&auto=format&fit=crop&q=80",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4", # Örnek test videosu
-        "genre": "Aksiyon • Suç",
-        "imdb": "9.0",
-        "desc": "Batman, Gotham'ı kaosa sürükleyen Joker adlı suç dehasıyla yüzleşmek zorundadır."
     }
 ]
 
@@ -91,7 +82,6 @@ st.markdown("""
         text-shadow: 0 2px 10px rgba(229, 9, 20, 0.4);
     }
 
-    /* Giriş Animasyonu */
     .net-intro {
         position: fixed;
         top: 0;
@@ -124,7 +114,6 @@ st.markdown("""
         100% { transform: scale(1); opacity: 1; }
     }
 
-    /* PROFİL KARTI TASARIMI */
     .profile-card-container {
         display: flex;
         flex-direction: column;
@@ -185,7 +174,6 @@ st.markdown("""
         box-shadow: 0 6px 16px rgba(229, 9, 20, 0.5);
     }
 
-    /* Hero Banner */
     .hero-container {
         position: relative;
         background: linear-gradient(to top, #141414 10%, rgba(20,20,20,0.3) 60%),
@@ -348,7 +336,7 @@ else:
             new_genre = st.text_input("Tür (Örn: Aksiyon • Dram)")
             new_imdb = st.text_input("IMDb Puanı (Örn: 8.5)")
             new_img = st.text_input("Afiş Görsel Linki (URL)")
-            new_video = st.text_input("Film Video Linki (MP4 / Doğrudan Video URL)")
+            new_video = st.text_input("Film Video Linki (.TS / .MP4 / Drive Linki)")
             new_desc = st.text_area("Film Özeti")
             
             if st.button("Filmi Sisteme Yükle"):
@@ -369,7 +357,7 @@ else:
                 else:
                     st.warning("Lütfen en az Film Adı ve Afiş Linkini doldurun.")
 
-    # Üst Menü / Navbar
+    # Navbar
     col_logo, col_space, col_search = st.columns([2, 5, 3])
 
     with col_logo:
@@ -391,10 +379,21 @@ else:
         </div>
     """, unsafe_allow_html=True)
 
-    if st.button("▶ Hemen İzle (Oynat)", key="hero_play"):
-        st.video("https://www.w3schools.com/html/mov_bbb.mp4")
-
     st.divider()
+
+    # Film Oynatıcı Fonksiyonu (TS ve MP4 Destekli HTML5 Player)
+    def render_custom_player(video_url):
+        player_html = f"""
+        <div style="width:100%; max-width:900px; margin:auto;">
+            <video controls autoplay style="width:100%; border-radius:8px; background:#000;">
+                <source src="{video_url}" type="video/mp4">
+                <source src="{video_url}" type="video/ogg">
+                <source src="{video_url}" type="video/webm">
+                Tarayıcınız bu video formatını doğrudan desteklemiyor.
+            </video>
+        </div>
+        """
+        st.components.v1.html(player_html, height=500)
 
     # Film Listeleme Fonksiyonu
     def display_movie_grid(movie_list):
@@ -424,8 +423,9 @@ else:
                     
                     if st.session_state.get(play_key, False):
                         st.info(f"📌 **Özet:** {movie['desc']}")
-                        # Doğrudan oynatıcı
-                        st.video(movie.get("video_url", "https://www.w3schools.com/html/mov_bbb.mp4"))
+                        v_url = movie.get("video_url", "")
+                        # TS veya MP4 fark etmeksizin özel player ile başlat
+                        render_custom_player(v_url)
 
     st.markdown('<div class="row-title">🔥 Vselix Arşivi ve Eklenen Filmler</div>', unsafe_allow_html=True)
     display_movie_grid(st.session_state.movies)
