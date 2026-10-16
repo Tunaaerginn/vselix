@@ -138,7 +138,6 @@ default_movies = [
     for i in range(20)
 ]
 
-# Varsayılan profiller tamamen temizlendi, başlangıçta boş veya sadece Misafir bırakıldı
 default_profiles = [
     {"name": "Misafir", "color": "#eab308", "icon": "🍿"}
 ]
@@ -341,6 +340,9 @@ if st.session_state.profile is None:
     st.markdown("""
         <div class="net-intro">
             <div class="intro-title">VSELIX</div>
+            <audio autoplay style="display:none;">
+                <source src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" type="audio/mpeg">
+            </audio>
         </div>
     """, unsafe_allow_html=True)
     
@@ -419,7 +421,6 @@ else:
                 else:
                     st.warning("Lütfen profil adı girin.")
 
-        # Profil silme veya düzenleme seçeneği
         if len(st.session_state.profiles) > 1:
             st.markdown("---")
             st.markdown("#### Profili Sil")
@@ -504,7 +505,7 @@ else:
 
     st.divider()
 
-    # Dev Ekran Sinematik Oynatıcı Fonksiyonu
+    # Sesli Intro Animasyonlu Sinematik Oynatıcı Fonksiyonu
     def render_custom_player(video_url):
         embed_url = video_url
         
@@ -517,14 +518,26 @@ else:
                 embed_url = f"https://drive.google.com/file/d/{file_id}/preview"
 
             player_html = f"""
-            <div style="width:100%; display:flex; justify-content:center; margin:auto;">
+            <div class="net-intro" style="position:relative; width:100%; height:480px; background:#000; border-radius:8px; display:flex; justify-content:center; align-items:center;">
+                <div class="intro-title" style="font-size:70px;">VSELIX</div>
+                <audio autoplay>
+                    <source src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            <div style="width:100%; display:flex; justify-content:center; margin-top:20px;">
                 <iframe src="{embed_url}" width="100%" height="620" allow="autoplay; fullscreen" allowfullscreen="true" style="border:none; border-radius:8px; background:#000; box-shadow: 0 10px 30px rgba(0,0,0,0.8);"></iframe>
             </div>
             """
-            st.components.v1.html(player_html, height=640)
+            st.components.v1.html(player_html, height=720)
         else:
             player_html = f"""
-            <div style="width:100%; display:flex; justify-content:center; margin:auto;">
+            <div class="net-intro" style="position:relative; width:100%; height:480px; background:#000; border-radius:8px; display:flex; justify-content:center; align-items:center;">
+                <div class="intro-title" style="font-size:70px;">VSELIX</div>
+                <audio autoplay>
+                    <source src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            <div style="width:100%; display:flex; justify-content:center; margin-top:20px;">
                 <video controls autoplay style="width:100%; max-height:650px; border-radius:8px; background:#000; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
                     <source src="{video_url}" type="video/mp4">
                     <source src="{video_url}" type="video/ogg">
@@ -533,7 +546,7 @@ else:
                 </video>
             </div>
             """
-            st.components.v1.html(player_html, height=660)
+            st.components.v1.html(player_html, height=720)
 
     # Film Listeleme Fonksiyonu
     def display_movie_grid(movie_list):
