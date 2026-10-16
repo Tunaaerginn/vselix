@@ -14,7 +14,6 @@ st.set_page_config(
 DB_FILE = "movies.json"
 PROFILE_FILE = "profiles.json"
 
-# 11 Orijinal Film + 20 Taslak Kutu (is_active: True/False)
 default_movies = [
     {
         "id": "dag2",
@@ -151,6 +150,14 @@ def save_data(filename, data_list):
         json.dump(data_list, f, ensure_ascii=False, indent=4)
 
 def load_data(filename, default_val):
+    if os.path.exists(filename):
+        try:
+            with open(filename, "r", encoding="utf-8") as f:
+                content = f.read().strip()
+                if content:
+                    return json.loads(content)
+        except Exception:
+            pass
     save_data(filename, default_val)
     return default_val
 
@@ -504,7 +511,6 @@ else:
 
     # Film Listeleme Fonksiyonu
     def display_movie_grid(movie_list):
-        # Admin değilse sadece aktif filmleri filtrele
         visible_movies = [m for m in movie_list if m.get("is_active", True) or st.session_state.admin_logged]
 
         if not visible_movies:
@@ -523,7 +529,6 @@ else:
                 with cols[idx]:
                     st.image(movie["img"], use_container_width=True)
                     
-                    # Eğer film kapalıysa ve admin bakıyorsa belirt
                     if not movie.get("is_active", True):
                         st.markdown(f"**{movie['title']}** *(🔴 Taslak / Kapalı)*")
                     else:
