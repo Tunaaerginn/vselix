@@ -167,13 +167,13 @@ if "profiles" not in st.session_state:
 if "show_add_profile" not in st.session_state:
     st.session_state.show_add_profile = False
 
-# --- NETFLİX CSS & TASARIM ---
+# --- MODERN VE PREMIUM CSS TASARIMI ---
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
     .stApp {
-        background-color: #141414;
+        background-color: #0d0d0d;
         color: #FFFFFF;
         font-family: 'Montserrat', sans-serif;
     }
@@ -181,43 +181,16 @@ st.markdown("""
     .vselix-logo {
         font-family: 'Bebas Neue', sans-serif;
         color: #E50914;
-        font-size: 52px;
-        letter-spacing: 3px;
+        font-size: 56px;
+        letter-spacing: 4px;
         margin: 0;
         line-height: 1;
-        text-shadow: 0 2px 10px rgba(229, 9, 20, 0.4);
+        text-shadow: 0 4px 20px rgba(229, 9, 20, 0.6);
+        transition: transform 0.3s ease;
     }
 
-    .net-intro {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: #000000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 99999;
-        animation: fadeOut 0.4s ease 1.2s forwards;
-    }
-
-    @keyframes fadeOut {
-        to { opacity: 0; visibility: hidden; }
-    }
-
-    .intro-title {
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 130px;
-        color: #E50914;
-        letter-spacing: 10px;
-        animation: scaleUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes scaleUp {
-        0% { transform: scale(0.4); opacity: 0; filter: blur(10px); }
-        60% { transform: scale(1.08); opacity: 1; filter: blur(0px); }
-        100% { transform: scale(1); opacity: 1; }
+    .vselix-logo:hover {
+        transform: scale(1.03);
     }
 
     .profile-card-container {
@@ -229,29 +202,30 @@ st.markdown("""
     }
 
     .profile-avatar-box {
-        width: 135px;
-        height: 135px;
-        border-radius: 8px;
+        width: 140px;
+        height: 140px;
+        border-radius: 12px;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 55px;
-        border: 3px solid transparent;
-        transition: all 0.25s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        font-size: 58px;
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+        backdrop-filter: blur(10px);
     }
 
     .profile-card-container:hover .profile-avatar-box {
-        border-color: #ffffff;
-        transform: scale(1.06);
-        box-shadow: 0 8px 25px rgba(229, 9, 20, 0.5);
+        border-color: #E50914;
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 0 12px 30px rgba(229, 9, 20, 0.5);
     }
 
     .profile-name {
-        margin-top: 12px;
+        margin-top: 14px;
         font-size: 16px;
-        color: #b3b3b3;
-        font-weight: 500;
+        color: #a3a3a3;
+        font-weight: 600;
         letter-spacing: 0.5px;
         transition: color 0.2s;
     }
@@ -261,69 +235,97 @@ st.markdown("""
     }
 
     div.stButton > button {
-        background-color: #E50914;
+        background: linear-gradient(135deg, #E50914 0%, #b20710 100%);
         color: white;
         font-family: 'Montserrat', sans-serif;
-        font-weight: 600;
+        font-weight: 700;
         font-size: 14px;
-        border-radius: 6px;
+        border-radius: 8px;
         border: none;
-        padding: 10px 18px;
+        padding: 12px 20px;
         width: 100%;
-        box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
-        transition: all 0.25s ease;
+        box-shadow: 0 4px 15px rgba(229, 9, 20, 0.35);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        letter-spacing: 0.5px;
     }
 
     div.stButton > button:hover {
-        background-color: #F40612;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(229, 9, 20, 0.5);
+        background: linear-gradient(135deg, #ff1e27 0%, #E50914 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(229, 9, 20, 0.6);
     }
 
     .hero-container {
         position: relative;
-        background: linear-gradient(to top, #141414 10%, rgba(20,20,20,0.3) 60%),
+        background: linear-gradient(180deg, rgba(13,13,13,0.1) 0%, rgba(13,13,13,0.95) 100%),
                     url('https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg');
         background-size: cover;
-        background-position: center;
-        height: 480px;
-        border-radius: 8px;
-        padding: 45px;
+        background-position: center 20%;
+        height: 500px;
+        border-radius: 16px;
+        padding: 50px;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        margin-bottom: 25px;
-        box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
+        margin-bottom: 35px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-badge {
+        background: rgba(229, 9, 20, 0.9);
+        color: white;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-weight: 800;
+        font-size: 11px;
+        width: fit-content;
+        margin-bottom: 12px;
+        letter-spacing: 1.5px;
+        box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+        backdrop-filter: blur(4px);
     }
 
     .hero-title {
         font-family: 'Bebas Neue', sans-serif;
-        font-size: 70px;
-        letter-spacing: 2px;
+        font-size: 80px;
+        letter-spacing: 3px;
         color: #FFFFFF;
-        margin-bottom: 6px;
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+        margin-bottom: 8px;
+        line-height: 0.9;
+        text-shadow: 0 4px 15px rgba(0,0,0,0.9);
     }
 
     .row-title {
         font-family: 'Bebas Neue', sans-serif;
-        font-size: 28px;
-        letter-spacing: 1px;
-        margin-top: 35px;
-        margin-bottom: 15px;
-        color: #E5E5E5;
+        font-size: 32px;
+        letter-spacing: 1.5px;
+        margin-top: 25px;
+        margin-bottom: 20px;
+        color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
     div[data-testid="column"] img {
-        border-radius: 6px;
-        transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+        border-radius: 10px;
+        transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
         cursor: pointer;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.5);
     }
 
     div[data-testid="column"] img:hover {
-        transform: scale(1.08);
-        box-shadow: 0 12px 25px rgba(229, 9, 20, 0.5);
+        transform: scale(1.06) translateY(-6px);
+        box-shadow: 0 15px 30px rgba(229, 9, 20, 0.45);
         z-index: 50;
+    }
+
+    /* Streamlit Arama Kutusu Özelleştirme */
+    div[data-baseweb="input"] {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        border-radius: 10px !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -337,18 +339,9 @@ if "admin_logged" not in st.session_state:
 
 # --- 1. NETFLİX PROFİL SEÇİM EKRANI ---
 if st.session_state.profile is None:
-    st.markdown("""
-        <div class="net-intro">
-            <div class="intro-title">VSELIX</div>
-            <audio autoplay style="display:none;">
-                <source src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" type="audio/mpeg">
-            </audio>
-        </div>
-    """, unsafe_allow_html=True)
-    
     st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown("<h1 style='font-family: Bebas Neue; font-size: 75px; text-align: center; color: #E50914; margin-bottom: 0; letter-spacing: 4px;'>VSELIX</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center; color: #b3b3b3; font-weight: 400; margin-bottom: 35px; font-size: 26px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
+    st.markdown("<h1 style='font-family: Bebas Neue; font-size: 85px; text-align: center; color: #E50914; margin-bottom: 0; letter-spacing: 6px; text-shadow: 0 5px 25px rgba(229, 9, 20, 0.5);'>VSELIX</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: #8c8c8c; font-weight: 500; margin-bottom: 45px; font-size: 24px; letter-spacing: 1px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
     
     total_slots = len(st.session_state.profiles) + 1
     cols = st.columns(total_slots)
@@ -363,18 +356,18 @@ if st.session_state.profile is None:
                     <div class="profile-name">{prof['name']}</div>
                 </div>
             """, unsafe_allow_html=True)
-            if st.button(f"👉 {prof['name']} ile Giriş Yap", key=f"prof_btn_{idx}"):
+            if st.button(f"👉 {prof['name']}", key=f"prof_btn_{idx}"):
                 st.session_state.profile = prof['name']
                 st.rerun()
 
     with cols[-1]:
         st.markdown(f"""
             <div class="profile-card-container">
-                <div class="profile-avatar-box" style="background-color: rgba(255,255,255,0.05); border: 3px dashed #666; color: #888;">+</div>
+                <div class="profile-avatar-box" style="background-color: rgba(255,255,255,0.03); border: 2px dashed rgba(255,255,255,0.2); color: #666;">+</div>
                 <div class="profile-name">Profil Ekle</div>
             </div>
         """, unsafe_allow_html=True)
-        if st.button("➕ Yeni Profil Ekle", key="add_prof_main_btn"):
+        if st.button("➕ Profil Ekle", key="add_prof_main_btn"):
             st.session_state.show_add_profile = True
             st.rerun()
 
@@ -402,7 +395,7 @@ if st.session_state.profile is None:
 # --- 2. ANA UYGULAMA EKRANI ---
 else:
     with st.sidebar:
-        st.markdown(f"### 👤 Aktif Profil: **{st.session_state.profile}**")
+        st.markdown(f"### 👤 Profil: **{st.session_state.profile}**")
         if st.button("🔄 Profili Değiştir"):
             st.session_state.profile = None
             st.rerun()
@@ -490,22 +483,20 @@ else:
     with col_search:
         search_query = st.text_input("", placeholder="🔍 Film, dizi ara...", label_visibility="collapsed")
 
-    st.markdown("<hr style='margin: 5px 0px 20px 0px; border-color: #222;'>", unsafe_allow_html=True)
+    st.markdown("<hr style='margin: 10px 0px 25px 0px; border-color: rgba(255,255,255,0.08);'>", unsafe_allow_html=True)
 
     # Hero Banner
     st.markdown("""
         <div class="hero-container">
-            <div style="background-color: #E50914; display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 11px; width: fit-content; margin-bottom: 8px; letter-spacing: 1px;">VSELIX ÖZEL YAPIM</div>
+            <div class="hero-badge">VSELIX ÖZEL YAPIM</div>
             <div class="hero-title">DAĞ 2</div>
-            <div style="font-size: 15px; max-width: 580px; color: #D1D1D1; margin-bottom: 15px; line-height: 1.4;">
+            <div style="font-size: 16px; max-width: 600px; color: #d1d1d1; margin-bottom: 15px; line-height: 1.5; font-weight: 400;">
                 Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu ve destansı mücadelesi.
             </div>
         </div>
     """, unsafe_allow_html=True)
 
-    st.divider()
-
-    # Sesli Intro Animasyonlu Sinematik Oynatıcı Fonksiyonu
+    # SİNEMATİK DEV OYNATICI FONKSİYONU
     def render_custom_player(video_url):
         embed_url = video_url
         
@@ -518,27 +509,15 @@ else:
                 embed_url = f"https://drive.google.com/file/d/{file_id}/preview"
 
             player_html = f"""
-            <div class="net-intro" style="position:relative; width:100%; height:480px; background:#000; border-radius:8px; display:flex; justify-content:center; align-items:center;">
-                <div class="intro-title" style="font-size:70px;">VSELIX</div>
-                <audio autoplay>
-                    <source src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-            <div style="width:100%; display:flex; justify-content:center; margin-top:20px;">
-                <iframe src="{embed_url}" width="100%" height="620" allow="autoplay; fullscreen" allowfullscreen="true" style="border:none; border-radius:8px; background:#000; box-shadow: 0 10px 30px rgba(0,0,0,0.8);"></iframe>
+            <div style="width:100%; display:flex; justify-content:center; margin:auto;">
+                <iframe src="{embed_url}" width="100%" height="640" allow="autoplay; fullscreen" allowfullscreen="true" style="border:none; border-radius:12px; background:#000; box-shadow: 0 15px 35px rgba(0,0,0,0.9);"></iframe>
             </div>
             """
-            st.components.v1.html(player_html, height=720)
+            st.components.v1.html(player_html, height=660)
         else:
             player_html = f"""
-            <div class="net-intro" style="position:relative; width:100%; height:480px; background:#000; border-radius:8px; display:flex; justify-content:center; align-items:center;">
-                <div class="intro-title" style="font-size:70px;">VSELIX</div>
-                <audio autoplay>
-                    <source src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-            <div style="width:100%; display:flex; justify-content:center; margin-top:20px;">
-                <video controls autoplay style="width:100%; max-height:650px; border-radius:8px; background:#000; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+            <div style="width:100%; display:flex; justify-content:center; margin:auto;">
+                <video controls autoplay style="width:100%; max-height:650px; border-radius:12px; background:#000; box-shadow: 0 15px 35px rgba(0,0,0,0.9);">
                     <source src="{video_url}" type="video/mp4">
                     <source src="{video_url}" type="video/ogg">
                     <source src="{video_url}" type="video/webm">
@@ -546,7 +525,7 @@ else:
                 </video>
             </div>
             """
-            st.components.v1.html(player_html, height=720)
+            st.components.v1.html(player_html, height=670)
 
     # Film Listeleme Fonksiyonu
     def display_movie_grid(movie_list):
