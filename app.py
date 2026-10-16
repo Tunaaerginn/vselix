@@ -506,32 +506,37 @@ else:
         </div>
     """, unsafe_allow_html=True)
 
-    # SİNEMATİK VE KOTA ENGELİNİ AŞAN OYNATICI FONKSİYONU
+    # SİNEMATİK AKILLI OYNATICI FONKSİYONU
     def render_custom_player(video_url):
-        direct_url = video_url
-        
-        # Google Drive Linklerini Doğrudan Oynatılabilir Akış Linkine Dönüştürme
+        # Google Drive Link Kontrolü ve IFRAME Önizleme Dönüşümü
         if "drive.google.com" in video_url:
-            file_id = ""
+            embed_url = video_url
             if "/file/d/" in video_url:
                 file_id = video_url.split("/file/d/")[1].split("/")[0]
+                embed_url = f"https://drive.google.com/file/d/{file_id}/preview"
             elif "id=" in video_url:
                 file_id = video_url.split("id=")[1].split("&")[0]
-            
-            if file_id:
-                direct_url = f"https://drive.google.com/uc?export=download&id={file_id}"
+                embed_url = f"https://drive.google.com/file/d/{file_id}/preview"
 
-        # HTML5 Video Oynatıcı
-        player_html = f"""
-        <div style="width:100%; display:flex; justify-content:center; margin:auto;">
-            <video controls autoplay style="width:100%; max-height:650px; border-radius:12px; background:#000; box-shadow: 0 15px 35px rgba(0,0,0,0.9);">
-                <source src="{direct_url}" type="video/mp4">
-                <source src="{direct_url}" type="video/webm">
-                Tarayıcınız bu video formatını desteklemiyor.
-            </video>
-        </div>
-        """
-        st.components.v1.html(player_html, height=670)
+            player_html = f"""
+            <div style="width:100%; display:flex; justify-content:center; margin:auto;">
+                <iframe src="{embed_url}" width="100%" height="640" allow="autoplay; fullscreen" allowfullscreen="true" style="border:none; border-radius:12px; background:#000; box-shadow: 0 15px 35px rgba(0,0,0,0.9);"></iframe>
+            </div>
+            """
+            st.components.v1.html(player_html, height=660)
+        
+        # Doğrudan Video Dosyaları (MP4, WebM vb.)
+        else:
+            player_html = f"""
+            <div style="width:100%; display:flex; justify-content:center; margin:auto;">
+                <video controls autoplay style="width:100%; max-height:650px; border-radius:12px; background:#000; box-shadow: 0 15px 35px rgba(0,0,0,0.9);">
+                    <source src="{video_url}" type="video/mp4">
+                    <source src="{video_url}" type="video/webm">
+                    Tarayıcınız bu video formatını desteklemiyor.
+                </video>
+            </div>
+            """
+            st.components.v1.html(player_html, height=670)
 
     # Film Listeleme Fonksiyonu
     def display_movie_grid(movie_list):
