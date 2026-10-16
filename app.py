@@ -19,7 +19,7 @@ default_movies = [
         "id": "t1",
         "title": "Inception",
         "img": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500&auto=format&fit=crop&q=80",
-        "trailer": "https://www.youtube.com/watch?v=YoHD9XEInc0",
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4", # Örnek test videosu
         "genre": "Bilim Kurgu • Aksiyon",
         "imdb": "8.8",
         "desc": "Rüya hırsızlığı yapan ve zihinlere fikir eken yetenekli bir hırsızın son görevi."
@@ -28,14 +28,13 @@ default_movies = [
         "id": "t2",
         "title": "The Dark Knight",
         "img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=500&auto=format&fit=crop&q=80",
-        "trailer": "https://www.youtube.com/watch?v=EXeTwQWrcwY",
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4", # Örnek test videosu
         "genre": "Aksiyon • Suç",
         "imdb": "9.0",
         "desc": "Batman, Gotham'ı kaosa sürükleyen Joker adlı suç dehasıyla yüzleşmek zorundadır."
     }
 ]
 
-# Garantili ve şık renkli Netflix profil simgeleri
 default_profiles = [
     {"name": "Volkan", "color": "#E50914", "icon": "👨‍💻"},
     {"name": "Aile", "color": "#3b82f6", "icon": "👨‍👩‍👧‍👦"},
@@ -125,7 +124,7 @@ st.markdown("""
         100% { transform: scale(1); opacity: 1; }
     }
 
-    /* NETFLİX PROFİL KARTI TASARIMI (Butonsuz, Direkt Kutucuk) */
+    /* PROFİL KARTI TASARIMI */
     .profile-card-container {
         display: flex;
         flex-direction: column;
@@ -166,7 +165,6 @@ st.markdown("""
         color: #ffffff;
     }
 
-    /* Streamlit butonlarını profil kartının içine gizleme ve tıklanabilir yapma */
     div.stButton > button {
         background-color: #E50914;
         color: white;
@@ -268,12 +266,10 @@ if st.session_state.profile is None:
                     <div class="profile-name">{prof['name']}</div>
                 </div>
             """, unsafe_allow_html=True)
-            # Karmaşık yazılar yerine şık ve sade buton ismi
             if st.button(f"👉 {prof['name']} ile Giriş Yap", key=f"prof_btn_{idx}"):
                 st.session_state.profile = prof['name']
                 st.rerun()
 
-    # En sağdaki "+" Profil Ekle Kutusu
     with cols[-1]:
         st.markdown(f"""
             <div class="profile-card-container">
@@ -285,7 +281,6 @@ if st.session_state.profile is None:
             st.session_state.show_add_profile = True
             st.rerun()
 
-    # Profil Ekleme Formu
     if st.session_state.show_add_profile:
         st.markdown("<br>", unsafe_allow_html=True)
         col_f1, col_f2, col_f3 = st.columns([1, 2, 1])
@@ -353,7 +348,7 @@ else:
             new_genre = st.text_input("Tür (Örn: Aksiyon • Dram)")
             new_imdb = st.text_input("IMDb Puanı (Örn: 8.5)")
             new_img = st.text_input("Afiş Görsel Linki (URL)")
-            new_trailer = st.text_input("YouTube Fragman Linki")
+            new_video = st.text_input("Film Video Linki (MP4 / Doğrudan Video URL)")
             new_desc = st.text_area("Film Özeti")
             
             if st.button("Filmi Sisteme Yükle"):
@@ -362,7 +357,7 @@ else:
                         "id": str(len(st.session_state.movies) + 1),
                         "title": new_title,
                         "img": new_img,
-                        "trailer": new_trailer if new_trailer else "https://www.youtube.com/watch?v=YoHD9XEInc0",
+                        "video_url": new_video if new_video else "https://www.w3schools.com/html/mov_bbb.mp4",
                         "genre": new_genre if new_genre else "Genel",
                         "imdb": new_imdb if new_imdb else "7.0",
                         "desc": new_desc if new_desc else "Açıklama girilmedi."
@@ -396,8 +391,8 @@ else:
         </div>
     """, unsafe_allow_html=True)
 
-    if st.button("▶ Hemen İzle (Fragman Oynat)", key="hero_play"):
-        st.video("https://www.youtube.com/watch?v=zSWdZVtXT7E")
+    if st.button("▶ Hemen İzle (Oynat)", key="hero_play"):
+        st.video("https://www.w3schools.com/html/mov_bbb.mp4")
 
     st.divider()
 
@@ -424,12 +419,13 @@ else:
                     b_key = f"btn_{movie['id']}"
                     play_key = f"play_{movie['id']}"
                     
-                    if st.button("▶ Fragman & Detay", key=b_key):
+                    if st.button("▶ Filmi Başlat", key=b_key):
                         st.session_state[play_key] = not st.session_state.get(play_key, False)
                     
                     if st.session_state.get(play_key, False):
                         st.info(f"📌 **Özet:** {movie['desc']}")
-                        st.video(movie["trailer"])
+                        # Doğrudan oynatıcı
+                        st.video(movie.get("video_url", "https://www.w3schools.com/html/mov_bbb.mp4"))
 
     st.markdown('<div class="row-title">🔥 Vselix Arşivi ve Eklenen Filmler</div>', unsafe_allow_html=True)
     display_movie_grid(st.session_state.movies)
