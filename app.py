@@ -83,13 +83,13 @@ if "admin_logged" not in st.session_state:
 if "show_add_profile" not in st.session_state:
     st.session_state.show_add_profile = False
 
-# --- CSS VE TASARIM ---
+# --- CSS VE REALISTIC NETFLIX TASARIMI ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
     .stApp {
-        background-color: #0d0d0d;
+        background-color: #141414;
         color: #FFFFFF;
         font-family: 'Montserrat', sans-serif;
     }
@@ -97,21 +97,33 @@ st.markdown("""
     .vselix-logo {
         font-family: 'Bebas Neue', sans-serif;
         color: #E50914;
-        font-size: 56px;
-        letter-spacing: 4px;
+        font-size: 64px;
+        letter-spacing: 5px;
         margin: 0;
         line-height: 1;
-        text-shadow: 0 4px 20px rgba(229, 9, 20, 0.6);
+        text-shadow: 0 4px 25px rgba(229, 9, 20, 0.7);
     }
 
-    .login-box {
-        background: #141414;
-        padding: 40px;
-        border-radius: 16px;
+    /* NETFLIX GERÇEKÇİLİĞİNDE GİRİŞ KUTUSU */
+    .netflix-login-card {
+        background: rgba(0, 0, 0, 0.75);
+        background-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.95) 100%);
+        padding: 45px 40px;
+        border-radius: 8px;
         border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.8);
-        max-width: 450px;
-        margin: 40px auto;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+        max-width: 480px;
+        margin: 30px auto;
+        backdrop-filter: blur(10px);
+    }
+
+    .netflix-header {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 55px;
+        color: #E50914;
+        letter-spacing: 3px;
+        text-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+        margin-bottom: 5px;
         text-align: center;
     }
 
@@ -126,7 +138,7 @@ st.markdown("""
     .profile-avatar-box {
         width: 140px;
         height: 140px;
-        border-radius: 12px;
+        border-radius: 8px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -150,31 +162,31 @@ st.markdown("""
     }
 
     div.stButton > button {
-        background: linear-gradient(135deg, #E50914 0%, #b20710 100%);
+        background: #E50914;
         color: white;
         font-family: 'Montserrat', sans-serif;
         font-weight: 700;
-        font-size: 14px;
-        border-radius: 8px;
+        font-size: 15px;
+        border-radius: 4px;
         border: none;
-        padding: 10px 16px;
+        padding: 12px 20px;
         width: 100%;
-        box-shadow: 0 4px 15px rgba(229, 9, 20, 0.35);
-        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+        transition: all 0.2s ease;
     }
 
     div.stButton > button:hover {
-        background: linear-gradient(135deg, #ff1e27 0%, #E50914 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(229, 9, 20, 0.6);
+        background: #f6121d;
+        transform: scale(1.01);
+        box-shadow: 0 6px 20px rgba(229, 9, 20, 0.6);
     }
 
     .hero-container {
         position: relative;
         background-size: cover;
         background-position: center 20%;
-        height: 500px;
-        border-radius: 16px;
+        height: 520px;
+        border-radius: 12px;
         padding: 50px;
         display: flex;
         flex-direction: column;
@@ -185,10 +197,10 @@ st.markdown("""
     }
 
     .hero-badge {
-        background: rgba(229, 9, 20, 0.9);
+        background: #E50914;
         color: white;
         padding: 6px 14px;
-        border-radius: 20px;
+        border-radius: 4px;
         font-weight: 800;
         font-size: 11px;
         width: fit-content;
@@ -198,7 +210,7 @@ st.markdown("""
 
     .hero-title {
         font-family: 'Bebas Neue', sans-serif;
-        font-size: 80px;
+        font-size: 85px;
         letter-spacing: 3px;
         color: #FFFFFF;
         margin-bottom: 8px;
@@ -213,6 +225,17 @@ st.markdown("""
         margin-top: 25px;
         margin-bottom: 20px;
         color: #FFFFFF;
+    }
+    
+    /* Input Alanları Stylingi */
+    .stTextInput input {
+        background-color: #333333 !important;
+        color: #ffffff !important;
+        border-radius: 4px !important;
+        border: none !important;
+    }
+    .stTextInput input:focus {
+        border: 1px solid #E50914 !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -229,49 +252,50 @@ def format_youtube_embed(url):
         return url
     return url
 
-# --- 1. AŞAMA: GİRİŞ EKRANI (AİLE KODU VEYA YETKİLİ GİRİŞİ) ---
+# --- 1. AŞAMA: NETFLIX TARZI GİRİŞ EKRANI ---
 if not st.session_state.is_authenticated:
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
     
     with col_l2:
         st.markdown("""
-            <div class="login-box">
-                <h1 style='font-family: Bebas Neue; font-size: 65px; color: #E50914; margin-bottom: 0;'>VSELIX</h1>
+            <div class="netflix-login-card">
+                <div class="netflix-header">VSELIX</div>
+                <p style="color: #8c8c8c; font-size: 14px; text-align: center; margin-bottom: 25px;">Sınırsız film, dizi ve çok daha fazlası.</p>
             </div>
         """, unsafe_allow_html=True)
         
-        tab_user, tab_admin = st.tabs(["🔑 Aile Üyesi Girişi", "🔐 Yetkili / Admin Girişi"])
+        tab_user, tab_admin = st.tabs(["🔑 Oturum Kodu (Aile)", "🔐 Yönetici Girişi (Admin)"])
         
         with tab_user:
-            st.markdown("<p style='color: #a3a3a3; font-size: 13px; margin-top: 10px;'>Erişim için yetkiliyle iletişime geçip 6 haneli kodunuzu alın.</p>", unsafe_allow_html=True)
+            st.markdown("<p style='color: #b3b3b3; font-size: 13px; margin-top: 15px;'>Erişim için yetkiliyle iletişime geçip 6 haneli kodunuzu alın.</p>", unsafe_allow_html=True)
             with st.form("access_code_form"):
-                user_code = st.text_input("6 Haneli Giriş Kodu", max_chars=6, placeholder="Örn: 123456", type="default")
-                remember_me = st.checkbox("📌 Beni Hatırla", value=True)
-                submit_code = st.form_submit_button("Sisteme Giriş Yap")
+                user_code = st.text_input("6 Haneli Giriş Kodu", max_chars=6, placeholder="Örn: 123456")
+                remember_me = st.checkbox("📌 Beni Hatırla (Bu cihazı kaydet)", value=True)
+                submit_code = st.form_submit_button("Oturum Aç")
                 
                 if submit_code:
                     if user_code in st.session_state.access_codes:
                         st.session_state.is_authenticated = True
-                        st.success("Giriş başarılı!")
+                        st.success("Giriş başarılı! Profil seçimine aktarılıyorsunuz...")
                         st.rerun()
                     else:
-                        st.error("❌ Geçersiz kod! Lütfen yetkiliye danışın.")
+                        st.error("❌ Geçersiz erişim kodu! Lütfen yetkiliyle iletişime geçin.")
                         
         with tab_admin:
-            st.markdown("<p style='color: #a3a3a3; font-size: 13px; margin-top: 10px;'>Yönetici şifrenizle doğrudan sisteme bağlanın.</p>", unsafe_allow_html=True)
+            st.markdown("<p style='color: #b3b3b3; font-size: 13px; margin-top: 15px;'>Yönetici şifrenizle paneli doğrudan kontrol edin.</p>", unsafe_allow_html=True)
             with st.form("admin_login_form"):
-                adm_pass = st.text_input("Yönetici Şifresi", type="password", placeholder="Admin şifresi")
+                adm_pass = st.text_input("Yönetici Parolası", type="password", placeholder="Admin Parolası")
                 submit_admin = st.form_submit_button("Yönetici Olarak Giriş Yap")
                 
                 if submit_admin:
                     if adm_pass == "vselix123":
                         st.session_state.is_authenticated = True
                         st.session_state.admin_logged = True
-                        st.success("Yönetici girişi başarılı!")
+                        st.success("Yönetici girişi onaylandı!")
                         st.rerun()
                     else:
-                        st.error("❌ Hatalı yönetici şifresi!")
+                        st.error("❌ Hatalı yönetici parolası!")
 
 # --- 2. AŞAMA: PROFİL SEÇİM EKRANI ---
 elif "profile" not in st.session_state or st.session_state.profile is None:
@@ -329,6 +353,11 @@ elif "profile" not in st.session_state or st.session_state.profile is None:
 
 # --- 3. AŞAMA: ANA UYGULAMA EKRANI ---
 else:
+    # Mevcut tüm kategorileri dinamik olarak topla
+    existing_genres = sorted(list(set(m.get("genre", "Aksiyon") for m in st.session_state.movies if m.get("genre"))))
+    default_genre_options = ["Aksiyon", "Dram", "Komedi", "Bilim Kurgu", "Korku", "Animasyon", "Belgesel", "Macera", "Romantik"]
+    combined_genres = sorted(list(set(existing_genres + default_genre_options))) + ["➕ Yeni Kategori Yaz / Ekle"]
+
     with st.sidebar:
         st.markdown(f"### 👤 Profil: **{st.session_state.profile}**")
         if st.button("🔄 Profili Değiştir"):
@@ -385,15 +414,20 @@ else:
                 new_c = ''.join(random.choices(string.digits, k=6))
                 st.session_state.access_codes.append(new_c)
                 save_data(ACCESS_CODES_FILE, st.session_state.access_codes)
-                st.success(f" Yeni Kod Üretildi: **{new_c}**")
+                st.success(f"Yeni Kod Üretildi: **{new_c}**")
                 st.rerun()
 
             st.markdown("---")
-            st.subheader("➕ Yeni Film Ekle")
+            st.subheader("➕ Yeni Film & Kategori Ekle")
+            
+            selected_genre_choice = st.selectbox("Kategori / Tür Seçin", combined_genres)
+            custom_genre = ""
+            if selected_genre_choice == "➕ Yeni Kategori Yaz / Ekle":
+                custom_genre = st.text_input("Yeni Kategori İsmi Girin (Örn: Polisiye, Anime)", placeholder="Kategori Adı")
+
             with st.form("add_new_movie_form"):
                 n_id = st.text_input("Film ID (Benzersiz İngilizce, örn: mucize)")
                 n_title = st.text_input("Film Adı")
-                n_genre = st.selectbox("Kategori / Tür", ["Aksiyon", "Dram", "Komedi", "Bilim Kurgu", "Korku", "Animasyon", "Belgesel", "Macera", "Romantik"])
                 n_imdb = st.text_input("IMDb Puanı", value="7.0")
                 n_img = st.text_input("Afiş Görsel Linki (URL)")
                 n_video = st.text_input("Film Video Linki")
@@ -404,7 +438,8 @@ else:
                 
                 add_movie_btn = st.form_submit_button("🚀 Filmi Arşive Ekle")
                 if add_movie_btn:
-                    if n_id and n_title:
+                    final_genre = custom_genre.strip() if selected_genre_choice == "➕ Yeni Kategori Yaz / Ekle" else selected_genre_choice
+                    if n_id and n_title and final_genre:
                         if n_featured:
                             for m in st.session_state.movies:
                                 m["is_featured"] = False
@@ -415,7 +450,7 @@ else:
                             "img": n_img,
                             "video_url": n_video,
                             "trailer_url": n_trailer,
-                            "genre": n_genre,
+                            "genre": final_genre,
                             "imdb": n_imdb,
                             "desc": n_desc,
                             "is_active": n_active,
@@ -423,10 +458,10 @@ else:
                         }
                         st.session_state.movies.append(new_m)
                         save_data(DB_FILE, st.session_state.movies)
-                        st.success(f"'{n_title}' başarıyla eklendi!")
+                        st.success(f"'{n_title}' filmi [{final_genre}] kategorisine başarıyla eklendi!")
                         st.rerun()
                     else:
-                        st.warning("Lütfen alanları doldurun.")
+                        st.warning("Lütfen Film ID, Film Adı ve Kategori alanlarını doldurun.")
 
             st.markdown("---")
             st.subheader("✏️ Mevcut Filmi Düzenle / Sil")
@@ -440,9 +475,7 @@ else:
                     ed_active = st.checkbox("🟢 Yayın Durumu", value=target_movie.get("is_active", True))
                     ed_featured = st.checkbox("⭐ Öne Çıkan Film Yap", value=target_movie.get("is_featured", False))
                     ed_title = st.text_input("Film Adı", value=target_movie.get("title", ""))
-                    categories = ["Aksiyon", "Dram", "Komedi", "Bilim Kurgu", "Korku", "Animasyon", "Belgesel", "Macera", "Romantik"]
-                    current_g = target_movie.get("genre", "Aksiyon")
-                    ed_genre = st.selectbox("Kategori / Tür", categories, index=categories.index(current_g) if current_g in categories else 0)
+                    ed_genre = st.text_input("Kategori / Tür", value=target_movie.get("genre", ""))
                     ed_imdb = st.text_input("IMDb Puanı", value=target_movie.get("imdb", ""))
                     ed_img = st.text_input("Afiş Görsel Linki", value=target_movie.get("img", ""))
                     ed_video = st.text_input("Video Linki", value=target_movie.get("video_url", ""))
@@ -493,7 +526,7 @@ else:
         featured_movie = active_ones[0] if active_ones else st.session_state.movies[0]
 
     st.markdown(f"""
-        <div class="hero-container" style="background: linear-gradient(180deg, rgba(13,13,13,0.1) 0%, rgba(13,13,13,0.95) 100%), url('{featured_movie['img']}');">
+        <div class="hero-container" style="background: linear-gradient(180deg, rgba(20,20,20,0.1) 0%, rgba(20,20,20,0.95) 100%), url('{featured_movie['img']}');">
             <div class="hero-badge">⭐ VSELIX ÖNE ÇIKAN</div>
             <div class="hero-title">{featured_movie['title']}</div>
             <div style="font-size: 16px; max-width: 600px; color: #d1d1d1; margin-bottom: 15px; line-height: 1.5; font-weight: 400;">
