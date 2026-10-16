@@ -77,6 +77,9 @@ if "access_codes" not in st.session_state:
 if "is_authenticated" not in st.session_state:
     st.session_state.is_authenticated = False
 
+if "admin_logged" not in st.session_state:
+    st.session_state.admin_logged = False
+
 if "show_add_profile" not in st.session_state:
     st.session_state.show_add_profile = False
 
@@ -226,7 +229,7 @@ def format_youtube_embed(url):
         return url
     return url
 
-# --- 1. AŞAMA: 6 HANELİ ERİŞİM KODU EKRANI ---
+# --- 1. AŞAMA: GİRİŞ EKRANI (AİLE KODU VEYA YETKİLİ GİRİŞİ) ---
 if not st.session_state.is_authenticated:
     st.markdown("<br><br>", unsafe_allow_html=True)
     col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
@@ -235,22 +238,40 @@ if not st.session_state.is_authenticated:
         st.markdown("""
             <div class="login-box">
                 <h1 style='font-family: Bebas Neue; font-size: 65px; color: #E50914; margin-bottom: 0;'>VSELIX</h1>
-                <p style='color: #a3a3a3; font-size: 14px; margin-bottom: 25px;'>Erişim için yetkiliyle iletişime geçip 6 haneli kodunuzu alın.</p>
             </div>
         """, unsafe_allow_html=True)
         
-        with st.form("access_code_form"):
-            user_code = st.text_input("🔑 6 Haneli Giriş Kodu", max_chars=6, placeholder="Örn: 123456")
-            remember_me = st.checkbox("📌 Beni Hatırla (Bu cihazı hatırla)", value=True)
-            submit_code = st.form_submit_button("Sisteme Giriş Yap")
-            
-            if submit_code:
-                if user_code in st.session_state.access_codes:
-                    st.session_state.is_authenticated = True
-                    st.success("Giriş başarılı! Yönlendiriliyorsunuz...")
-                    st.rerun()
-                else:
-                    st.error("❌ Geçersiz erişim kodu! Lütfen yetkiliyle iletişime geçin.")
+        tab_user, tab_admin = st.tabs(["🔑 Aile Üyesi Girişi", "🔐 Yetkili / Admin Girişi"])
+        
+        with tab_user:
+            st.markdown("<p style='color: #a3a3a3; font-size: 13px; margin-top: 10px;'>Erişim için yetkiliyle iletişime geçip 6 haneli kodunuzu alın.</p>", unsafe_allow_html=True)
+            with st.form("access_code_form"):
+                user_code = st.text_input("6 Haneli Giriş Kodu", max_chars=6, placeholder="Örn: 123456", type="default")
+                remember_me = st.checkbox("📌 Beni Hatırla", value=True)
+                submit_code = st.form_submit_button("Sisteme Giriş Yap")
+                
+                if submit_code:
+                    if user_code in st.session_state.access_codes:
+                        st.session_state.is_authenticated = True
+                        st.success("Giriş başarılı!")
+                        st.rerun()
+                    else:
+                        st.error("❌ Geçersiz kod! Lütfen yetkiliye danışın.")
+                        
+        with tab_admin:
+            st.markdown("<p style='color: #a3a3a3; font-size: 13px; margin-top: 10px;'>Yönetici şifrenizle doğrudan sisteme bağlanın.</p>", unsafe_allow_html=True)
+            with st.form("admin_login_form"):
+                adm_pass = st.text_input("Yönetici Şifresi", type="password", placeholder="Admin şifresi")
+                submit_admin = st.form_submit_button("Yönetici Olarak Giriş Yap")
+                
+                if submit_admin:
+                    if adm_pass == "vselix123":
+                        st.session_state.is_authenticated = True
+                        st.session_state.admin_logged = True
+                        st.success("Yönetici girişi başarılı!")
+                        st.rerun()
+                    else:
+                        st.error("❌ Hatalı yönetici şifresi!")
 
 # --- 2. AŞAMA: PROFİL SEÇİM EKRANI ---
 elif "profile" not in st.session_state or st.session_state.profile is None:
@@ -341,7 +362,7 @@ else:
         st.divider()
         st.markdown("### 🔐 Yönetici Paneli (Admin)")
         
-        if not st.session_state.get("admin_logged", False):
+        if not st.session_state.admin_logged:
             admin_pass = st.text_input("Yönetici Şifresi", type="password")
             if st.button("Giriş Yap"):
                 if admin_pass == "vselix123":
@@ -364,7 +385,7 @@ else:
                 new_c = ''.join(random.choices(string.digits, k=6))
                 st.session_state.access_codes.append(new_c)
                 save_data(ACCESS_CODES_FILE, st.session_state.access_codes)
-                st.success(f"Yeni Kod Üretildi: **{new_c}**")
+                st.success(f" Yeni Kod Üretildi: **{new_c}**")
                 st.rerun()
 
             st.markdown("---")
