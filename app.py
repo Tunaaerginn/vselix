@@ -35,7 +35,7 @@ default_movies = [
     }
 ]
 
-# NETFLİX ORİJİNAL RENKLİ PROFIL AVATARLARI (İnsan resimleri tamamen kaldırıldı)
+# NETFLİX ORİJİNAL RENKLİ PROFIL AVATARLARI
 default_avatar = "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
 
 default_profiles = [
@@ -57,7 +57,6 @@ def load_data(filename, default_val):
                     save_data(filename, default_val)
                     return default_val
                 data = json.loads(content)
-                # Eski insan resimleri kalmışsa otomatik temizle
                 if filename == PROFILE_FILE:
                     for p in data:
                         if "unsplash.com" in p.get("avatar", ""):
@@ -297,7 +296,7 @@ if st.session_state.profile is None:
 
     # En sağdaki "+" Profil Ekle Butonu
     with cols[-1]:
-        st.markdown(f"""
+        st.markdown("""
             <div class="profile-box" style="display: flex; flex-direction: column; align-items: center;">
                 <div class="add-profile-icon">+</div>
                 <div class="profile-title">Profil Ekle</div>
@@ -419,4 +418,40 @@ else:
         </div>
     """, unsafe_allow_html=True)
 
-    if st.button("▶ Hemen İzle (Fragman Oynat
+    if st.button("▶ Hemen İzle (Fragman Oynat)", key="hero_play"):
+        st.video("https://www.youtube.com/watch?v=zSWdZVtXT7E")
+
+    st.divider()
+
+    # Film Listeleme Fonksiyonu
+    def display_movie_grid(movie_list):
+        if not movie_list:
+            st.info("Aradığınız kriterlere uygun içerik bulunamadı.")
+            return
+
+        cols_per_row = 4
+        for i in range(0, len(movie_list), cols_per_row):
+            row_movies = movie_list[i:i + cols_per_row]
+            cols = st.columns(cols_per_row)
+            
+            for idx, movie in enumerate(row_movies):
+                if search_query and search_query.lower() not in movie["title"].lower():
+                    continue
+                
+                with cols[idx]:
+                    st.image(movie["img"], use_container_width=True)
+                    st.markdown(f"**{movie['title']}**")
+                    st.caption(f"⭐ IMDb: {movie['imdb']} | {movie['genre']}")
+                    
+                    b_key = f"btn_{movie['id']}"
+                    play_key = f"play_{movie['id']}"
+                    
+                    if st.button("▶ Fragman & Detay", key=b_key):
+                        st.session_state[play_key] = not st.session_state.get(play_key, False)
+                    
+                    if st.session_state.get(play_key, False):
+                        st.info(f"📌 **Özet:** {movie['desc']}")
+                        st.video(movie["trailer"])
+
+    st.markdown('<div class="row-title">🔥 Vselix Arşivi ve Eklenen Filmler</div>', unsafe_allow_html=True)
+    display_movie_grid(st.session_state.movies)
