@@ -1,6 +1,8 @@
 import streamlit as st
 import json
 import os
+import random
+import string
 
 # Sayfa Yapılandırması
 st.set_page_config(
@@ -12,6 +14,7 @@ st.set_page_config(
 
 DB_FILE = "movies.json"
 PROFILE_FILE = "profiles.json"
+ACCESS_CODES_FILE = "access_codes.json"
 
 default_movies = [
     {
@@ -20,10 +23,11 @@ default_movies = [
         "img": "https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "trailer_url": "https://www.youtube.com/watch?v=519u2895Djc",
-        "genre": "Aksiyon • Savaş • Dram",
+        "genre": "Aksiyon",
         "imdb": "8.9",
         "desc": "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu.",
-        "is_active": True
+        "is_active": True,
+        "is_featured": True
     },
     {
         "id": "furiosa",
@@ -31,128 +35,19 @@ default_movies = [
         "img": "https://tr.web.img4.acsta.net/pictures/24/03/19/12/12/3221371.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "trailer_url": "https://www.youtube.com/watch?v=XJMek08brmg",
-        "genre": "Aksiyon • Bilim Kurgu • Macera",
+        "genre": "Bilim Kurgu",
         "imdb": "7.6",
         "desc": "Dünyanın çöküşünden yıllar sonra genç Furiosa, Yeşil Diyar'dan koparılır.",
-        "is_active": True
-    },
-    {
-        "id": "ballerina",
-        "title": "John Wick Dünyasından: Ballerina",
-        "img": "https://tr.web.img4.acsta.net/pictures/24/09/26/15/28/1932645.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/watch?v=W3w2SWpDW88",
-        "genre": "Aksiyon • Gerilim",
-        "imdb": "7.2",
-        "desc": "John Wick evreninde geçen bu hikayede genç bir suikastçı intikam peşinde.",
-        "is_active": True
-    },
-    {
-        "id": "nefes",
-        "title": "Nefes: Vatan Sağolsun",
-        "img": "https://tr.web.img2.acsta.net/r_1280_720/pictures/bgt/04/72/47285.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/watch?v=Y0z7045U0s0",
-        "genre": "Savaş • Dram",
-        "imdb": "8.0",
-        "desc": "Güneydoğu Anadolu'daki bir karakolda görev yapan 40 askerin yaşam mücadelesi.",
-        "is_active": True
-    },
-    {
-        "id": "t34",
-        "title": "T-34",
-        "img": "https://tr.web.img3.acsta.net/pictures/18/12/18/15/00/2219762.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/watch?v=g6j3a62S-ic",
-        "genre": "Aksiyon • Savaş • Tarih",
-        "imdb": "6.7",
-        "desc": "İkinci Dünya Savaşı sırasında esir düşen bir subayın tankla imkansız kaçışı.",
-        "is_active": True
-    },
-    {
-        "id": "hellboy",
-        "title": "Hellboy",
-        "img": "https://tr.web.img4.acsta.net/pictures/19/03/01/10/58/0644342.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/watch?v=Zs5yjqY00qs",
-        "genre": "Fantastik • Aksiyon • Macera",
-        "imdb": "7.0",
-        "desc": "Cehennemden gelen kırmızı iblis kahraman dünyayı koruyor.",
-        "is_active": True
-    },
-    {
-        "id": "indiana",
-        "title": "Indiana Jones",
-        "img": "https://tr.web.img4.acsta.net/pictures/21/04/14/15/22/0128795.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/watch?v=ZfMYxwsnuZ4",
-        "genre": "Macera • Aksiyon",
-        "imdb": "8.4",
-        "desc": "Arkeolog Indiana Jones'un tehlikeli hazine maceraları.",
-        "is_active": True
-    },
-    {
-        "id": "breach",
-        "title": "Breach",
-        "img": "https://tr.web.img4.acsta.net/pictures/20/11/17/12/03/4925766.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/watch?v=aT6g9aX2V6A",
-        "genre": "Bilim Kurgu • Aksiyon",
-        "imdb": "6.5",
-        "desc": "Uzay gemisinde uzaylı formuna karşı hayatta kalma savaşı.",
-        "is_active": True
-    },
-    {
-        "id": "dawn",
-        "title": "Şafaktan Önce",
-        "img": "https://tr.web.img3.acsta.net/pictures/22/08/17/11/49/0950663.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "genre": "Korku • Gerilim",
-        "imdb": "6.2",
-        "desc": "Karanlık çöktüğünde hayatta kalmaya çalışan bir grup insanın hikayesi.",
-        "is_active": True
-    },
-    {
-        "id": "zombie",
-        "title": "Zombi Günlükleri 2",
-        "img": "https://tr.web.img2.acsta.net/pictures/fs/00/69/006992_ok.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "genre": "Korku • Aksiyon",
-        "imdb": "5.8",
-        "desc": "Zombi istilasında sığınak arayan son insanların amansız savaşı.",
-        "is_active": True
-    },
-    {
-        "id": "karacin",
-        "title": "Kara Cin Laneti",
-        "img": "https://tr.web.img2.acsta.net/pictures/24/02/13/14/50/2324673.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "genre": "Korku • Gizem",
-        "imdb": "5.5",
-        "desc": "Lanetli bir evin sırlarını araştıran ailenin korku dolu anları.",
-        "is_active": True
+        "is_active": True,
+        "is_featured": False
     }
-] + [
-    {
-        "id": f"draft_{i+1}",
-        "title": f"Taslak Slot #{i+1}",
-        "img": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&auto=format&fit=crop&q=80",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        "genre": "Taslak",
-        "imdb": "0.0",
-        "desc": "Bu film slotu henüz kapalı. Admin panelinden aktif yapabilirsiniz.",
-        "is_active": False
-    }
-    for i in range(20)
 ]
 
 default_profiles = [
     {"name": "Misafir", "color": "#eab308", "icon": "🍿"}
 ]
+
+default_codes = ["123456", "654321"]
 
 def save_data(filename, data_list):
     with open(filename, "w", encoding="utf-8") as f:
@@ -176,6 +71,12 @@ if "movies" not in st.session_state:
 if "profiles" not in st.session_state:
     st.session_state.profiles = load_data(PROFILE_FILE, default_profiles)
 
+if "access_codes" not in st.session_state:
+    st.session_state.access_codes = load_data(ACCESS_CODES_FILE, default_codes)
+
+if "is_authenticated" not in st.session_state:
+    st.session_state.is_authenticated = False
+
 if "show_add_profile" not in st.session_state:
     st.session_state.show_add_profile = False
 
@@ -198,6 +99,17 @@ st.markdown("""
         margin: 0;
         line-height: 1;
         text-shadow: 0 4px 20px rgba(229, 9, 20, 0.6);
+    }
+
+    .login-box {
+        background: #141414;
+        padding: 40px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+        max-width: 450px;
+        margin: 40px auto;
+        text-align: center;
     }
 
     .profile-card-container {
@@ -256,8 +168,6 @@ st.markdown("""
 
     .hero-container {
         position: relative;
-        background: linear-gradient(180deg, rgba(13,13,13,0.1) 0%, rgba(13,13,13,0.95) 100%),
-                    url('https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg');
         background-size: cover;
         background-position: center 20%;
         height: 500px;
@@ -304,7 +214,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# YouTube Link Dönüştürücü Fonksiyon
+# YouTube Link Dönüştürücü
 def format_youtube_embed(url):
     if "watch?v=" in url:
         v_id = url.split("watch?v=")[1].split("&")[0]
@@ -316,15 +226,34 @@ def format_youtube_embed(url):
         return url
     return url
 
-# --- OTURUM DURUMLARI ---
-if "profile" not in st.session_state:
-    st.session_state.profile = None
+# --- 1. AŞAMA: 6 HANELİ ERİŞİM KODU EKRANI ---
+if not st.session_state.is_authenticated:
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
+    
+    with col_l2:
+        st.markdown("""
+            <div class="login-box">
+                <h1 style='font-family: Bebas Neue; font-size: 65px; color: #E50914; margin-bottom: 0;'>VSELIX</h1>
+                <p style='color: #a3a3a3; font-size: 14px; margin-bottom: 25px;'>Erişim için yetkiliyle iletişime geçip 6 haneli kodunuzu alın.</p>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        with st.form("access_code_form"):
+            user_code = st.text_input("🔑 6 Haneli Giriş Kodu", max_chars=6, placeholder="Örn: 123456")
+            remember_me = st.checkbox("📌 Beni Hatırla (Bu cihazı hatırla)", value=True)
+            submit_code = st.form_submit_button("Sisteme Giriş Yap")
+            
+            if submit_code:
+                if user_code in st.session_state.access_codes:
+                    st.session_state.is_authenticated = True
+                    st.success("Giriş başarılı! Yönlendiriliyorsunuz...")
+                    st.rerun()
+                else:
+                    st.error("❌ Geçersiz erişim kodu! Lütfen yetkiliyle iletişime geçin.")
 
-if "admin_logged" not in st.session_state:
-    st.session_state.admin_logged = False
-
-# --- 1. PROFİL SEÇİM EKRANI ---
-if st.session_state.profile is None:
+# --- 2. AŞAMA: PROFİL SEÇİM EKRANI ---
+elif "profile" not in st.session_state or st.session_state.profile is None:
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("<h1 style='font-family: Bebas Neue; font-size: 85px; text-align: center; color: #E50914; margin-bottom: 0; letter-spacing: 6px; text-shadow: 0 5px 25px rgba(229, 9, 20, 0.5);'>VSELIX</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center; color: #8c8c8c; font-weight: 500; margin-bottom: 45px; font-size: 24px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
@@ -368,7 +297,6 @@ if st.session_state.profile is None:
                 if submitted:
                     if new_name:
                         colors = ["#E50914", "#3b82f6", "#10b981", "#f97316", "#06b6d4", "#8b5cf6"]
-                        import random
                         chosen_color = random.choice(colors)
                         st.session_state.profiles.append({"name": new_name, "color": chosen_color, "icon": "🍿"})
                         save_data(PROFILE_FILE, st.session_state.profiles)
@@ -378,7 +306,7 @@ if st.session_state.profile is None:
                     else:
                         st.warning("Lütfen bir profil adı girin.")
 
-# --- 2. ANA UYGULAMA EKRANI ---
+# --- 3. AŞAMA: ANA UYGULAMA EKRANI ---
 else:
     with st.sidebar:
         st.markdown(f"### 👤 Profil: **{st.session_state.profile}**")
@@ -413,7 +341,7 @@ else:
         st.divider()
         st.markdown("### 🔐 Yönetici Paneli (Admin)")
         
-        if not st.session_state.admin_logged:
+        if not st.session_state.get("admin_logged", False):
             admin_pass = st.text_input("Yönetici Şifresi", type="password")
             if st.button("Giriş Yap"):
                 if admin_pass == "vselix123":
@@ -429,27 +357,85 @@ else:
                 st.rerun()
             
             st.markdown("---")
-            st.subheader("✏️ Film Yönetimi ve Düzenleme")
+            st.subheader("🔑 6 Haneli Giriş Kodları Yönetimi")
+            st.write("Aktif Kodlar:", st.session_state.access_codes)
             
+            if st.button("🎲 Yeni 6 Haneli Kod Üret"):
+                new_c = ''.join(random.choices(string.digits, k=6))
+                st.session_state.access_codes.append(new_c)
+                save_data(ACCESS_CODES_FILE, st.session_state.access_codes)
+                st.success(f"Yeni Kod Üretildi: **{new_c}**")
+                st.rerun()
+
+            st.markdown("---")
+            st.subheader("➕ Yeni Film Ekle")
+            with st.form("add_new_movie_form"):
+                n_id = st.text_input("Film ID (Benzersiz İngilizce, örn: mucize)")
+                n_title = st.text_input("Film Adı")
+                n_genre = st.selectbox("Kategori / Tür", ["Aksiyon", "Dram", "Komedi", "Bilim Kurgu", "Korku", "Animasyon", "Belgesel", "Macera", "Romantik"])
+                n_imdb = st.text_input("IMDb Puanı", value="7.0")
+                n_img = st.text_input("Afiş Görsel Linki (URL)")
+                n_video = st.text_input("Film Video Linki")
+                n_trailer = st.text_input("YouTube Fragman Linki")
+                n_desc = st.text_area("Film Özeti")
+                n_active = st.checkbox("🟢 Yayında (Aktif)", value=True)
+                n_featured = st.checkbox("⭐ Öne Çıkan Film Yap", value=False)
+                
+                add_movie_btn = st.form_submit_button("🚀 Filmi Arşive Ekle")
+                if add_movie_btn:
+                    if n_id and n_title:
+                        if n_featured:
+                            for m in st.session_state.movies:
+                                m["is_featured"] = False
+
+                        new_m = {
+                            "id": n_id,
+                            "title": n_title,
+                            "img": n_img,
+                            "video_url": n_video,
+                            "trailer_url": n_trailer,
+                            "genre": n_genre,
+                            "imdb": n_imdb,
+                            "desc": n_desc,
+                            "is_active": n_active,
+                            "is_featured": n_featured
+                        }
+                        st.session_state.movies.append(new_m)
+                        save_data(DB_FILE, st.session_state.movies)
+                        st.success(f"'{n_title}' başarıyla eklendi!")
+                        st.rerun()
+                    else:
+                        st.warning("Lütfen alanları doldurun.")
+
+            st.markdown("---")
+            st.subheader("✏️ Mevcut Filmi Düzenle / Sil")
             movie_titles = [m["title"] for m in st.session_state.movies]
-            selected_title = st.selectbox("Düzenlemek İstediğiniz Filmi Seçin", movie_titles)
+            selected_title = st.selectbox("Düzenlenecek Filmi Seç", movie_titles)
             
             target_movie = next((m for m in st.session_state.movies if m["title"] == selected_title), None)
             
             if target_movie:
                 with st.form("edit_movie_form"):
-                    ed_active = st.checkbox("🟢 Yayın Durumu (Açık / Yayında)", value=target_movie.get("is_active", True))
+                    ed_active = st.checkbox("🟢 Yayın Durumu", value=target_movie.get("is_active", True))
+                    ed_featured = st.checkbox("⭐ Öne Çıkan Film Yap", value=target_movie.get("is_featured", False))
                     ed_title = st.text_input("Film Adı", value=target_movie.get("title", ""))
-                    ed_genre = st.text_input("Tür (Örn: Aksiyon • Dram)", value=target_movie.get("genre", ""))
+                    categories = ["Aksiyon", "Dram", "Komedi", "Bilim Kurgu", "Korku", "Animasyon", "Belgesel", "Macera", "Romantik"]
+                    current_g = target_movie.get("genre", "Aksiyon")
+                    ed_genre = st.selectbox("Kategori / Tür", categories, index=categories.index(current_g) if current_g in categories else 0)
                     ed_imdb = st.text_input("IMDb Puanı", value=target_movie.get("imdb", ""))
-                    ed_img = st.text_input("Afiş Görsel Linki (URL)", value=target_movie.get("img", ""))
-                    ed_video = st.text_input("Film Video Linki (Google Drive / Direct)", value=target_movie.get("video_url", ""))
-                    ed_trailer = st.text_input("YouTube Fragman Linki", value=target_movie.get("trailer_url", ""))
-                    ed_desc = st.text_area("Film Özeti", value=target_movie.get("desc", ""))
+                    ed_img = st.text_input("Afiş Görsel Linki", value=target_movie.get("img", ""))
+                    ed_video = st.text_input("Video Linki", value=target_movie.get("video_url", ""))
+                    ed_trailer = st.text_input("Fragman Linki", value=target_movie.get("trailer_url", ""))
+                    ed_desc = st.text_area("Özet", value=target_movie.get("desc", ""))
                     
-                    update_btn = st.form_submit_button("💾 Filmi Kaydet ve Güncelle")
+                    update_btn = st.form_submit_button("💾 Güncellemeyi Kaydet")
                     if update_btn:
+                        if ed_featured:
+                            for m in st.session_state.movies:
+                                m["is_featured"] = False
+
                         target_movie["is_active"] = ed_active
+                        target_movie["is_featured"] = ed_featured
                         target_movie["title"] = ed_title
                         target_movie["genre"] = ed_genre
                         target_movie["imdb"] = ed_imdb
@@ -459,56 +445,44 @@ else:
                         target_movie["desc"] = ed_desc
                         
                         save_data(DB_FILE, st.session_state.movies)
-                        st.success(f"'{ed_title}' başarıyla kaydedildi!")
+                        st.success("Film güncellendi!")
                         st.rerun()
-
-            st.markdown("---")
-            st.subheader("⭐ Hero Banner (Özel Yapım) Ayarları")
-            with st.form("hero_settings_form"):
-                hero_badge_text = st.text_input("Hero Etiket Metni", value=st.session_state.get("hero_badge", "VSELIX ÖZEL YAPIM"))
-                hero_title_text = st.text_input("Hero Film Adı", value=st.session_state.get("hero_title", "DAĞ 2"))
-                hero_desc_text = st.text_area("Hero Açıklaması", value=st.session_state.get("hero_desc", "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu."))
-                hero_bg_text = st.text_input("Hero Arka Plan Görsel URL", value=st.session_state.get("hero_bg", "https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg"))
                 
-                save_hero = st.form_submit_button("🎨 Hero Banner'ı Güncelle")
-                if save_hero:
-                    st.session_state.hero_badge = hero_badge_text
-                    st.session_state.hero_title = hero_title_text
-                    st.session_state.hero_desc = hero_desc_text
-                    st.session_state.hero_bg = hero_bg_text
-                    st.success("Hero Banner güncellendi!")
+                if st.button("🗑️ Bu Filmi Arşivden Sil", key="del_movie_btn"):
+                    st.session_state.movies = [m for m in st.session_state.movies if m["id"] != target_movie["id"]]
+                    save_data(DB_FILE, st.session_state.movies)
+                    st.success("Film silindi!")
                     st.rerun()
 
     # Navbar
-    col_logo, col_space, col_search = st.columns([2, 5, 3])
+    col_logo, col_space, col_search = st.columns([2, 3, 4])
 
     with col_logo:
         st.markdown('<p class="vselix-logo">VSELIX</p>', unsafe_allow_html=True)
 
     with col_search:
-        search_query = st.text_input("", placeholder="🔍 Film, dizi ara...", label_visibility="collapsed")
+        search_query = st.text_input("", placeholder="🔍 Film, dizi veya kategori ara...", label_visibility="collapsed")
 
     st.markdown("<hr style='margin: 10px 0px 25px 0px; border-color: rgba(255,255,255,0.08);'>", unsafe_allow_html=True)
 
-    # Hero Banner
-    h_badge = st.session_state.get("hero_badge", "VSELIX ÖZEL YAPIM")
-    h_title = st.session_state.get("hero_title", "DAĞ 2")
-    h_desc = st.session_state.get("hero_desc", "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu.")
-    h_bg = st.session_state.get("hero_bg", "https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg")
+    # Öne Çıkan Film (Hero Banner)
+    featured_movie = next((m for m in st.session_state.movies if m.get("is_featured", False) and m.get("is_active", True)), None)
+    if not featured_movie:
+        active_ones = [m for m in st.session_state.movies if m.get("is_active", True)]
+        featured_movie = active_ones[0] if active_ones else st.session_state.movies[0]
 
     st.markdown(f"""
-        <div class="hero-container" style="background: linear-gradient(180deg, rgba(13,13,13,0.1) 0%, rgba(13,13,13,0.95) 100%), url('{h_bg}'); background-size: cover; background-position: center 20%;">
-            <div class="hero-badge">{h_badge}</div>
-            <div class="hero-title">{h_title}</div>
+        <div class="hero-container" style="background: linear-gradient(180deg, rgba(13,13,13,0.1) 0%, rgba(13,13,13,0.95) 100%), url('{featured_movie['img']}');">
+            <div class="hero-badge">⭐ VSELIX ÖNE ÇIKAN</div>
+            <div class="hero-title">{featured_movie['title']}</div>
             <div style="font-size: 16px; max-width: 600px; color: #d1d1d1; margin-bottom: 15px; line-height: 1.5; font-weight: 400;">
-                {h_desc}
+                {featured_movie['desc']}
             </div>
         </div>
     """, unsafe_allow_html=True)
 
-    # SİNEMATİK AKILLI OYNATICI FONKSİYONU
+    # Oynatıcı Fonksiyonu
     def render_custom_player(video_url):
-        # Google Drive Link Kontrolü ve IFRAME Önizleme Dönüşümü
         if "drive.google.com" in video_url:
             embed_url = video_url
             if "/file/d/" in video_url:
@@ -524,8 +498,6 @@ else:
             </div>
             """
             st.components.v1.html(player_html, height=660)
-        
-        # Doğrudan Video Dosyaları (MP4, WebM vb.)
         else:
             player_html = f"""
             <div style="width:100%; display:flex; justify-content:center; margin:auto;">
@@ -538,28 +510,32 @@ else:
             """
             st.components.v1.html(player_html, height=670)
 
-    # Film Listeleme Fonksiyonu
-    def display_movie_grid(movie_list):
-        visible_movies = [m for m in movie_list if m.get("is_active", True) or st.session_state.admin_logged]
+    # Kategoriye Göre Listeleme
+    categories = sorted(list(set(m.get("genre", "Diğer") for m in st.session_state.movies if m.get("is_active", True) or st.session_state.get("admin_logged", False))))
 
-        if not visible_movies:
-            st.info("Yayında film bulunmuyor.")
-            return
+    for cat in categories:
+        cat_movies = [m for m in st.session_state.movies if m.get("genre", "Diğer") == cat and (m.get("is_active", True) or st.session_state.get("admin_logged", False))]
+        
+        if search_query:
+            q = search_query.lower()
+            cat_movies = [m for m in cat_movies if q in m["title"].lower() or q in m["genre"].lower()]
 
+        if not cat_movies:
+            continue
+
+        st.markdown(f'<div class="row-title">📂 {cat}</div>', unsafe_allow_html=True)
+        
         cols_per_row = 4
-        for i in range(0, len(visible_movies), cols_per_row):
-            row_movies = visible_movies[i:i + cols_per_row]
+        for i in range(0, len(cat_movies), cols_per_row):
+            row_movies = cat_movies[i:i + cols_per_row]
             cols = st.columns(cols_per_row)
             
             for idx, movie in enumerate(row_movies):
-                if search_query and search_query.lower() not in movie["title"].lower():
-                    continue
-                
                 with cols[idx]:
                     st.image(movie["img"], use_container_width=True)
                     
                     if not movie.get("is_active", True):
-                        st.markdown(f"**{movie['title']}** *(🔴 Taslak / Kapalı)*")
+                        st.markdown(f"**{movie['title']}** *(🔴 Taslak)*")
                     else:
                         st.markdown(f"**{movie['title']}**")
                         
@@ -581,7 +557,6 @@ else:
                             st.session_state[trailer_key] = not st.session_state.get(trailer_key, False)
                             st.session_state[play_key] = False
 
-                    # Fragman Ekranı
                     if st.session_state.get(trailer_key, False):
                         t_raw = movie.get("trailer_url", "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
                         t_embed = format_youtube_embed(t_raw)
@@ -590,11 +565,7 @@ else:
                             <iframe width="100%" height="400" src="{t_embed}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:10px;"></iframe>
                         """, height=420)
 
-                    # Film Oynatıcı Ekranı
                     if st.session_state.get(play_key, False):
                         st.info(f"📌 **Özet:** {movie['desc']}")
                         v_url = movie.get("video_url", "")
                         render_custom_player(v_url)
-
-    st.markdown('<div class="row-title">🎬 Vselix Film Arşivi</div>', unsafe_allow_html=True)
-    display_movie_grid(st.session_state.movies)
