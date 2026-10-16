@@ -494,23 +494,36 @@ else:
 
     st.divider()
 
-    # Oynatıcı Fonksiyonu (Google Drive Embed Desteği Eklendi)
-    def render_custom_player(video_url):
-        # Eğer link Google Drive paylaşım linkiyse veya /view içeriyorsa otomatik preview/embed formatına çevir
+    # Oynatıcı Fonksiyonu (Tam Ekran Menü Desteği ile)
+    def render_custom_player(video_url, movie_title):
         embed_url = video_url
+        raw_drive_url = video_url
+        
         if "drive.google.com" in video_url:
             if "/file/d/" in video_url:
                 file_id = video_url.split("/file/d/")[1].split("/")[0]
                 embed_url = f"https://drive.google.com/file/d/{file_id}/preview"
+                raw_drive_url = f"https://drive.google.com/file/d/{file_id}/view"
             elif "id=" in video_url:
                 file_id = video_url.split("id=")[1].split("&")[0]
                 embed_url = f"https://drive.google.com/file/d/{file_id}/preview"
+                raw_drive_url = f"https://drive.google.com/file/d/{file_id}/view"
 
             player_html = f"""
             <div style="width:100%; max-width:900px; margin:auto;">
-                <iframe src="{embed_url}" width="100%" height="480" allow="autoplay" style="border:none; border-radius:8px; background:#000;"></iframe>
+                <iframe src="{embed_url}" width="100%" height="480" allow="autoplay; fullscreen" allowfullscreen="true" style="border:none; border-radius:8px; background:#000;"></iframe>
             </div>
             """
+            st.components.v1.html(player_html, height=500)
+            
+            # Tam Ekran / Harici Açma Butonu Menüsü
+            st.markdown(f"""
+                <div style="display: flex; justify-content: center; margin-top: -10px; margin-bottom: 20px;">
+                    <a href="{raw_drive_url}" target="_blank" style="background-color: #E50914; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-family: 'Montserrat', sans-serif; font-size: 14px; box-shadow: 0 4px 12px rgba(229,9,20,0.4);">
+                        📺 Google Drive Tam Ekran Oynatıcıda Aç (Full Screen)
+                    </a>
+                </div>
+            """, unsafe_allow_html=True)
         else:
             player_html = f"""
             <div style="width:100%; max-width:900px; margin:auto;">
@@ -522,7 +535,7 @@ else:
                 </video>
             </div>
             """
-        st.components.v1.html(player_html, height=500)
+            st.components.v1.html(player_html, height=500)
 
     # Film Listeleme Fonksiyonu
     def display_movie_grid(movie_list):
@@ -560,7 +573,7 @@ else:
                     if st.session_state.get(play_key, False):
                         st.info(f"📌 **Özet:** {movie['desc']}")
                         v_url = movie.get("video_url", "")
-                        render_custom_player(v_url)
+                        render_custom_player(v_url, movie["title"])
 
     st.markdown('<div class="row-title">🎬 Vselix Film Arşivi</div>', unsafe_allow_html=True)
     display_movie_grid(st.session_state.movies)
