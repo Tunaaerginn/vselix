@@ -35,13 +35,11 @@ default_movies = [
     }
 ]
 
-# NETFLİX ORİJİNAL RENKLİ PROFIL AVATARLARI
-default_avatar = "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
-
+# Garantili ve şık renkli Netflix profil simgeleri
 default_profiles = [
-    {"name": "Volkan", "avatar": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"},
-    {"name": "Aile", "avatar": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png"},
-    {"name": "Misafir", "avatar": "https://mir-s3-cdn-cf.behance.net/project_modules/disp/64623a33850498.56ba69ac2a6f7.png"}
+    {"name": "Volkan", "color": "#E50914", "icon": "👨‍💻"},
+    {"name": "Aile", "color": "#3b82f6", "icon": "👨‍👩‍👧‍👦"},
+    {"name": "Misafir", "color": "#eab308", "icon": "🍿"}
 ]
 
 def save_data(filename, data_list):
@@ -56,12 +54,7 @@ def load_data(filename, default_val):
                 if not content:
                     save_data(filename, default_val)
                     return default_val
-                data = json.loads(content)
-                if filename == PROFILE_FILE:
-                    for p in data:
-                        if "unsplash.com" in p.get("avatar", ""):
-                            p["avatar"] = default_avatar
-                return data
+                return json.loads(content)
         except Exception:
             save_data(filename, default_val)
             return default_val
@@ -132,61 +125,66 @@ st.markdown("""
         100% { transform: scale(1); opacity: 1; }
     }
 
-    /* NETFLİX PROFİL SEÇİM EKRANI STİLLERİ */
-    .profile-box {
-        text-align: center;
+    /* NETFLİX PROFİL KARTI TASARIMI (Butonsuz, Direkt Kutucuk) */
+    .profile-card-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         cursor: pointer;
+        margin-bottom: 20px;
     }
 
-    .profile-avatar {
+    .profile-avatar-box {
         width: 135px;
         height: 135px;
-        border-radius: 6px;
-        object-fit: cover;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 55px;
         border: 3px solid transparent;
-        transition: all 0.2s ease-in-out;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-        background-color: #333;
+        transition: all 0.25s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.6);
     }
 
-    .profile-box:hover .profile-avatar {
+    .profile-card-container:hover .profile-avatar-box {
         border-color: #ffffff;
-        transform: scale(1.05);
-        box-shadow: 0 8px 22px rgba(229, 9, 20, 0.5);
+        transform: scale(1.06);
+        box-shadow: 0 8px 25px rgba(229, 9, 20, 0.5);
     }
 
-    .profile-title {
+    .profile-name {
         margin-top: 12px;
         font-size: 16px;
         color: #b3b3b3;
         font-weight: 500;
         letter-spacing: 0.5px;
+        transition: color 0.2s;
     }
 
-    .profile-box:hover .profile-title {
+    .profile-card-container:hover .profile-name {
         color: #ffffff;
     }
 
-    /* Artı Butonu Kutusu */
-    .add-profile-icon {
-        width: 135px;
-        height: 135px;
+    /* Streamlit butonlarını profil kartının içine gizleme ve tıklanabilir yapma */
+    div.stButton > button {
+        background-color: #E50914;
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
         border-radius: 6px;
-        border: 3px dashed #666;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 55px;
-        color: #666;
-        background-color: rgba(255,255,255,0.03);
-        transition: all 0.2s ease;
+        border: none;
+        padding: 10px 18px;
+        width: 100%;
+        box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+        transition: all 0.25s ease;
     }
 
-    .profile-box:hover .add-profile-icon {
-        border-color: #fff;
-        color: #fff;
-        background-color: rgba(255,255,255,0.08);
-        transform: scale(1.05);
+    div.stButton > button:hover {
+        background-color: #F40612;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(229, 9, 20, 0.5);
     }
 
     /* Hero Banner */
@@ -224,7 +222,6 @@ st.markdown("""
         color: #E5E5E5;
     }
 
-    /* Film Kartları Hover Efekti */
     div[data-testid="column"] img {
         border-radius: 6px;
         transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
@@ -235,27 +232,6 @@ st.markdown("""
         transform: scale(1.08);
         box-shadow: 0 12px 25px rgba(229, 9, 20, 0.5);
         z-index: 50;
-    }
-
-    /* Butonlar */
-    div.stButton > button {
-        background-color: #E50914;
-        color: white;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 600;
-        font-size: 14px;
-        border-radius: 6px;
-        border: none;
-        padding: 10px 18px;
-        width: 100%;
-        box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
-        transition: all 0.25s ease;
-    }
-
-    div.stButton > button:hover {
-        background-color: #F40612;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(229, 9, 20, 0.5);
     }
     </style>
 """, unsafe_allow_html=True)
@@ -277,36 +253,39 @@ if st.session_state.profile is None:
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("<h1 style='font-family: Bebas Neue; font-size: 75px; text-align: center; color: #E50914; margin-bottom: 0; letter-spacing: 4px;'>VSELIX</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center; color: #b3b3b3; font-weight: 400; margin-bottom: 30px; font-size: 26px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: #b3b3b3; font-weight: 400; margin-bottom: 35px; font-size: 26px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
     
     total_slots = len(st.session_state.profiles) + 1
     cols = st.columns(total_slots)
     
     for idx, prof in enumerate(st.session_state.profiles):
         with cols[idx]:
+            bg_color = prof.get('color', '#333')
+            icon = prof.get('icon', '👤')
             st.markdown(f"""
-                <div class="profile-box" style="display: flex; flex-direction: column; align-items: center;">
-                    <img src="{prof['avatar']}" class="profile-avatar">
-                    <div class="profile-title">{prof['name']}</div>
+                <div class="profile-card-container">
+                    <div class="profile-avatar-box" style="background-color: {bg_color};">{icon}</div>
+                    <div class="profile-name">{prof['name']}</div>
                 </div>
             """, unsafe_allow_html=True)
-            if st.button(f"Seç: {prof['name']}", key=f"prof_btn_{idx}"):
+            # Karmaşık yazılar yerine şık ve sade buton ismi
+            if st.button(f"👉 {prof['name']} ile Giriş Yap", key=f"prof_btn_{idx}"):
                 st.session_state.profile = prof['name']
                 st.rerun()
 
-    # En sağdaki "+" Profil Ekle Butonu
+    # En sağdaki "+" Profil Ekle Kutusu
     with cols[-1]:
-        st.markdown("""
-            <div class="profile-box" style="display: flex; flex-direction: column; align-items: center;">
-                <div class="add-profile-icon">+</div>
-                <div class="profile-title">Profil Ekle</div>
+        st.markdown(f"""
+            <div class="profile-card-container">
+                <div class="profile-avatar-box" style="background-color: rgba(255,255,255,0.05); border: 3px dashed #666; color: #888;">+</div>
+                <div class="profile-name">Profil Ekle</div>
             </div>
         """, unsafe_allow_html=True)
-        if st.button("➕ Profil Ekle", key="add_prof_main_btn"):
+        if st.button("➕ Yeni Profil Ekle", key="add_prof_main_btn"):
             st.session_state.show_add_profile = True
             st.rerun()
 
-    # Profil Ekleme Form Alanı
+    # Profil Ekleme Formu
     if st.session_state.show_add_profile:
         st.markdown("<br>", unsafe_allow_html=True)
         col_f1, col_f2, col_f3 = st.columns([1, 2, 1])
@@ -314,12 +293,13 @@ if st.session_state.profile is None:
             st.markdown("<h4 style='text-align: center; color: #fff;'>Yeni Profil Oluştur</h4>", unsafe_allow_html=True)
             with st.form("quick_add_profile"):
                 new_name = st.text_input("Profil Adı")
-                new_avatar = st.text_input("Profil Fotoğrafı URL (Boş bırakırsan varsayılan kırmızı ikon atanır)")
                 submitted = st.form_submit_button("Profili Kaydet")
                 if submitted:
                     if new_name:
-                        avatar_url = new_avatar if new_avatar.strip() != "" else default_avatar
-                        st.session_state.profiles.append({"name": new_name, "avatar": avatar_url})
+                        colors = ["#8b5cf6", "#ec4899", "#10b981", "#f97316", "#06b6d4"]
+                        import random
+                        chosen_color = random.choice(colors)
+                        st.session_state.profiles.append({"name": new_name, "color": chosen_color, "icon": "😊"})
                         save_data(PROFILE_FILE, st.session_state.profiles)
                         st.session_state.show_add_profile = False
                         st.success(f"'{new_name}' başarıyla eklendi!")
@@ -339,12 +319,10 @@ else:
         st.markdown("### ⚙️ Profil Yönetimi")
         with st.form("new_profile_form_sidebar"):
             new_p_name = st.text_input("Yeni Profil Adı")
-            new_p_avatar = st.text_input("Avatar URL (İsteğe bağlı)", placeholder="https://...")
             add_prof_btn = st.form_submit_button("Profil Ekle")
             if add_prof_btn:
                 if new_p_name:
-                    avatar_url = new_p_avatar if new_p_avatar.strip() != "" else default_avatar
-                    st.session_state.profiles.append({"name": new_p_name, "avatar": avatar_url})
+                    st.session_state.profiles.append({"name": new_p_name, "color": "#4f46e5", "icon": "🌟"})
                     save_data(PROFILE_FILE, st.session_state.profiles)
                     st.success(f"'{new_p_name}' profili eklendi!")
                     st.rerun()
