@@ -36,8 +36,16 @@ default_movies = [
 
 def load_movies():
     if os.path.exists(DB_FILE):
-        with open(DB_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
+        try:
+            with open(DB_FILE, "r", encoding="utf-8") as f:
+                content = f.read().strip()
+                if not content:
+                    save_movies(default_movies)
+                    return default_movies
+                return json.loads(content)
+        except Exception:
+            save_movies(default_movies)
+            return default_movies
     else:
         save_movies(default_movies)
         return default_movies
@@ -126,13 +134,12 @@ if "profile" not in st.session_state:
 if "admin_logged" not in st.session_state:
     st.session_state.admin_logged = False
 
-# --- 1. NETFLİX PROFİL SEÇİM EKRANI (Her cihazda ilk burası açılır) ---
+# --- 1. NETFLİX PROFİL SEÇİM EKRANI ---
 if st.session_state.profile is None:
     st.markdown("<br><br><br>", unsafe_allow_html=True)
     st.markdown("<h1 style='text-align: center; font-family: Bebas Neue; font-size: 70px; color: #E50914; letter-spacing: 3px;'>VSELIX</h1>", unsafe_allow_html=True)
     st.markdown("<h3 style='text-align: center; color: #fff; font-weight: 400; margin-bottom: 30px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
     
-    # Profil Butonları (Ortalanmış görünüm için sütunlar)
     col_emp1, c1, c2, c3, c_emp2 = st.columns([2, 1, 1, 1, 2])
     
     with c1:
@@ -153,9 +160,8 @@ if st.session_state.profile is None:
             st.session_state.profile = "Misafir"
             st.rerun()
 
-# --- 2. ANA UYGULAMA EKRANI (Profil seçildikten sonra açılır) ---
+# --- 2. ANA UYGULAMA EKRANI ---
 else:
-    # Kenar Çubuğu (Yönetici Paneli ve Profil Değiştirme)
     with st.sidebar:
         st.markdown(f"### 👤 Aktif Profil: **{st.session_state.profile}**")
         if st.button("🔄 Profili Değiştir"):
@@ -168,7 +174,7 @@ else:
         if not st.session_state.admin_logged:
             admin_pass = st.text_input("Yönetici Şifresi", type="password")
             if st.button("Giriş Yap"):
-                if admin_pass == "vselix123": # Yönetici şifren
+                if admin_pass == "vselix123":
                     st.session_state.admin_logged = True
                     st.success("Giriş başarılı!")
                     st.rerun()
@@ -211,7 +217,7 @@ else:
     col_logo, col_space, col_search = st.columns([2, 5, 3])
 
     with col_logo:
-        st.markdown(f'<p class="vselix-logo">VSELIX</p>', unsafe_allow_html=True)
+        st.markdown('<p class="vselix-logo">VSELIX</p>', unsafe_allow_html=True)
 
     with col_search:
         search_query = st.text_input("", placeholder="🔍 Film, dizi ara...", label_visibility="collapsed")
@@ -264,6 +270,5 @@ else:
                         st.info(f"📌 **Özet:** {movie['desc']}")
                         st.video(movie["trailer"])
 
-    # Kategoriler
     st.markdown('<div class="row-title">🔥 Vselix Arşivi ve Eklenen Filmler</div>', unsafe_allow_html=True)
     display_movie_grid(st.session_state.movies)
