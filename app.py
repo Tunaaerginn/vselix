@@ -19,9 +19,10 @@ default_movies = [
         "title": "Dağ 2",
         "img": "https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "trailer_url": "https://www.youtube.com/embed/519u2895Djc?autoplay=1&mute=1&controls=0&loop=1&playlist=519u2895Djc",
         "genre": "Aksiyon • Savaş • Dram",
         "imdb": "8.9",
-        "desc": "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin hayatı ve sınır ötesi operasyonu.",
+        "desc": "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu.",
         "is_active": True
     },
     {
@@ -29,9 +30,10 @@ default_movies = [
         "title": "Furiosa: Bir Mad Max Destanı",
         "img": "https://tr.web.img4.acsta.net/pictures/24/03/19/12/12/3221371.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "trailer_url": "https://www.youtube.com/embed/XJMek08brmg?autoplay=1&mute=1&controls=0&loop=1&playlist=XJMek08brmg",
         "genre": "Aksiyon • Bilim Kurgu • Macera",
         "imdb": "7.6",
-        "desc": "Dünyanın çöküşünden yıllar sonra genç Furiosa, Yeşil Diyar'dan koparılır ve Savaş Lordu Dementus'un eline düşer.",
+        "desc": "Dünyanın çöküşünden yıllar sonra genç Furiosa, Yeşil Diyar'dan koparılır.",
         "is_active": True
     },
     {
@@ -39,9 +41,10 @@ default_movies = [
         "title": "John Wick Dünyasından: Ballerina",
         "img": "https://tr.web.img4.acsta.net/pictures/24/09/26/15/28/1932645.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "trailer_url": "https://www.youtube.com/embed/W3w2SWpDW88?autoplay=1&mute=1&controls=0&loop=1&playlist=W3w2SWpDW88",
         "genre": "Aksiyon • Gerilim",
         "imdb": "7.2",
-        "desc": "John Wick evreninde geçen bu hikayede genç bir suikastçı, ailesinin intikamını almak için antik gelenekleri kullanıyor.",
+        "desc": "John Wick evreninde geçen bu hikayede genç bir suikastçı intikam peşinde.",
         "is_active": True
     },
     {
@@ -49,9 +52,10 @@ default_movies = [
         "title": "Nefes: Vatan Sağolsun",
         "img": "https://tr.web.img2.acsta.net/r_1280_720/pictures/bgt/04/72/47285.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "trailer_url": "https://www.youtube.com/embed/Y0z7045U0s0?autoplay=1&mute=1&controls=0&loop=1&playlist=Y0z7045U0s0",
         "genre": "Savaş • Dram",
         "imdb": "8.0",
-        "desc": "Güneydoğu Anadolu'daki bir karakolda görev yapan 40 asker ve komutanlarının zorlu yaşam mücadelesi.",
+        "desc": "Güneydoğu Anadolu'daki bir karakolda görev yapan 40 askerin yaşam mücadelesi.",
         "is_active": True
     },
     {
@@ -59,9 +63,10 @@ default_movies = [
         "title": "T-34",
         "img": "https://tr.web.img3.acsta.net/pictures/18/12/18/15/00/2219762.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "trailer_url": "https://www.youtube.com/embed/g6j3a62S-ic?autoplay=1&mute=1&controls=0&loop=1&playlist=g6j3a62S-ic",
         "genre": "Aksiyon • Savaş • Tarih",
         "imdb": "6.7",
-        "desc": "İkinci Dünya Savaşı sırasında esir düşen cesur bir Sovyet subayı, bir T-34 tankıyla imkansız bir kaçış planı yapar.",
+        "desc": "İkinci Dünya Savaşı sırasında esir düşen bir subayın tankla imkansız kaçışı.",
         "is_active": True
     },
     {
@@ -69,19 +74,21 @@ default_movies = [
         "title": "Hellboy",
         "img": "https://tr.web.img4.acsta.net/pictures/19/03/01/10/58/0644342.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "trailer_url": "https://www.youtube.com/embed/Zs5yjqY00qs?autoplay=1&mute=1&controls=0&loop=1&playlist=Zs5yjqY00qs",
         "genre": "Fantastik • Aksiyon • Macera",
         "imdb": "7.0",
-        "desc": "Cehennemden gelen kırmızı iblis kahraman, dünyayı karanlık güçlerden korumak için amansız bir mücadele verir.",
+        "desc": "Cehennemden gelen kırmızı iblis kahraman dünyayı koruyor.",
         "is_active": True
     },
     {
         "id": "indiana",
-        "title": "Indiana Jones: Kutsal Hazine Avcıları",
+        "title": "Indiana Jones",
         "img": "https://tr.web.img4.acsta.net/pictures/21/04/14/15/22/0128795.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "trailer_url": "https://www.youtube.com/embed/ZfMYxwsnuZ4?autoplay=1&mute=1&controls=0&loop=1&playlist=ZfMYxwsnuZ4",
         "genre": "Macera • Aksiyon",
         "imdb": "8.4",
-        "desc": "Arkeolog Indiana Jones, Nazi güçlerinden önce Kutsal Kase'yi veya Ahit Sandığı'nı bulmak için tehlikeli bir maceraya atılır.",
+        "desc": "Arkeolog Indiana Jones'un tehlikeli hazine maceraları.",
         "is_active": True
     },
     {
@@ -89,29 +96,32 @@ default_movies = [
         "title": "Breach",
         "img": "https://tr.web.img4.acsta.net/pictures/20/11/17/12/03/4925766.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "trailer_url": "https://www.youtube.com/embed/aT6g9aX2V6A?autoplay=1&mute=1&controls=0&loop=1&playlist=aT6g9aX2V6A",
         "genre": "Bilim Kurgu • Aksiyon",
         "imdb": "6.5",
-        "desc": "Dünyayı terk eden bir gemide, uzaylı bir formun ele geçirdiği mürettebata karşı hayatta kalma savaşı.",
+        "desc": "Uzay gemisinde uzaylı formuna karşı hayatta kalma savaşı.",
         "is_active": True
     },
     {
         "id": "dawn",
-        "title": "Şafaktan Önce (Before Dawn)",
+        "title": "Şafaktan Önce",
         "img": "https://tr.web.img3.acsta.net/pictures/22/08/17/11/49/0950663.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "trailer_url": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1&playlist=dQw4w9WgXcQ",
         "genre": "Korku • Gerilim",
         "imdb": "6.2",
-        "desc": "Karanlık çöktüğünde hayatta kalmaya çalışan bir grubun gerilim dolu ve ürkütücü hikayesi.",
+        "desc": "Karanlık çöktüğünde hayatta kalmaya çalışan bir grup insanın hikayesi.",
         "is_active": True
     },
     {
         "id": "zombie",
-        "title": "Ölülerin Dünyası: Zombi Günlükleri 2",
+        "title": "Zombi Günlükleri 2",
         "img": "https://tr.web.img2.acsta.net/pictures/fs/00/69/006992_ok.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "trailer_url": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1&playlist=dQw4w9WgXcQ",
         "genre": "Korku • Aksiyon",
         "imdb": "5.8",
-        "desc": "Zombi istilasından kaçmaya çalışan son insan kalıntılarının sığınak arayışı ve zombilere karşı amansız savaşı.",
+        "desc": "Zombi istilasında sığınak arayan son insanların amansız savaşı.",
         "is_active": True
     },
     {
@@ -119,9 +129,10 @@ default_movies = [
         "title": "Kara Cin Laneti",
         "img": "https://tr.web.img2.acsta.net/pictures/24/02/13/14/50/2324673.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "trailer_url": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1&playlist=dQw4w9WgXcQ",
         "genre": "Korku • Gizem",
         "imdb": "5.5",
-        "desc": "Eski ve lanetli bir evin sırlarını araştırırken cinlerin hedefi haline gelen bir ailenin korku dolu anları.",
+        "desc": "Lanetli bir evin sırlarını araştıran ailenin korku dolu anları.",
         "is_active": True
     }
 ] + [
@@ -130,6 +141,7 @@ default_movies = [
         "title": f"Taslak Slot #{i+1}",
         "img": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&auto=format&fit=crop&q=80",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "trailer_url": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1&playlist=dQw4w9WgXcQ",
         "genre": "Taslak",
         "imdb": "0.0",
         "desc": "Bu film slotu henüz kapalı. Admin panelinden aktif yapabilirsiniz.",
@@ -167,7 +179,7 @@ if "profiles" not in st.session_state:
 if "show_add_profile" not in st.session_state:
     st.session_state.show_add_profile = False
 
-# --- MODERN VE PREMIUM CSS TASARIMI ---
+# --- CSS VE HOVER FRAGMAN EFEKTİ ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
@@ -186,11 +198,6 @@ st.markdown("""
         margin: 0;
         line-height: 1;
         text-shadow: 0 4px 20px rgba(229, 9, 20, 0.6);
-        transition: transform 0.3s ease;
-    }
-
-    .vselix-logo:hover {
-        transform: scale(1.03);
     }
 
     .profile-card-container {
@@ -210,9 +217,8 @@ st.markdown("""
         align-items: center;
         font-size: 58px;
         border: 3px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        transition: all 0.3s ease;
         box-shadow: 0 8px 24px rgba(0,0,0,0.7);
-        backdrop-filter: blur(10px);
     }
 
     .profile-card-container:hover .profile-avatar-box {
@@ -226,12 +232,6 @@ st.markdown("""
         font-size: 16px;
         color: #a3a3a3;
         font-weight: 600;
-        letter-spacing: 0.5px;
-        transition: color 0.2s;
-    }
-
-    .profile-card-container:hover .profile-name {
-        color: #ffffff;
     }
 
     div.stButton > button {
@@ -245,13 +245,12 @@ st.markdown("""
         padding: 12px 20px;
         width: 100%;
         box-shadow: 0 4px 15px rgba(229, 9, 20, 0.35);
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
     }
 
     div.stButton > button:hover {
         background: linear-gradient(135deg, #ff1e27 0%, #E50914 100%);
-        transform: translateY(-3px);
+        transform: translateY(-2px);
         box-shadow: 0 8px 25px rgba(229, 9, 20, 0.6);
     }
 
@@ -282,8 +281,6 @@ st.markdown("""
         width: fit-content;
         margin-bottom: 12px;
         letter-spacing: 1.5px;
-        box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
-        backdrop-filter: blur(4px);
     }
 
     .hero-title {
@@ -303,29 +300,36 @@ st.markdown("""
         margin-top: 25px;
         margin-bottom: 20px;
         color: #FFFFFF;
-        display: flex;
-        align-items: center;
-        gap: 10px;
     }
 
-    div[data-testid="column"] img {
+    /* HOVER TRAILER KART EFEKTİ */
+    .movie-card {
+        position: relative;
         border-radius: 10px;
-        transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-        cursor: pointer;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: #1f1f1f;
+        margin-bottom: 15px;
     }
-
-    div[data-testid="column"] img:hover {
-        transform: scale(1.06) translateY(-6px);
-        box-shadow: 0 15px 30px rgba(229, 9, 20, 0.45);
-        z-index: 50;
+    .movie-card:hover {
+        transform: scale(1.04);
+        box-shadow: 0 12px 30px rgba(229, 9, 20, 0.5);
     }
-
-    /* Streamlit Arama Kutusu Özelleştirme */
-    div[data-baseweb="input"] {
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        border-radius: 10px !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    .movie-card iframe {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        border: none;
+    }
+    .movie-card:hover iframe {
+        display: block;
+    }
+    .movie-card:hover img {
+        opacity: 0;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -337,11 +341,11 @@ if "profile" not in st.session_state:
 if "admin_logged" not in st.session_state:
     st.session_state.admin_logged = False
 
-# --- 1. NETFLİX PROFİL SEÇİM EKRANI ---
+# --- 1. PROFİL SEÇİM EKRANI ---
 if st.session_state.profile is None:
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("<h1 style='font-family: Bebas Neue; font-size: 85px; text-align: center; color: #E50914; margin-bottom: 0; letter-spacing: 6px; text-shadow: 0 5px 25px rgba(229, 9, 20, 0.5);'>VSELIX</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center; color: #8c8c8c; font-weight: 500; margin-bottom: 45px; font-size: 24px; letter-spacing: 1px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: #8c8c8c; font-weight: 500; margin-bottom: 45px; font-size: 24px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
     
     total_slots = len(st.session_state.profiles) + 1
     cols = st.columns(total_slots)
@@ -458,6 +462,7 @@ else:
                     ed_imdb = st.text_input("IMDb Puanı", value=target_movie.get("imdb", ""))
                     ed_img = st.text_input("Afiş Görsel Linki (URL)", value=target_movie.get("img", ""))
                     ed_video = st.text_input("Film Video Linki (Google Drive / Direct)", value=target_movie.get("video_url", ""))
+                    ed_trailer = st.text_input("YouTube Fragman Linki (Embed)", value=target_movie.get("trailer_url", "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1"))
                     ed_desc = st.text_area("Film Özeti", value=target_movie.get("desc", ""))
                     
                     update_btn = st.form_submit_button("💾 Filmi Kaydet ve Güncelle")
@@ -468,11 +473,29 @@ else:
                         target_movie["imdb"] = ed_imdb
                         target_movie["img"] = ed_img
                         target_movie["video_url"] = ed_video
+                        target_movie["trailer_url"] = ed_trailer
                         target_movie["desc"] = ed_desc
                         
                         save_data(DB_FILE, st.session_state.movies)
                         st.success(f"'{ed_title}' başarıyla kaydedildi!")
                         st.rerun()
+
+            st.markdown("---")
+            st.subheader("⭐ Hero Banner (Özel Yapım) Ayarları")
+            with st.form("hero_settings_form"):
+                hero_badge_text = st.text_input("Hero Etiket Metni", value=st.session_state.get("hero_badge", "VSELIX ÖZEL YAPIM"))
+                hero_title_text = st.text_input("Hero Film Adı", value=st.session_state.get("hero_title", "DAĞ 2"))
+                hero_desc_text = st.text_area("Hero Açıklaması", value=st.session_state.get("hero_desc", "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu."))
+                hero_bg_text = st.text_input("Hero Arka Plan Görsel URL", value=st.session_state.get("hero_bg", "https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg"))
+                
+                save_hero = st.form_submit_button("🎨 Hero Banner'ı Güncelle")
+                if save_hero:
+                    st.session_state.hero_badge = hero_badge_text
+                    st.session_state.hero_title = hero_title_text
+                    st.session_state.hero_desc = hero_desc_text
+                    st.session_state.hero_bg = hero_bg_text
+                    st.success("Hero Banner güncellendi!")
+                    st.rerun()
 
     # Navbar
     col_logo, col_space, col_search = st.columns([2, 5, 3])
@@ -485,13 +508,18 @@ else:
 
     st.markdown("<hr style='margin: 10px 0px 25px 0px; border-color: rgba(255,255,255,0.08);'>", unsafe_allow_html=True)
 
-    # Hero Banner
-    st.markdown("""
-        <div class="hero-container">
-            <div class="hero-badge">VSELIX ÖZEL YAPIM</div>
-            <div class="hero-title">DAĞ 2</div>
+    # Hero Banner (Admin panelinden özelleştirilebilir)
+    h_badge = st.session_state.get("hero_badge", "VSELIX ÖZEL YAPIM")
+    h_title = st.session_state.get("hero_title", "DAĞ 2")
+    h_desc = st.session_state.get("hero_desc", "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu.")
+    h_bg = st.session_state.get("hero_bg", "https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg")
+
+    st.markdown(f"""
+        <div class="hero-container" style="background: linear-gradient(180deg, rgba(13,13,13,0.1) 0%, rgba(13,13,13,0.95) 100%), url('{h_bg}'); background-size: cover; background-position: center 20%;">
+            <div class="hero-badge">{h_badge}</div>
+            <div class="hero-title">{h_title}</div>
             <div style="font-size: 16px; max-width: 600px; color: #d1d1d1; margin-bottom: 15px; line-height: 1.5; font-weight: 400;">
-                Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu ve destansı mücadelesi.
+                {h_desc}
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -527,7 +555,7 @@ else:
             """
             st.components.v1.html(player_html, height=670)
 
-    # Film Listeleme Fonksiyonu
+    # Film Listeleme ve Hover Fragman Fonksiyonu
     def display_movie_grid(movie_list):
         visible_movies = [m for m in movie_list if m.get("is_active", True) or st.session_state.admin_logged]
 
@@ -545,7 +573,16 @@ else:
                     continue
                 
                 with cols[idx]:
-                    st.image(movie["img"], use_container_width=True)
+                    trailer = movie.get("trailer_url", "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1")
+                    
+                    # Hover efekti için HTML kart sarmalayıcı
+                    card_html = f"""
+                    <div class="movie-card">
+                        <img src="{movie['img']}" style="width:100%; border-radius:10px; display:block;">
+                        <iframe src="{trailer}"></iframe>
+                    </div>
+                    """
+                    st.markdown(card_html, unsafe_allow_html=True)
                     
                     if not movie.get("is_active", True):
                         st.markdown(f"**{movie['title']}** *(🔴 Taslak / Kapalı)*")
