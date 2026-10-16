@@ -14,12 +14,12 @@ st.set_page_config(
 DB_FILE = "movies.json"
 PROFILE_FILE = "profiles.json"
 
-# Optimize edilmiş, kırılmayan kaliteli film afişleri
+# Filmlerin Kendi Orijinal ve Gerçek Afişleri
 default_movies = [
     {
         "id": "dag2",
         "title": "Dağ 2",
-        "img": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=600&auto=format&fit=crop&q=80",
+        "img": "https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "genre": "Aksiyon • Savaş • Dram",
         "imdb": "8.9",
@@ -28,7 +28,7 @@ default_movies = [
     {
         "id": "furiosa",
         "title": "Furiosa: Bir Mad Max Destanı",
-        "img": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=80",
+        "img": "https://tr.web.img4.acsta.net/pictures/24/03/19/12/12/3221371.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "genre": "Aksiyon • Bilim Kurgu • Macera",
         "imdb": "7.6",
@@ -37,7 +37,7 @@ default_movies = [
     {
         "id": "ballerina",
         "title": "John Wick Dünyasından: Ballerina",
-        "img": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80",
+        "img": "https://tr.web.img4.acsta.net/pictures/24/09/26/15/28/1932645.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "genre": "Aksiyon • Gerilim",
         "imdb": "7.2",
@@ -46,7 +46,7 @@ default_movies = [
     {
         "id": "nefes",
         "title": "Nefes: Vatan Sağolsun",
-        "img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80",
+        "img": "https://tr.web.img2.acsta.net/r_1280_720/pictures/bgt/04/72/47285.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "genre": "Savaş • Dram",
         "imdb": "8.0",
@@ -55,7 +55,7 @@ default_movies = [
     {
         "id": "t34",
         "title": "T-34",
-        "img": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=600&auto=format&fit=crop&q=80",
+        "img": "https://tr.web.img3.acsta.net/pictures/18/12/18/15/00/2219762.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "genre": "Aksiyon • Savaş • Tarih",
         "imdb": "6.7",
@@ -64,7 +64,7 @@ default_movies = [
     {
         "id": "hellboy",
         "title": "Hellboy",
-        "img": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=80",
+        "img": "https://tr.web.img4.acsta.net/pictures/19/03/01/10/58/0644342.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "genre": "Fantastik • Aksiyon • Macera",
         "imdb": "7.0",
@@ -73,7 +73,7 @@ default_movies = [
     {
         "id": "indiana",
         "title": "Indiana Jones: Kutsal Hazine Avcıları",
-        "img": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80",
+        "img": "https://tr.web.img4.acsta.net/pictures/21/04/14/15/22/0128795.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "genre": "Macera • Aksiyon",
         "imdb": "8.4",
@@ -82,7 +82,7 @@ default_movies = [
     {
         "id": "breach",
         "title": "Breach",
-        "img": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80",
+        "img": "https://tr.web.img4.acsta.net/pictures/20/11/17/12/03/4925766.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "genre": "Bilim Kurgu • Aksiyon",
         "imdb": "6.5",
@@ -91,7 +91,7 @@ default_movies = [
     {
         "id": "dawn",
         "title": "Şafaktan Önce (Before Dawn)",
-        "img": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80",
+        "img": "https://tr.web.img3.acsta.net/pictures/22/08/17/11/49/0950663.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "genre": "Korku • Gerilim",
         "imdb": "6.2",
@@ -100,7 +100,7 @@ default_movies = [
     {
         "id": "zombie",
         "title": "Ölülerin Dünyası: Zombi Günlükleri 2",
-        "img": "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=600&auto=format&fit=crop&q=80",
+        "img": "https://tr.web.img2.acsta.net/pictures/fs/00/69/006992_ok.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "genre": "Korku • Aksiyon",
         "imdb": "5.8",
@@ -109,7 +109,7 @@ default_movies = [
     {
         "id": "karacin",
         "title": "Kara Cin Laneti",
-        "img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80",
+        "img": "https://tr.web.img2.acsta.net/pictures/24/02/13/14/50/2324673.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "genre": "Korku • Gizem",
         "imdb": "5.5",
@@ -256,7 +256,7 @@ st.markdown("""
     .hero-container {
         position: relative;
         background: linear-gradient(to top, #141414 10%, rgba(20,20,20,0.3) 60%),
-                    url('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=1400&auto=format&fit=crop&q=85');
+                    url('https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg');
         background-size: cover;
         background-position: center;
         height: 480px;
