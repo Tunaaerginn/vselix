@@ -14,107 +14,18 @@ st.set_page_config(
 DB_FILE = "movies.json"
 PROFILE_FILE = "profiles.json"
 
-# Filmlerin Kendi Orijinal ve Gerçek Afişleri
+# Otomatik 50 Tane Düzenlenmeyi Bekleyen Taslak Kutu Oluştur
 default_movies = [
     {
-        "id": "dag2",
-        "title": "Dağ 2",
-        "img": "https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg",
+        "id": f"draft_{i+1}",
+        "title": f"Film #{i+1} (Düzenlenmeyi Bekliyor)",
+        "img": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&auto=format&fit=crop&q=80",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "genre": "Aksiyon • Savaş • Dram",
-        "imdb": "8.9",
-        "desc": "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin hayatı ve sınır ötesi operasyonu."
-    },
-    {
-        "id": "furiosa",
-        "title": "Furiosa: Bir Mad Max Destanı",
-        "img": "https://tr.web.img4.acsta.net/pictures/24/03/19/12/12/3221371.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "genre": "Aksiyon • Bilim Kurgu • Macera",
-        "imdb": "7.6",
-        "desc": "Dünyanın çöküşünden yıllar sonra genç Furiosa, Yeşil Diyar'dan koparılır ve Savaş Lordu Dementus'un eline düşer."
-    },
-    {
-        "id": "ballerina",
-        "title": "John Wick Dünyasından: Ballerina",
-        "img": "https://tr.web.img4.acsta.net/pictures/24/09/26/15/28/1932645.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "genre": "Aksiyon • Gerilim",
-        "imdb": "7.2",
-        "desc": "John Wick evreninde geçen bu hikayede genç bir suikastçı, ailesinin intikamını almak için antik gelenekleri kullanıyor."
-    },
-    {
-        "id": "nefes",
-        "title": "Nefes: Vatan Sağolsun",
-        "img": "https://tr.web.img2.acsta.net/r_1280_720/pictures/bgt/04/72/47285.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "genre": "Savaş • Dram",
-        "imdb": "8.0",
-        "desc": "Güneydoğu Anadolu'daki bir karakolda görev yapan 40 asker ve komutanlarının zorlu yaşam mücadelesi."
-    },
-    {
-        "id": "t34",
-        "title": "T-34",
-        "img": "https://tr.web.img3.acsta.net/pictures/18/12/18/15/00/2219762.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "genre": "Aksiyon • Savaş • Tarih",
-        "imdb": "6.7",
-        "desc": "İkinci Dünya Savaşı sırasında esir düşen cesur bir Sovyet subayı, bir T-34 tankıyla imkansız bir kaçış planı yapar."
-    },
-    {
-        "id": "hellboy",
-        "title": "Hellboy",
-        "img": "https://tr.web.img4.acsta.net/pictures/19/03/01/10/58/0644342.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "genre": "Fantastik • Aksiyon • Macera",
-        "imdb": "7.0",
-        "desc": "Cehennemden gelen kırmızı iblis kahraman, dünyayı karanlık güçlerden korumak için amansız bir mücadele verir."
-    },
-    {
-        "id": "indiana",
-        "title": "Indiana Jones: Kutsal Hazine Avcıları",
-        "img": "https://tr.web.img4.acsta.net/pictures/21/04/14/15/22/0128795.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "genre": "Macera • Aksiyon",
-        "imdb": "8.4",
-        "desc": "Arkeolog Indiana Jones, Nazi güçlerinden önce Kutsal Kase'yi veya Ahit Sandığı'nı bulmak için tehlikeli bir maceraya atılır."
-    },
-    {
-        "id": "breach",
-        "title": "Breach",
-        "img": "https://tr.web.img4.acsta.net/pictures/20/11/17/12/03/4925766.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "genre": "Bilim Kurgu • Aksiyon",
-        "imdb": "6.5",
-        "desc": "Dünyayı terk eden bir gemide, uzaylı bir formun ele geçirdiği mürettebata karşı hayatta kalma savaşı."
-    },
-    {
-        "id": "dawn",
-        "title": "Şafaktan Önce (Before Dawn)",
-        "img": "https://tr.web.img3.acsta.net/pictures/22/08/17/11/49/0950663.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "genre": "Korku • Gerilim",
-        "imdb": "6.2",
-        "desc": "Karanlık çöktüğünde hayatta kalmaya çalışan bir grubun gerilim dolu ve ürkütücü hikayesi."
-    },
-    {
-        "id": "zombie",
-        "title": "Ölülerin Dünyası: Zombi Günlükleri 2",
-        "img": "https://tr.web.img2.acsta.net/pictures/fs/00/69/006992_ok.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "genre": "Korku • Aksiyon",
-        "imdb": "5.8",
-        "desc": "Zombi istilasından kaçmaya çalışan son insan kalıntılarının sığınak arayışı ve zombilere karşı amansız savaşı."
-    },
-    {
-        "id": "karacin",
-        "title": "Kara Cin Laneti",
-        "img": "https://tr.web.img2.acsta.net/pictures/24/02/13/14/50/2324673.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "genre": "Korku • Gizem",
-        "imdb": "5.5",
-        "desc": "Eski ve lanetli bir evin sırlarını araştırırken cinlerin hedefi haline gelen bir ailenin korku dolu anları."
+        "genre": "Henüz Eklenmedi",
+        "imdb": "0.0",
+        "desc": "Bu film slotu boş. Admin panelinden girerek bilgileri ve video linkini güncelleyebilirsiniz."
     }
+    for i in range(50)
 ]
 
 default_profiles = [
@@ -128,8 +39,20 @@ def save_data(filename, data_list):
         json.dump(data_list, f, ensure_ascii=False, indent=4)
 
 def load_data(filename, default_val):
-    save_data(filename, default_val)
-    return default_val
+    if os.path.exists(filename):
+        try:
+            with open(filename, "r", encoding="utf-8") as f:
+                content = f.read().strip()
+                if not content:
+                    save_data(filename, default_val)
+                    return default_val
+                return json.loads(content)
+        except Exception:
+            save_data(filename, default_val)
+            return default_val
+    else:
+        save_data(filename, default_val)
+        return default_val
 
 if "movies" not in st.session_state:
     st.session_state.movies = load_data(DB_FILE, default_movies)
@@ -256,7 +179,7 @@ st.markdown("""
     .hero-container {
         position: relative;
         background: linear-gradient(to top, #141414 10%, rgba(20,20,20,0.3) 60%),
-                    url('https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg');
+                    url('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=1400&auto=format&fit=crop&q=85');
         background-size: cover;
         background-position: center;
         height: 480px;
@@ -410,31 +333,34 @@ else:
                 st.rerun()
             
             st.markdown("---")
-            st.subheader("➕ Yeni Film Ekle")
-            new_title = st.text_input("Film Adı")
-            new_genre = st.text_input("Tür (Örn: Aksiyon • Dram)")
-            new_imdb = st.text_input("IMDb Puanı (Örn: 8.5)")
-            new_img = st.text_input("Afiş Görsel Linki (URL)")
-            new_video = st.text_input("Film Video Linki (.TS / .MP4 / Drive Linki)")
-            new_desc = st.text_area("Film Özeti")
+            st.subheader("✏️ Film Kutularını Düzenle")
             
-            if st.button("Filmi Sisteme Yükle"):
-                if new_title and new_img:
-                    new_movie = {
-                        "id": str(len(st.session_state.movies) + 1),
-                        "title": new_title,
-                        "img": new_img,
-                        "video_url": new_video if new_video else "https://www.w3schools.com/html/mov_bbb.mp4",
-                        "genre": new_genre if new_genre else "Genel",
-                        "imdb": new_imdb if new_imdb else "7.0",
-                        "desc": new_desc if new_desc else "Açıklama girilmedi."
-                    }
-                    st.session_state.movies.append(new_movie)
-                    save_data(DB_FILE, st.session_state.movies)
-                    st.success(f"'{new_title}' başarıyla eklendi!")
-                    st.rerun()
-                else:
-                    st.warning("Lütfen en az Film Adı ve Afiş Linkini doldurun.")
+            movie_titles = [m["title"] for m in st.session_state.movies]
+            selected_title = st.selectbox("Düzenlemek İstediğiniz Kutuyu Seçin", movie_titles)
+            
+            target_movie = next((m for m in st.session_state.movies if m["title"] == selected_title), None)
+            
+            if target_movie:
+                with st.form("edit_movie_form"):
+                    ed_title = st.text_input("Film Adı", value=target_movie.get("title", ""))
+                    ed_genre = st.text_input("Tür (Örn: Aksiyon • Dram)", value=target_movie.get("genre", ""))
+                    ed_imdb = st.text_input("IMDb Puanı", value=target_movie.get("imdb", ""))
+                    ed_img = st.text_input("Afiş Görsel Linki (URL)", value=target_movie.get("img", ""))
+                    ed_video = st.text_input("Film Video Linki (Google Drive / Direct)", value=target_movie.get("video_url", ""))
+                    ed_desc = st.text_area("Film Özeti", value=target_movie.get("desc", ""))
+                    
+                    update_btn = st.form_submit_button("💾 Filmi Kaydet ve Güncelle")
+                    if update_btn:
+                        target_movie["title"] = ed_title
+                        target_movie["genre"] = ed_genre
+                        target_movie["imdb"] = ed_imdb
+                        target_movie["img"] = ed_img
+                        target_movie["video_url"] = ed_video
+                        target_movie["desc"] = ed_desc
+                        
+                        save_data(DB_FILE, st.session_state.movies)
+                        st.success(f"'{ed_title}' başarıyla kaydedildi!")
+                        st.rerun()
 
     # Navbar
     col_logo, col_space, col_search = st.columns([2, 5, 3])
@@ -451,9 +377,9 @@ else:
     st.markdown("""
         <div class="hero-container">
             <div style="background-color: #E50914; display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 11px; width: fit-content; margin-bottom: 8px; letter-spacing: 1px;">VSELIX ÖZEL YAPIM</div>
-            <div class="hero-title">DAĞ 2</div>
+            <div class="hero-title">VSELIX HOŞ GELDİNİZ</div>
             <div style="font-size: 15px; max-width: 580px; color: #D1D1D1; margin-bottom: 15px; line-height: 1.4;">
-                Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu ve destansı mücadelesi.
+                Sol menüden yönetici paneline (`vselix123`) girerek 50 adet hazır film kutusunu dilediğiniz gibi düzenleyebilirsiniz.
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -477,7 +403,7 @@ else:
     # Film Listeleme Fonksiyonu
     def display_movie_grid(movie_list):
         if not movie_list:
-            st.info("Aradığınız kriterlere uygun içerik bulunamadı.")
+            st.info("Film kutusu bulunamadı.")
             return
 
         cols_per_row = 4
@@ -505,5 +431,5 @@ else:
                         v_url = movie.get("video_url", "")
                         render_custom_player(v_url)
 
-    st.markdown('<div class="row-title">🔥 Vselix Arşivi ve Eklenen Filmler</div>', unsafe_allow_html=True)
+    st.markdown('<div class="row-title">🎬 Vselix Film Arşivi (50 Slot)</div>', unsafe_allow_html=True)
     display_movie_grid(st.session_state.movies)
