@@ -10,7 +10,6 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- DOSYA TABANLI VERİ YÖNETİMİ ---
 DB_FILE = "movies.json"
 PROFILE_FILE = "profiles.json"
 
@@ -495,18 +494,34 @@ else:
 
     st.divider()
 
-    # Oynatıcı Fonksiyonu
+    # Oynatıcı Fonksiyonu (Google Drive Embed Desteği Eklendi)
     def render_custom_player(video_url):
-        player_html = f"""
-        <div style="width:100%; max-width:900px; margin:auto;">
-            <video controls autoplay style="width:100%; border-radius:8px; background:#000;">
-                <source src="{video_url}" type="video/mp4">
-                <source src="{video_url}" type="video/ogg">
-                <source src="{video_url}" type="video/webm">
-                Tarayıcınız bu video formatını doğrudan desteklemiyor.
-            </video>
-        </div>
-        """
+        # Eğer link Google Drive paylaşım linkiyse veya /view içeriyorsa otomatik preview/embed formatına çevir
+        embed_url = video_url
+        if "drive.google.com" in video_url:
+            if "/file/d/" in video_url:
+                file_id = video_url.split("/file/d/")[1].split("/")[0]
+                embed_url = f"https://drive.google.com/file/d/{file_id}/preview"
+            elif "id=" in video_url:
+                file_id = video_url.split("id=")[1].split("&")[0]
+                embed_url = f"https://drive.google.com/file/d/{file_id}/preview"
+
+            player_html = f"""
+            <div style="width:100%; max-width:900px; margin:auto;">
+                <iframe src="{embed_url}" width="100%" height="480" allow="autoplay" style="border:none; border-radius:8px; background:#000;"></iframe>
+            </div>
+            """
+        else:
+            player_html = f"""
+            <div style="width:100%; max-width:900px; margin:auto;">
+                <video controls autoplay style="width:100%; border-radius:8px; background:#000;">
+                    <source src="{video_url}" type="video/mp4">
+                    <source src="{video_url}" type="video/ogg">
+                    <source src="{video_url}" type="video/webm">
+                    Tarayıcınız bu video formatını doğrudan desteklemiyor.
+                </video>
+            </div>
+            """
         st.components.v1.html(player_html, height=500)
 
     # Film Listeleme Fonksiyonu
