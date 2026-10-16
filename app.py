@@ -19,7 +19,7 @@ default_movies = [
         "title": "Dağ 2",
         "img": "https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/embed/519u2895Djc?autoplay=1&mute=1&controls=0&loop=1&playlist=519u2895Djc",
+        "trailer_url": "https://www.youtube.com/watch?v=519u2895Djc",
         "genre": "Aksiyon • Savaş • Dram",
         "imdb": "8.9",
         "desc": "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu.",
@@ -30,7 +30,7 @@ default_movies = [
         "title": "Furiosa: Bir Mad Max Destanı",
         "img": "https://tr.web.img4.acsta.net/pictures/24/03/19/12/12/3221371.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/embed/XJMek08brmg?autoplay=1&mute=1&controls=0&loop=1&playlist=XJMek08brmg",
+        "trailer_url": "https://www.youtube.com/watch?v=XJMek08brmg",
         "genre": "Aksiyon • Bilim Kurgu • Macera",
         "imdb": "7.6",
         "desc": "Dünyanın çöküşünden yıllar sonra genç Furiosa, Yeşil Diyar'dan koparılır.",
@@ -41,7 +41,7 @@ default_movies = [
         "title": "John Wick Dünyasından: Ballerina",
         "img": "https://tr.web.img4.acsta.net/pictures/24/09/26/15/28/1932645.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/embed/W3w2SWpDW88?autoplay=1&mute=1&controls=0&loop=1&playlist=W3w2SWpDW88",
+        "trailer_url": "https://www.youtube.com/watch?v=W3w2SWpDW88",
         "genre": "Aksiyon • Gerilim",
         "imdb": "7.2",
         "desc": "John Wick evreninde geçen bu hikayede genç bir suikastçı intikam peşinde.",
@@ -52,7 +52,7 @@ default_movies = [
         "title": "Nefes: Vatan Sağolsun",
         "img": "https://tr.web.img2.acsta.net/r_1280_720/pictures/bgt/04/72/47285.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/embed/Y0z7045U0s0?autoplay=1&mute=1&controls=0&loop=1&playlist=Y0z7045U0s0",
+        "trailer_url": "https://www.youtube.com/watch?v=Y0z7045U0s0",
         "genre": "Savaş • Dram",
         "imdb": "8.0",
         "desc": "Güneydoğu Anadolu'daki bir karakolda görev yapan 40 askerin yaşam mücadelesi.",
@@ -63,7 +63,7 @@ default_movies = [
         "title": "T-34",
         "img": "https://tr.web.img3.acsta.net/pictures/18/12/18/15/00/2219762.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/embed/g6j3a62S-ic?autoplay=1&mute=1&controls=0&loop=1&playlist=g6j3a62S-ic",
+        "trailer_url": "https://www.youtube.com/watch?v=g6j3a62S-ic",
         "genre": "Aksiyon • Savaş • Tarih",
         "imdb": "6.7",
         "desc": "İkinci Dünya Savaşı sırasında esir düşen bir subayın tankla imkansız kaçışı.",
@@ -74,7 +74,7 @@ default_movies = [
         "title": "Hellboy",
         "img": "https://tr.web.img4.acsta.net/pictures/19/03/01/10/58/0644342.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/embed/Zs5yjqY00qs?autoplay=1&mute=1&controls=0&loop=1&playlist=Zs5yjqY00qs",
+        "trailer_url": "https://www.youtube.com/watch?v=Zs5yjqY00qs",
         "genre": "Fantastik • Aksiyon • Macera",
         "imdb": "7.0",
         "desc": "Cehennemden gelen kırmızı iblis kahraman dünyayı koruyor.",
@@ -85,7 +85,7 @@ default_movies = [
         "title": "Indiana Jones",
         "img": "https://tr.web.img4.acsta.net/pictures/21/04/14/15/22/0128795.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/embed/ZfMYxwsnuZ4?autoplay=1&mute=1&controls=0&loop=1&playlist=ZfMYxwsnuZ4",
+        "trailer_url": "https://www.youtube.com/watch?v=ZfMYxwsnuZ4",
         "genre": "Macera • Aksiyon",
         "imdb": "8.4",
         "desc": "Arkeolog Indiana Jones'un tehlikeli hazine maceraları.",
@@ -96,7 +96,7 @@ default_movies = [
         "title": "Breach",
         "img": "https://tr.web.img4.acsta.net/pictures/20/11/17/12/03/4925766.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/embed/aT6g9aX2V6A?autoplay=1&mute=1&controls=0&loop=1&playlist=aT6g9aX2V6A",
+        "trailer_url": "https://www.youtube.com/watch?v=aT6g9aX2V6A",
         "genre": "Bilim Kurgu • Aksiyon",
         "imdb": "6.5",
         "desc": "Uzay gemisinde uzaylı formuna karşı hayatta kalma savaşı.",
@@ -107,7 +107,7 @@ default_movies = [
         "title": "Şafaktan Önce",
         "img": "https://tr.web.img3.acsta.net/pictures/22/08/17/11/49/0950663.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1&playlist=dQw4w9WgXcQ",
+        "trailer_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         "genre": "Korku • Gerilim",
         "imdb": "6.2",
         "desc": "Karanlık çöktüğünde hayatta kalmaya çalışan bir grup insanın hikayesi.",
@@ -118,7 +118,7 @@ default_movies = [
         "title": "Zombi Günlükleri 2",
         "img": "https://tr.web.img2.acsta.net/pictures/fs/00/69/006992_ok.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1&playlist=dQw4w9WgXcQ",
+        "trailer_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         "genre": "Korku • Aksiyon",
         "imdb": "5.8",
         "desc": "Zombi istilasında sığınak arayan son insanların amansız savaşı.",
@@ -129,7 +129,7 @@ default_movies = [
         "title": "Kara Cin Laneti",
         "img": "https://tr.web.img2.acsta.net/pictures/24/02/13/14/50/2324673.jpg",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1&playlist=dQw4w9WgXcQ",
+        "trailer_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         "genre": "Korku • Gizem",
         "imdb": "5.5",
         "desc": "Lanetli bir evin sırlarını araştıran ailenin korku dolu anları.",
@@ -141,7 +141,7 @@ default_movies = [
         "title": f"Taslak Slot #{i+1}",
         "img": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&auto=format&fit=crop&q=80",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1&playlist=dQw4w9WgXcQ",
+        "trailer_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         "genre": "Taslak",
         "imdb": "0.0",
         "desc": "Bu film slotu henüz kapalı. Admin panelinden aktif yapabilirsiniz.",
@@ -179,7 +179,7 @@ if "profiles" not in st.session_state:
 if "show_add_profile" not in st.session_state:
     st.session_state.show_add_profile = False
 
-# --- CSS VE HOVER FRAGMAN EFEKTİ ---
+# --- CSS VE TASARIM ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
@@ -242,7 +242,7 @@ st.markdown("""
         font-size: 14px;
         border-radius: 8px;
         border: none;
-        padding: 12px 20px;
+        padding: 10px 16px;
         width: 100%;
         box-shadow: 0 4px 15px rgba(229, 9, 20, 0.35);
         transition: all 0.3s ease;
@@ -301,38 +301,20 @@ st.markdown("""
         margin-bottom: 20px;
         color: #FFFFFF;
     }
-
-    /* HOVER TRAILER KART EFEKTİ */
-    .movie-card {
-        position: relative;
-        border-radius: 10px;
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        background: #1f1f1f;
-        margin-bottom: 15px;
-    }
-    .movie-card:hover {
-        transform: scale(1.04);
-        box-shadow: 0 12px 30px rgba(229, 9, 20, 0.5);
-    }
-    .movie-card iframe {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 10;
-        border: none;
-    }
-    .movie-card:hover iframe {
-        display: block;
-    }
-    .movie-card:hover img {
-        opacity: 0;
-    }
     </style>
 """, unsafe_allow_html=True)
+
+# YouTube Link Dönüştürücü Fonksiyon
+def format_youtube_embed(url):
+    if "watch?v=" in url:
+        v_id = url.split("watch?v=")[1].split("&")[0]
+        return f"https://www.youtube.com/embed/{v_id}?autoplay=1"
+    elif "youtu.be/" in url:
+        v_id = url.split("youtu.be/")[1].split("?")[0]
+        return f"https://www.youtube.com/embed/{v_id}?autoplay=1"
+    elif "/embed/" in url:
+        return url
+    return url
 
 # --- OTURUM DURUMLARI ---
 if "profile" not in st.session_state:
@@ -462,7 +444,7 @@ else:
                     ed_imdb = st.text_input("IMDb Puanı", value=target_movie.get("imdb", ""))
                     ed_img = st.text_input("Afiş Görsel Linki (URL)", value=target_movie.get("img", ""))
                     ed_video = st.text_input("Film Video Linki (Google Drive / Direct)", value=target_movie.get("video_url", ""))
-                    ed_trailer = st.text_input("YouTube Fragman Linki (Embed)", value=target_movie.get("trailer_url", "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1"))
+                    ed_trailer = st.text_input("YouTube Fragman Linki", value=target_movie.get("trailer_url", ""))
                     ed_desc = st.text_area("Film Özeti", value=target_movie.get("desc", ""))
                     
                     update_btn = st.form_submit_button("💾 Filmi Kaydet ve Güncelle")
@@ -508,7 +490,7 @@ else:
 
     st.markdown("<hr style='margin: 10px 0px 25px 0px; border-color: rgba(255,255,255,0.08);'>", unsafe_allow_html=True)
 
-    # Hero Banner (Admin panelinden özelleştirilebilir)
+    # Hero Banner
     h_badge = st.session_state.get("hero_badge", "VSELIX ÖZEL YAPIM")
     h_title = st.session_state.get("hero_title", "DAĞ 2")
     h_desc = st.session_state.get("hero_desc", "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu.")
@@ -555,7 +537,7 @@ else:
             """
             st.components.v1.html(player_html, height=670)
 
-    # Film Listeleme ve Hover Fragman Fonksiyonu
+    # Film Listeleme Fonksiyonu
     def display_movie_grid(movie_list):
         visible_movies = [m for m in movie_list if m.get("is_active", True) or st.session_state.admin_logged]
 
@@ -573,16 +555,7 @@ else:
                     continue
                 
                 with cols[idx]:
-                    trailer = movie.get("trailer_url", "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1")
-                    
-                    # Hover efekti için HTML kart sarmalayıcı
-                    card_html = f"""
-                    <div class="movie-card">
-                        <img src="{movie['img']}" style="width:100%; border-radius:10px; display:block;">
-                        <iframe src="{trailer}"></iframe>
-                    </div>
-                    """
-                    st.markdown(card_html, unsafe_allow_html=True)
+                    st.image(movie["img"], use_container_width=True)
                     
                     if not movie.get("is_active", True):
                         st.markdown(f"**{movie['title']}** *(🔴 Taslak / Kapalı)*")
@@ -592,11 +565,31 @@ else:
                     st.caption(f"⭐ IMDb: {movie['imdb']} | {movie['genre']}")
                     
                     b_key = f"btn_{movie['id']}"
+                    t_key = f"tr_{movie['id']}"
                     play_key = f"play_{movie['id']}"
+                    trailer_key = f"show_tr_{movie['id']}"
                     
-                    if st.button("▶ Filmi Başlat", key=b_key):
-                        st.session_state[play_key] = not st.session_state.get(play_key, False)
+                    col_b1, col_b2 = st.columns(2)
+                    with col_b1:
+                        if st.button("▶ Oynat", key=b_key):
+                            st.session_state[play_key] = not st.session_state.get(play_key, False)
+                            st.session_state[trailer_key] = False
                     
+                    with col_b2:
+                        if st.button("🎬 Fragman", key=t_key):
+                            st.session_state[trailer_key] = not st.session_state.get(trailer_key, False)
+                            st.session_state[play_key] = False
+
+                    # Fragman Ekranı
+                    if st.session_state.get(trailer_key, False):
+                        t_raw = movie.get("trailer_url", "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+                        t_embed = format_youtube_embed(t_raw)
+                        st.markdown(f"#### 🎬 {movie['title']} - Resmi Fragman")
+                        st.components.v1.html(f"""
+                            <iframe width="100%" height="400" src="{t_embed}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:10px;"></iframe>
+                        """, height=420)
+
+                    # Film Oynatıcı Ekranı
                     if st.session_state.get(play_key, False):
                         st.info(f"📌 **Özet:** {movie['desc']}")
                         v_url = movie.get("video_url", "")
