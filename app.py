@@ -104,7 +104,6 @@ st.markdown("""
         text-shadow: 0 4px 25px rgba(229, 9, 20, 0.7);
     }
 
-    /* NETFLIX GERÇEKÇİLİĞİNDE GİRİŞ KUTUSU */
     .netflix-login-card {
         background: rgba(0, 0, 0, 0.75);
         background-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.95) 100%);
@@ -227,7 +226,6 @@ st.markdown("""
         color: #FFFFFF;
     }
     
-    /* Input Alanları Stylingi */
     .stTextInput input {
         background-color: #333333 !important;
         color: #ffffff !important;
@@ -252,7 +250,7 @@ def format_youtube_embed(url):
         return url
     return url
 
-# --- 1. AŞAMA: NETFLIX TARZI GİRİŞ EKRANI ---
+# --- 1. AŞAMA: GİRİŞ EKRANI ---
 if not st.session_state.is_authenticated:
     st.markdown("<br>", unsafe_allow_html=True)
     col_l1, col_l2, col_l3 = st.columns([1, 2, 1])
@@ -277,10 +275,10 @@ if not st.session_state.is_authenticated:
                 if submit_code:
                     if user_code in st.session_state.access_codes:
                         st.session_state.is_authenticated = True
-                        st.success("Giriş başarılı! Profil seçimine aktarılıyorsunuz...")
+                        st.success("Giriş başarılı!")
                         st.rerun()
                     else:
-                        st.error("❌ Geçersiz erişim kodu! Lütfen yetkiliyle iletişime geçin.")
+                        st.error("❌ Geçersiz erişim kodu!")
                         
         with tab_admin:
             st.markdown("<p style='color: #b3b3b3; font-size: 13px; margin-top: 15px;'>Yönetici şifrenizle paneli doğrudan kontrol edin.</p>", unsafe_allow_html=True)
@@ -346,14 +344,13 @@ elif "profile" not in st.session_state or st.session_state.profile is None:
                         st.session_state.profiles.append({"name": new_name, "color": chosen_color, "icon": "🍿"})
                         save_data(PROFILE_FILE, st.session_state.profiles)
                         st.session_state.show_add_profile = False
-                        st.success(f"'{new_name}' başarıyla eklendi!")
+                        st.success(f"'{new_name}' eklendi!")
                         st.rerun()
                     else:
-                        st.warning("Lütfen bir profil adı girin.")
+                        st.warning("Lütfen profil adı girin.")
 
 # --- 3. AŞAMA: ANA UYGULAMA EKRANI ---
 else:
-    # Mevcut tüm kategorileri dinamik olarak topla
     existing_genres = sorted(list(set(m.get("genre", "Aksiyon") for m in st.session_state.movies if m.get("genre"))))
     default_genre_options = ["Aksiyon", "Dram", "Komedi", "Bilim Kurgu", "Korku", "Animasyon", "Belgesel", "Macera", "Romantik"]
     combined_genres = sorted(list(set(existing_genres + default_genre_options))) + ["➕ Yeni Kategori Yaz / Ekle"]
@@ -373,19 +370,15 @@ else:
                 if new_p_name:
                     st.session_state.profiles.append({"name": new_p_name, "color": "#4f46e5", "icon": "🌟"})
                     save_data(PROFILE_FILE, st.session_state.profiles)
-                    st.success(f"'{new_p_name}' profili eklendi!")
+                    st.success(f"'{new_p_name}' eklendi!")
                     st.rerun()
-                else:
-                    st.warning("Lütfen profil adı girin.")
 
         if len(st.session_state.profiles) > 1:
             st.markdown("---")
-            st.markdown("#### Profili Sil")
-            profile_to_delete = st.selectbox("Silinecek Profili Seç", [p["name"] for p in st.session_state.profiles])
-            if st.button("🗑️ Profili Kaldır"):
+            profile_to_delete = st.selectbox("Silinecek Profil", [p["name"] for p in st.session_state.profiles])
+            if st.button("🗑️ Profili Sil"):
                 st.session_state.profiles = [p for p in st.session_state.profiles if p["name"] != profile_to_delete]
                 save_data(PROFILE_FILE, st.session_state.profiles)
-                st.success("Profil silindi!")
                 st.rerun()
 
         st.divider()
@@ -396,47 +389,47 @@ else:
             if st.button("Giriş Yap"):
                 if admin_pass == "vselix123":
                     st.session_state.admin_logged = True
-                    st.success("Giriş başarılı!")
+                    st.success("Admin girişi yapıldı!")
                     st.rerun()
                 else:
                     st.error("Hatalı şifre!")
         else:
-            st.success("Yönetici olarak bağlandın! 🎬")
+            st.success("Yönetici Oturumu Aktif 🎬")
             if st.button("Admin Çıkışı Yap"):
                 st.session_state.admin_logged = False
                 st.rerun()
             
             st.markdown("---")
-            st.subheader("🔑 6 Haneli Giriş Kodları Yönetimi")
+            st.subheader("🔑 Giriş Kodları Yönetimi")
             st.write("Aktif Kodlar:", st.session_state.access_codes)
             
-            if st.button("🎲 Yeni 6 Haneli Kod Üret"):
+            if st.button("🎲 Yeni Kod Üret"):
                 new_c = ''.join(random.choices(string.digits, k=6))
                 st.session_state.access_codes.append(new_c)
                 save_data(ACCESS_CODES_FILE, st.session_state.access_codes)
-                st.success(f"Yeni Kod Üretildi: **{new_c}**")
+                st.success(f"Yeni Kod: **{new_c}**")
                 st.rerun()
 
             st.markdown("---")
-            st.subheader("➕ Yeni Film & Kategori Ekle")
+            st.subheader("➕ Yeni Film Ekle")
             
             selected_genre_choice = st.selectbox("Kategori / Tür Seçin", combined_genres)
             custom_genre = ""
             if selected_genre_choice == "➕ Yeni Kategori Yaz / Ekle":
-                custom_genre = st.text_input("Yeni Kategori İsmi Girin (Örn: Polisiye, Anime)", placeholder="Kategori Adı")
+                custom_genre = st.text_input("Yeni Kategori İsmi", placeholder="Örn: Polisiye")
 
             with st.form("add_new_movie_form"):
-                n_id = st.text_input("Film ID (Benzersiz İngilizce, örn: mucize)")
+                n_id = st.text_input("Film ID (İngilizce örn: mucize)")
                 n_title = st.text_input("Film Adı")
                 n_imdb = st.text_input("IMDb Puanı", value="7.0")
-                n_img = st.text_input("Afiş Görsel Linki (URL)")
-                n_video = st.text_input("Film Video Linki")
-                n_trailer = st.text_input("YouTube Fragman Linki")
+                n_img = st.text_input("Afiş Görsel URL")
+                n_video = st.text_input("Video URL")
+                n_trailer = st.text_input("YouTube Fragman URL")
                 n_desc = st.text_area("Film Özeti")
-                n_active = st.checkbox("🟢 Yayında (Aktif)", value=True)
+                n_active = st.checkbox("🟢 Yayında (Herkes Görsün)", value=True)
                 n_featured = st.checkbox("⭐ Öne Çıkan Film Yap", value=False)
                 
-                add_movie_btn = st.form_submit_button("🚀 Filmi Arşive Ekle")
+                add_movie_btn = st.form_submit_button("🚀 Filmi Kaydet ve Yayınla")
                 if add_movie_btn:
                     final_genre = custom_genre.strip() if selected_genre_choice == "➕ Yeni Kategori Yaz / Ekle" else selected_genre_choice
                     if n_id and n_title and final_genre:
@@ -453,18 +446,18 @@ else:
                             "genre": final_genre,
                             "imdb": n_imdb,
                             "desc": n_desc,
-                            "is_active": n_active,
+                            "is_active": n_active, # Varsayılan olarak Açık/Aktif
                             "is_featured": n_featured
                         }
                         st.session_state.movies.append(new_m)
                         save_data(DB_FILE, st.session_state.movies)
-                        st.success(f"'{n_title}' filmi [{final_genre}] kategorisine başarıyla eklendi!")
+                        st.success(f"'{n_title}' başarıyla eklendi ve yayınlandı!")
                         st.rerun()
                     else:
-                        st.warning("Lütfen Film ID, Film Adı ve Kategori alanlarını doldurun.")
+                        st.warning("Eksik alanları doldurun.")
 
             st.markdown("---")
-            st.subheader("✏️ Mevcut Filmi Düzenle / Sil")
+            st.subheader("✏️ Filmi Düzenle / Sil")
             movie_titles = [m["title"] for m in st.session_state.movies]
             selected_title = st.selectbox("Düzenlenecek Filmi Seç", movie_titles)
             
@@ -472,7 +465,7 @@ else:
             
             if target_movie:
                 with st.form("edit_movie_form"):
-                    ed_active = st.checkbox("🟢 Yayın Durumu", value=target_movie.get("is_active", True))
+                    ed_active = st.checkbox("🟢 Yayında (Herkes Görsün)", value=target_movie.get("is_active", True))
                     ed_featured = st.checkbox("⭐ Öne Çıkan Film Yap", value=target_movie.get("is_featured", False))
                     ed_title = st.text_input("Film Adı", value=target_movie.get("title", ""))
                     ed_genre = st.text_input("Kategori / Tür", value=target_movie.get("genre", ""))
@@ -502,10 +495,9 @@ else:
                         st.success("Film güncellendi!")
                         st.rerun()
                 
-                if st.button("🗑️ Bu Filmi Arşivden Sil", key="del_movie_btn"):
+                if st.button("🗑️ Bu Filmi Sil", key="del_movie_btn"):
                     st.session_state.movies = [m for m in st.session_state.movies if m["id"] != target_movie["id"]]
                     save_data(DB_FILE, st.session_state.movies)
-                    st.success("Film silindi!")
                     st.rerun()
 
     # Navbar
@@ -519,10 +511,10 @@ else:
 
     st.markdown("<hr style='margin: 10px 0px 25px 0px; border-color: rgba(255,255,255,0.08);'>", unsafe_allow_html=True)
 
-    # Öne Çıkan Film (Hero Banner)
-    featured_movie = next((m for m in st.session_state.movies if m.get("is_featured", False) and m.get("is_active", True)), None)
+    # Hero Banner
+    featured_movie = next((m for m in st.session_state.movies if m.get("is_featured", False) and (m.get("is_active", True) or st.session_state.admin_logged)), None)
     if not featured_movie:
-        active_ones = [m for m in st.session_state.movies if m.get("is_active", True)]
+        active_ones = [m for m in st.session_state.movies if m.get("is_active", True) or st.session_state.admin_logged]
         featured_movie = active_ones[0] if active_ones else st.session_state.movies[0]
 
     st.markdown(f"""
@@ -564,11 +556,12 @@ else:
             """
             st.components.v1.html(player_html, height=670)
 
-    # Kategoriye Göre Listeleme
-    categories = sorted(list(set(m.get("genre", "Diğer") for m in st.session_state.movies if m.get("is_active", True) or st.session_state.get("admin_logged", False))))
+    # HERKES İÇİN FİLM LİSTELEME
+    categories = sorted(list(set(m.get("genre", "Diğer") for m in st.session_state.movies if m.get("is_active", True) or st.session_state.admin_logged)))
 
     for cat in categories:
-        cat_movies = [m for m in st.session_state.movies if m.get("genre", "Diğer") == cat and (m.get("is_active", True) or st.session_state.get("admin_logged", False))]
+        # Yönetici değilse sadece is_active=True olan filmleri filtrele
+        cat_movies = [m for m in st.session_state.movies if m.get("genre", "Diğer") == cat and (m.get("is_active", True) or st.session_state.admin_logged)]
         
         if search_query:
             q = search_query.lower()
