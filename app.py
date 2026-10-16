@@ -14,15 +14,106 @@ st.set_page_config(
 DB_FILE = "movies.json"
 PROFILE_FILE = "profiles.json"
 
+# Senin Arşivindeki Filmler (Görseller, Kategoriler ve Özetleriyle Tam Liste)
 default_movies = [
     {
-        "id": "t1",
-        "title": "Inception",
+        "id": "dag2",
+        "title": "Dağ 2",
+        "img": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=500&auto=format&fit=crop&q=80",
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "genre": "Aksiyon • Savaş • Dram",
+        "imdb": "8.9",
+        "desc": "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin hayatı ve sınır ötesi operasyonu."
+    },
+    {
+        "id": "furiosa",
+        "title": "Furiosa: Bir Mad Max Destanı",
+        "img": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=500&auto=format&fit=crop&q=80",
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "genre": "Aksiyon • Bilim Kurgu • Macera",
+        "imdb": "7.6",
+        "desc": "Dünyanın çöküşünden yıllar sonra genç Furiosa, Yeşil Diyar'dan koparılır ve Savaş Lordu Dementus'un eline düşer."
+    },
+    {
+        "id": "ballerina",
+        "title": "John Wick Dünyasından: Ballerina",
         "img": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500&auto=format&fit=crop&q=80",
         "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "genre": "Aksiyon • Gerilim",
+        "imdb": "7.2",
+        "desc": "John Wick evreninde geçen bu hikayede genç bir suikastçı, ailesinin intikamını almak için antik gelenekleri kullanıyor."
+    },
+    {
+        "id": "nefes",
+        "title": "Nefes: Vatan Sağolsun",
+        "img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=500&auto=format&fit=crop&q=80",
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "genre": "Savaş • Dram",
+        "imdb": "8.0",
+        "desc": "Güneydoğu Anadolu'daki bir karakolda görev yapan 40 asker ve komutanlarının zorlu yaşam mücadelesi."
+    },
+    {
+        "id": "t34",
+        "title": "T-34",
+        "img": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=500&auto=format&fit=crop&q=80",
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "genre": "Aksiyon • Savaş • Tarih",
+        "imdb": "6.7",
+        "desc": "İkinci Dünya Savaşı sırasında esir düşen cesur bir Sovyet subayı, bir T-34 tankıyla imkansız bir kaçış planı yapar."
+    },
+    {
+        "id": "hellboy",
+        "title": "Hellboy",
+        "img": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500&auto=format&fit=crop&q=80",
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "genre": "Fantastik • Aksiyon • Macera",
+        "imdb": "7.0",
+        "desc": "Cehennemden gelen kırmızı iblis kahraman, dünyayı karanlık güçlerden korumak için amansız bir mücadele verir."
+    },
+    {
+        "id": "indiana",
+        "title": "Indiana Jones: Kutsal Hazine Avcıları",
+        "img": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500&auto=format&fit=crop&q=80",
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "genre": "Macera • Aksiyon",
+        "imdb": "8.4",
+        "desc": "Arkeolog Indiana Jones, Nazi güçlerinden önce Kutsal Kase'yi veya Ahit Sandığı'nı bulmak için tehlikeli bir maceraya atılır."
+    },
+    {
+        "id": "breach",
+        "title": "Breach",
+        "img": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&auto=format&fit=crop&q=80",
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
         "genre": "Bilim Kurgu • Aksiyon",
-        "imdb": "8.8",
-        "desc": "Rüya hırsızlığı yapan ve zihinlere fikir eken yetenekli bir hırsızın son görevi."
+        "imdb": "6.5",
+        "desc": "Dünyayı terk eden bir gemide, uzaylı bir formun ele geçirdiği mürettebata karşı hayatta kalma savaşı."
+    },
+    {
+        "id": "dawn",
+        "title": "Şafaktan Önce (Before Dawn)",
+        "img": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500&auto=format&fit=crop&q=80",
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "genre": "Korku • Gerilim",
+        "imdb": "6.2",
+        "desc": "Karanlık çöktüğünde hayatta kalmaya çalışan bir grubun gerilim dolu ve ürkütücü hikayesi."
+    },
+    {
+        "id": "zombie",
+        "title": "Ölülerin Dünyası: Zombi Günlükleri 2",
+        "img": "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=500&auto=format&fit=crop&q=80",
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "genre": "Korku • Aksiyon",
+        "imdb": "5.8",
+        "desc": "Zombi istilasından kaçmaya çalışan son insan kalıntılarının sığınak arayışı ve zombilere karşı amansız savaşı."
+    },
+    {
+        "id": "karacin",
+        "title": "Kara Cin Laneti",
+        "img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=500&auto=format&fit=crop&q=80",
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "genre": "Korku • Gizem",
+        "imdb": "5.5",
+        "desc": "Eski ve lanetli bir evin sırlarını araştırırken cinlerin hedefi haline gelen bir ailenin korku dolu anları."
     }
 ]
 
@@ -372,16 +463,16 @@ else:
     st.markdown("""
         <div class="hero-container">
             <div style="background-color: #E50914; display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 11px; width: fit-content; margin-bottom: 8px; letter-spacing: 1px;">VSELIX ÖZEL YAPIM</div>
-            <div class="hero-title">INTERSTELLAR</div>
+            <div class="hero-title">DAĞ 2</div>
             <div style="font-size: 15px; max-width: 580px; color: #D1D1D1; margin-bottom: 15px; line-height: 1.4;">
-                İnsanlığın son günlerinde bir grup astronot, yeni bir yaşanabilir gezegen bulmak için solucan deliğinden geçer.
+                Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu ve destansı mücadelesi.
             </div>
         </div>
     """, unsafe_allow_html=True)
 
     st.divider()
 
-    # Film Oynatıcı Fonksiyonu (TS ve MP4 Destekli HTML5 Player)
+    # Oynatıcı Fonksiyonu
     def render_custom_player(video_url):
         player_html = f"""
         <div style="width:100%; max-width:900px; margin:auto;">
@@ -424,7 +515,6 @@ else:
                     if st.session_state.get(play_key, False):
                         st.info(f"📌 **Özet:** {movie['desc']}")
                         v_url = movie.get("video_url", "")
-                        # TS veya MP4 fark etmeksizin özel player ile başlat
                         render_custom_player(v_url)
 
     st.markdown('<div class="row-title">🔥 Vselix Arşivi ve Eklenen Filmler</div>', unsafe_allow_html=True)
