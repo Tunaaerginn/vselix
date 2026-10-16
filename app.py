@@ -57,10 +57,10 @@ def save_movies(movies_list):
 if "movies" not in st.session_state:
     st.session_state.movies = load_movies()
 
-# --- CSS STİLLERİ ---
+# --- GELİŞMİŞ NETFLİX CSS & HOVER ANİMASYONLARI ---
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap');
 
     .stApp {
         background-color: #141414;
@@ -71,63 +71,134 @@ st.markdown("""
     .vselix-logo {
         font-family: 'Bebas Neue', sans-serif;
         color: #E50914;
-        font-size: 48px;
+        font-size: 52px;
         letter-spacing: 3px;
         margin: 0;
         line-height: 1;
+        text-shadow: 0 2px 10px rgba(229, 9, 20, 0.4);
     }
 
+    /* Giriş Animasyonu Ekranı */
+    .net-intro {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #000000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+        animation: fadeOut 0.5s ease 2s forwards;
+    }
+
+    @keyframes fadeOut {
+        to { opacity: 0; visibility: hidden; }
+    }
+
+    .intro-title {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 130px;
+        color: #E50914;
+        letter-spacing: 10px;
+        animation: scaleUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes scaleUp {
+        0% { transform: scale(0.4); opacity: 0; filter: blur(12px); }
+        50% { transform: scale(1.1); opacity: 1; filter: blur(0px); }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Hero Banner */
     .hero-container {
         position: relative;
-        background: linear-gradient(to top, #141414 10%, rgba(20,20,20,0.4) 60%),
+        background: linear-gradient(to top, #141414 10%, rgba(20,20,20,0.3) 60%),
                     url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1400&auto=format&fit=crop&q=85');
         background-size: cover;
         background-position: center;
-        height: 450px;
-        border-radius: 10px;
-        padding: 40px;
+        height: 480px;
+        border-radius: 8px;
+        padding: 45px;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
+        box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
     }
 
     .hero-title {
         font-family: 'Bebas Neue', sans-serif;
-        font-size: 64px;
+        font-size: 70px;
         letter-spacing: 2px;
         color: #FFFFFF;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
     }
 
     .row-title {
         font-family: 'Bebas Neue', sans-serif;
-        font-size: 26px;
+        font-size: 28px;
         letter-spacing: 1px;
-        margin-top: 30px;
+        margin-top: 35px;
         margin-bottom: 15px;
         color: #E5E5E5;
-        border-left: 4px solid #E50914;
-        padding-left: 10px;
     }
 
+    /* FİLİM KARTLARI ÜZERİNE GELİNCE BÜYÜME (HOVER) EFEKTİ */
+    div[data-testid="column"] img {
+        border-radius: 6px;
+        transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+    div[data-testid="column"] img:hover {
+        transform: scale(1.08);
+        box-shadow: 0 12px 25px rgba(229, 9, 20, 0.5);
+        z-index: 50;
+    }
+
+    /* Buton Tasarımları */
     div.stButton > button {
         background-color: #E50914;
         color: white;
+        font-family: 'Montserrat', sans-serif;
         font-weight: 600;
-        border-radius: 4px;
+        font-size: 14px;
+        border-radius: 6px;
         border: none;
-        padding: 10px 16px;
+        padding: 10px 18px;
         width: 100%;
-        font-size: 16px;
+        box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+        transition: all 0.25s ease;
     }
+
     div.stButton > button:hover {
         background-color: #F40612;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(229, 9, 20, 0.5);
+    }
+
+    /* Profil Butonları */
+    .profile-btn div.stButton > button {
+        background-color: transparent;
+        border: 2px solid #555;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 500;
+        border-radius: 8px;
+        padding: 14px;
+    }
+    .profile-btn div.stButton > button:hover {
+        border-color: #fff;
+        background-color: rgba(255,255,255,0.1);
+        transform: scale(1.05);
     }
     </style>
 """, unsafe_allow_html=True)
 
-# --- PROFİLLER VE YÖNETİCİ KONTROLÜ ---
+# --- OTURUM DURUMLARI ---
 if "profile" not in st.session_state:
     st.session_state.profile = None
 
@@ -136,29 +207,41 @@ if "admin_logged" not in st.session_state:
 
 # --- 1. NETFLİX PROFİL SEÇİM EKRANI ---
 if st.session_state.profile is None:
-    st.markdown("<br><br><br>", unsafe_allow_html=True)
-    st.markdown("<h1 style='text-align: center; font-family: Bebas Neue; font-size: 70px; color: #E50914; letter-spacing: 3px;'>VSELIX</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center; color: #fff; font-weight: 400; margin-bottom: 30px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
+    st.markdown("""
+        <div class="net-intro">
+            <div class="intro-title">VSELIX</div>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<h1 style='font-family: Bebas Neue; font-size: 75px; text-align: center; color: #E50914; margin-bottom: 0; letter-spacing: 4px;'>VSELIX</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: #b3b3b3; font-weight: 400; margin-bottom: 40px; font-size: 24px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
     
     col_emp1, c1, c2, c3, c_emp2 = st.columns([2, 1, 1, 1, 2])
     
     with c1:
-        st.markdown("<div style='text-align: center; font-size: 40px;'>👨‍💻</div>", unsafe_allow_html=True)
+        st.markdown("<div style='text-align: center; font-size: 45px; margin-bottom: 10px;'>👨‍💻</div>", unsafe_allow_html=True)
+        st.markdown('<div class="profile-btn">', unsafe_allow_html=True)
         if st.button("Volkan"):
             st.session_state.profile = "Volkan"
             st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
             
     with c2:
-        st.markdown("<div style='text-align: center; font-size: 40px;'>👩‍👩‍👦</div>", unsafe_allow_html=True)
+        st.markdown("<div style='text-align: center; font-size: 45px; margin-bottom: 10px;'>👩‍👩‍👦</div>", unsafe_allow_html=True)
+        st.markdown('<div class="profile-btn">', unsafe_allow_html=True)
         if st.button("Aile"):
             st.session_state.profile = "Aile"
             st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
             
     with c3:
-        st.markdown("<div style='text-align: center; font-size: 40px;'>🍿</div>", unsafe_allow_html=True)
+        st.markdown("<div style='text-align: center; font-size: 45px; margin-bottom: 10px;'>🍿</div>", unsafe_allow_html=True)
+        st.markdown('<div class="profile-btn">', unsafe_allow_html=True)
         if st.button("Misafir"):
             st.session_state.profile = "Misafir"
             st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
 
 # --- 2. ANA UYGULAMA EKRANI ---
 else:
@@ -222,14 +305,14 @@ else:
     with col_search:
         search_query = st.text_input("", placeholder="🔍 Film, dizi ara...", label_visibility="collapsed")
 
-    st.markdown("<hr style='margin: 5px 0px 20px 0px; border-color: #333;'>", unsafe_allow_html=True)
+    st.markdown("<hr style='margin: 5px 0px 20px 0px; border-color: #222;'>", unsafe_allow_html=True)
 
     # Hero Banner
     st.markdown("""
         <div class="hero-container">
-            <div style="background-color: rgba(229, 9, 20, 0.8); display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; width: fit-content; margin-bottom: 8px;">VSELIX ÖZEL YAPIM</div>
+            <div style="background-color: #E50914; display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 11px; width: fit-content; margin-bottom: 8px; letter-spacing: 1px;">VSELIX ÖZEL YAPIM</div>
             <div class="hero-title">INTERSTELLAR</div>
-            <div style="font-size: 15px; max-width: 580px; color: #D1D1D1; margin-bottom: 15px;">
+            <div style="font-size: 15px; max-width: 580px; color: #D1D1D1; margin-bottom: 15px; line-height: 1.4;">
                 İnsanlığın son günlerinde bir grup astronot, yeni bir yaşanabilir gezegen bulmak için solucan deliğinden geçer.
             </div>
         </div>
