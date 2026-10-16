@@ -138,9 +138,8 @@ default_movies = [
     for i in range(20)
 ]
 
+# Varsayılan profiller tamamen temizlendi, başlangıçta boş veya sadece Misafir bırakıldı
 default_profiles = [
-    {"name": "Volkan", "color": "#E50914", "icon": "👨‍💻"},
-    {"name": "Aile", "color": "#3b82f6", "icon": "👨‍👩‍👧‍👦"},
     {"name": "Misafir", "color": "#eab308", "icon": "🍿"}
 ]
 
@@ -387,10 +386,10 @@ if st.session_state.profile is None:
                 submitted = st.form_submit_button("Profili Kaydet")
                 if submitted:
                     if new_name:
-                        colors = ["#8b5cf6", "#ec4899", "#10b981", "#f97316", "#06b6d4"]
+                        colors = ["#E50914", "#3b82f6", "#10b981", "#f97316", "#06b6d4", "#8b5cf6"]
                         import random
                         chosen_color = random.choice(colors)
-                        st.session_state.profiles.append({"name": new_name, "color": chosen_color, "icon": "😊"})
+                        st.session_state.profiles.append({"name": new_name, "color": chosen_color, "icon": "🍿"})
                         save_data(PROFILE_FILE, st.session_state.profiles)
                         st.session_state.show_add_profile = False
                         st.success(f"'{new_name}' başarıyla eklendi!")
@@ -419,6 +418,17 @@ else:
                     st.rerun()
                 else:
                     st.warning("Lütfen profil adı girin.")
+
+        # Profil silme veya düzenleme seçeneği
+        if len(st.session_state.profiles) > 1:
+            st.markdown("---")
+            st.markdown("#### Profili Sil")
+            profile_to_delete = st.selectbox("Silinecek Profili Seç", [p["name"] for p in st.session_state.profiles])
+            if st.button("🗑️ Profili Kaldır"):
+                st.session_state.profiles = [p for p in st.session_state.profiles if p["name"] != profile_to_delete]
+                save_data(PROFILE_FILE, st.session_state.profiles)
+                st.success("Profil silindi!")
+                st.rerun()
 
         st.divider()
         st.markdown("### 🔐 Yönetici Paneli (Admin)")
@@ -494,7 +504,7 @@ else:
 
     st.divider()
 
-    # Dev Ekran Sinematik Oynatıcı Fonksiyonu (Genişletilmiş Boyutlar)
+    # Dev Ekran Sinematik Oynatıcı Fonksiyonu
     def render_custom_player(video_url):
         embed_url = video_url
         
@@ -506,7 +516,6 @@ else:
                 file_id = video_url.split("id=")[1].split("&")[0]
                 embed_url = f"https://drive.google.com/file/d/{file_id}/preview"
 
-            # Google Drive için tam ekran ve dev genişlik (620px yükseklik)
             player_html = f"""
             <div style="width:100%; display:flex; justify-content:center; margin:auto;">
                 <iframe src="{embed_url}" width="100%" height="620" allow="autoplay; fullscreen" allowfullscreen="true" style="border:none; border-radius:8px; background:#000; box-shadow: 0 10px 30px rgba(0,0,0,0.8);"></iframe>
@@ -514,7 +523,6 @@ else:
             """
             st.components.v1.html(player_html, height=640)
         else:
-            # Normal video linkleri için dev sinematik oynatıcı
             player_html = f"""
             <div style="width:100%; display:flex; justify-content:center; margin:auto;">
                 <video controls autoplay style="width:100%; max-height:650px; border-radius:8px; background:#000; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
