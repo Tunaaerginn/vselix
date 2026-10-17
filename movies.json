@@ -21,7 +21,7 @@
         "imdb": "7.0",
         "desc": "T34 TANK",
         "is_active": true,
-        "is_featured": true
+        "is_featured": false
     },
     {
         "id": "Furiosa- Bir Mad Max Destan",
