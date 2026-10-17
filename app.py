@@ -36,7 +36,7 @@ default_movies = [
     }
 ]
 
-default_profiles = [{"name": "Misafir", "color": "#eab308", "icon": "🍿"}]
+default_profiles = [{"name": "Misafir", "color": "#E50914", "icon": "🍿"}]
 default_codes = ["123456", "654321"]
 
 def push_to_github(filename, data_list):
@@ -101,157 +101,186 @@ if "admin_logged" not in st.session_state:
 if "show_add_profile" not in st.session_state:
     st.session_state.show_add_profile = False
 
-# --- CSS VE REALISTIC NETFLIX TASARIMI ---
+# --- ULTRA KOZMETİK CSS VE SINEMATİK ARAYÜZ ---
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
+    /* Ana Arka Plan ve Tipografi */
     .stApp {
-        background-color: #141414;
+        background: #0f0f12;
+        background-image: radial-gradient(circle at 50% -20%, #1f080a 0%, #0f0f12 80%);
         color: #FFFFFF;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
     }
     
+    /* Netflix Tarzı Glow Logo */
     .vselix-logo {
         font-family: 'Bebas Neue', sans-serif;
         color: #E50914;
-        font-size: 64px;
-        letter-spacing: 5px;
+        font-size: 72px;
+        letter-spacing: 6px;
         margin: 0;
         line-height: 1;
-        text-shadow: 0 4px 25px rgba(229, 9, 20, 0.7);
+        text-shadow: 0 0 30px rgba(229, 9, 20, 0.6), 0 0 60px rgba(229, 9, 20, 0.2);
     }
 
+    /* Giriş Kartı */
     .netflix-login-card {
-        background: rgba(0, 0, 0, 0.75);
-        background-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.95) 100%);
-        padding: 45px 40px;
-        border-radius: 8px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+        background: rgba(18, 18, 22, 0.75);
+        padding: 50px 45px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.8);
         max-width: 480px;
-        margin: 30px auto;
-        backdrop-filter: blur(10px);
+        margin: 40px auto;
+        backdrop-filter: blur(20px);
     }
 
     .netflix-header {
         font-family: 'Bebas Neue', sans-serif;
-        font-size: 55px;
+        font-size: 60px;
         color: #E50914;
-        letter-spacing: 3px;
-        text-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+        letter-spacing: 4px;
+        text-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
         margin-bottom: 5px;
         text-align: center;
     }
 
+    /* Profil Seçim Kutuları */
     .profile-card-container {
         display: flex;
         flex-direction: column;
         align-items: center;
         cursor: pointer;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
     }
 
     .profile-avatar-box {
-        width: 140px;
-        height: 140px;
-        border-radius: 8px;
+        width: 150px;
+        height: 150px;
+        border-radius: 16px;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 58px;
-        border: 3px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.3s ease;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+        font-size: 64px;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.4) 100%);
     }
 
     .profile-card-container:hover .profile-avatar-box {
         border-color: #E50914;
-        transform: translateY(-8px) scale(1.05);
-        box-shadow: 0 12px 30px rgba(229, 9, 20, 0.5);
+        transform: translateY(-10px) scale(1.06);
+        box-shadow: 0 15px 35px rgba(229, 9, 20, 0.4);
     }
 
     .profile-name {
-        margin-top: 14px;
-        font-size: 16px;
-        color: #a3a3a3;
+        margin-top: 16px;
+        font-size: 18px;
+        color: #e5e5e5;
         font-weight: 600;
+        letter-spacing: 0.5px;
     }
 
+    /* Özel Buton Tasarımları */
     div.stButton > button {
-        background: #E50914;
+        background: linear-gradient(135deg, #E50914 0%, #b20710 100%);
         color: white;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-weight: 700;
         font-size: 15px;
-        border-radius: 4px;
+        border-radius: 8px;
         border: none;
-        padding: 12px 20px;
+        padding: 12px 22px;
         width: 100%;
-        box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
-        transition: all 0.2s ease;
+        box-shadow: 0 4px 20px rgba(229, 9, 20, 0.35);
+        transition: all 0.3s ease;
     }
 
     div.stButton > button:hover {
-        background: #f6121d;
-        transform: scale(1.01);
-        box-shadow: 0 6px 20px rgba(229, 9, 20, 0.6);
+        background: linear-gradient(135deg, #f6121d 0%, #d60914 100%);
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: 0 8px 25px rgba(229, 9, 20, 0.6);
     }
 
+    /* Öne Çıkan Hero Banner */
     .hero-container {
         position: relative;
         background-size: cover;
-        background-position: center 20%;
-        height: 520px;
-        border-radius: 12px;
-        padding: 50px;
+        background-position: center 25%;
+        height: 540px;
+        border-radius: 20px;
+        padding: 60px;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        margin-bottom: 35px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        margin-bottom: 40px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.9);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
     }
 
     .hero-badge {
-        background: #E50914;
+        background: rgba(229, 9, 20, 0.9);
+        backdrop-filter: blur(8px);
         color: white;
-        padding: 6px 14px;
-        border-radius: 4px;
+        padding: 6px 16px;
+        border-radius: 20px;
         font-weight: 800;
-        font-size: 11px;
+        font-size: 12px;
         width: fit-content;
-        margin-bottom: 12px;
-        letter-spacing: 1.5px;
+        margin-bottom: 14px;
+        letter-spacing: 2px;
+        box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
     }
 
     .hero-title {
         font-family: 'Bebas Neue', sans-serif;
-        font-size: 85px;
-        letter-spacing: 3px;
+        font-size: 90px;
+        letter-spacing: 4px;
         color: #FFFFFF;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
         line-height: 0.9;
-        text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+        text-shadow: 0 5px 25px rgba(0,0,0,0.95);
     }
 
+    /* Kategori Başlıkları */
     .row-title {
         font-family: 'Bebas Neue', sans-serif;
-        font-size: 32px;
-        letter-spacing: 1.5px;
-        margin-top: 25px;
+        font-size: 34px;
+        letter-spacing: 2px;
+        margin-top: 35px;
         margin-bottom: 20px;
         color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
     
     .stTextInput input {
-        background-color: #333333 !important;
+        background-color: rgba(255, 255, 255, 0.05) !important;
         color: #ffffff !important;
-        border-radius: 4px !important;
-        border: none !important;
+        border-radius: 8px !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        padding: 12px 16px !important;
     }
     .stTextInput input:focus {
-        border: 1px solid #E50914 !important;
+        border-color: #E50914 !important;
+        box-shadow: 0 0 15px rgba(229, 9, 20, 0.3) !important;
+    }
+
+    /* IMDb Badge */
+    .imdb-badge {
+        background: #f5c518;
+        color: #000;
+        font-weight: 900;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        display: inline-block;
+        margin-right: 6px;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -276,7 +305,7 @@ if not st.session_state.is_authenticated:
         st.markdown("""
             <div class="netflix-login-card">
                 <div class="netflix-header">VSELIX</div>
-                <p style="color: #8c8c8c; font-size: 14px; text-align: center; margin-bottom: 25px;">Sınırsız film, dizi ve çok daha fazlası.</p>
+                <p style="color: #a3a3a3; font-size: 15px; text-align: center; margin-bottom: 30px;">Sınırsız film, dizi ve özel içerik dünyası.</p>
             </div>
         """, unsafe_allow_html=True)
         
@@ -315,8 +344,8 @@ if not st.session_state.is_authenticated:
 # --- 2. AŞAMA: PROFİL SEÇİM EKRANI ---
 elif "profile" not in st.session_state or st.session_state.profile is None:
     st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown("<h1 style='font-family: Bebas Neue; font-size: 85px; text-align: center; color: #E50914; margin-bottom: 0; letter-spacing: 6px; text-shadow: 0 5px 25px rgba(229, 9, 20, 0.5);'>VSELIX</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align: center; color: #8c8c8c; font-weight: 500; margin-bottom: 45px; font-size: 24px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
+    st.markdown("<h1 style='font-family: Bebas Neue; font-size: 95px; text-align: center; color: #E50914; margin-bottom: 0; letter-spacing: 8px; text-shadow: 0 5px 35px rgba(229, 9, 20, 0.6);'>VSELIX</h1>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: #a3a3a3; font-weight: 500; margin-bottom: 50px; font-size: 26px;'>Kim izliyor?</h3>", unsafe_allow_html=True)
     
     total_slots = len(st.session_state.profiles) + 1
     cols = st.columns(total_slots)
@@ -338,7 +367,7 @@ elif "profile" not in st.session_state or st.session_state.profile is None:
     with cols[-1]:
         st.markdown(f"""
             <div class="profile-card-container">
-                <div class="profile-avatar-box" style="background-color: rgba(255,255,255,0.03); border: 2px dashed rgba(255,255,255,0.2); color: #666;">+</div>
+                <div class="profile-avatar-box" style="background-color: rgba(255,255,255,0.03); border: 2px dashed rgba(255,255,255,0.2); color: #888;">+</div>
                 <div class="profile-name">Profil Ekle</div>
             </div>
         """, unsafe_allow_html=True)
@@ -526,7 +555,7 @@ else:
     with col_search:
         search_query = st.text_input("", placeholder="🔍 Film, dizi veya kategori ara...", label_visibility="collapsed")
 
-    st.markdown("<hr style='margin: 10px 0px 25px 0px; border-color: rgba(255,255,255,0.08);'>", unsafe_allow_html=True)
+    st.markdown("<hr style='margin: 15px 0px 30px 0px; border-color: rgba(255,255,255,0.08);'>", unsafe_allow_html=True)
 
     # Hero Banner
     featured_movie = next((m for m in st.session_state.movies if m.get("is_featured", False) and (m.get("is_active", True) or st.session_state.admin_logged)), None)
@@ -535,10 +564,10 @@ else:
         featured_movie = active_ones[0] if active_ones else st.session_state.movies[0]
 
     st.markdown(f"""
-        <div class="hero-container" style="background: linear-gradient(180deg, rgba(20,20,20,0.1) 0%, rgba(20,20,20,0.95) 100%), url('{featured_movie['img']}');">
-            <div class="hero-badge">⭐ VSELIX ÖNE ÇIKAN</div>
+        <div class="hero-container" style="background: linear-gradient(180deg, rgba(15,15,18,0.1) 0%, rgba(15,15,18,0.98) 100%), url('{featured_movie['img']}');">
+            <div class="hero-badge">🔥 VSELIX ÖNE ÇIKAN</div>
             <div class="hero-title">{featured_movie['title']}</div>
-            <div style="font-size: 16px; max-width: 600px; color: #d1d1d1; margin-bottom: 15px; line-height: 1.5; font-weight: 400;">
+            <div style="font-size: 16px; max-width: 650px; color: #d1d1d1; margin-bottom: 20px; line-height: 1.6; font-weight: 400;">
                 {featured_movie['desc']}
             </div>
         </div>
@@ -556,14 +585,14 @@ else:
 
             player_html = f"""
             <div style="width:100%; display:flex; justify-content:center; margin:auto;">
-                <iframe src="{embed_url}" width="100%" height="640" allow="autoplay; fullscreen" allowfullscreen="true" style="border:none; border-radius:12px; background:#000; box-shadow: 0 15px 35px rgba(0,0,0,0.9);"></iframe>
+                <iframe src="{embed_url}" width="100%" height="640" allow="autoplay; fullscreen" allowfullscreen="true" style="border:none; border-radius:16px; background:#000; box-shadow: 0 20px 40px rgba(0,0,0,0.9);"></iframe>
             </div>
             """
             st.components.v1.html(player_html, height=660)
         else:
             player_html = f"""
             <div style="width:100%; display:flex; justify-content:center; margin:auto;">
-                <video controls autoplay style="width:100%; max-height:650px; border-radius:12px; background:#000; box-shadow: 0 15px 35px rgba(0,0,0,0.9);">
+                <video controls autoplay style="width:100%; max-height:650px; border-radius:16px; background:#000; box-shadow: 0 20px 40px rgba(0,0,0,0.9);">
                     <source src="{video_url}" type="video/mp4">
                     <source src="{video_url}" type="video/webm">
                     Tarayıcınız bu video formatını desteklemiyor.
@@ -584,7 +613,7 @@ else:
         if not cat_movies:
             continue
 
-        st.markdown(f'<div class="row-title">📂 {cat}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="row-title">🎬 {cat}</div>', unsafe_allow_html=True)
         
         cols_per_row = 4
         for i in range(0, len(cat_movies), cols_per_row):
@@ -600,7 +629,7 @@ else:
                     else:
                         st.markdown(f"**{movie['title']}**")
                         
-                    st.caption(f"⭐ IMDb: {movie['imdb']} | {movie['genre']}")
+                    st.markdown(f'<span class="imdb-badge">IMDb</span> **{movie["imdb"]}**', unsafe_allow_html=True)
                     
                     b_key = f"btn_{movie['id']}"
                     t_key = f"tr_{movie['id']}"
@@ -623,7 +652,7 @@ else:
                         t_embed = format_youtube_embed(t_raw)
                         st.markdown(f"#### 🎬 {movie['title']} - Resmi Fragman")
                         st.components.v1.html(f"""
-                            <iframe width="100%" height="400" src="{t_embed}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:10px;"></iframe>
+                            <iframe width="100%" height="400" src="{t_embed}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius:12px;"></iframe>
                         """, height=420)
 
                     if st.session_state.get(play_key, False):
