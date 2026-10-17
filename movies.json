@@ -58,5 +58,17 @@
         "desc": "The Tank",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "Episode 5",
+        "title": "Episode 5",
+        "img": "https://m.media-amazon.com/images/M/MV5BMTkxNGFlNDktZmJkNC00MDdhLTg0MTEtZjZiYWI3MGE5NWIwXkEyXkFqcGc@._V1_.jpg",
+        "video_url": "https://drive.google.com/file/d/1l_tTuqcgLM4Jq2A-6zVd6ypyDnoZaIZb/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Bilim Kurgu",
+        "imdb": "8.5",
+        "desc": "Episode 5",
+        "is_active": true,
+        "is_featured": false
     }
 ]
