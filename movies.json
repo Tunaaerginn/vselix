@@ -94,5 +94,17 @@
         "desc": "G_O_R_A (Cem Yılmaz)",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "Ketenpere Dalavere",
+        "title": "Ketenpere Dalavere",
+        "img": "https://m.media-amazon.com/images/M/MV5BNWExYjhmZTEtMWMyNS00ZThhLThmYTctYTNlNmM4NDEwZWI4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        "video_url": "https://drive.google.com/file/d/1EE4WMTd_WlW27D24g-0GcaIfEmZEEC-G/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Dram",
+        "imdb": "2.6",
+        "desc": "Ketenpere Dalavere",
+        "is_active": true,
+        "is_featured": false
     }
 ]
