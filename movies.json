@@ -166,5 +166,17 @@
         "desc": "Send Help",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "#Alive (HAYATTA)",
+        "title": "#Alive (HAYATTA)",
+        "img": "https://m.media-amazon.com/images/M/MV5BNmVhNDNjMjItZTA2Mi00OGQ4LWIzODItMGE0MjllZWY3ZDRmXkEyXkFqcGc@._V1_.jpg",
+        "video_url": "https://drive.google.com/file/d/1ruMFFrJOwIRyonmX-4nOOLhwVffdygIK/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Korku",
+        "imdb": "9.6",
+        "desc": "#Alive (HAYATTA)",
+        "is_active": true,
+        "is_featured": false
     }
 ]
