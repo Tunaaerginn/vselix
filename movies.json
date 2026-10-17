@@ -46,5 +46,17 @@
         "desc": "Indiana Jones- Kutsal Hazine Avcıları",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "The Tank",
+        "title": "The Tank",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFWOmFIPqBqFgai9b620jQyoGB8RXt5gM9tOdpDon-GQ&s",
+        "video_url": "https://drive.google.com/file/d/1S-8LVC5JnWn7xSOt1A08464lLBb510Ij/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Aksiyon",
+        "imdb": "4.9",
+        "desc": "The Tank",
+        "is_active": true,
+        "is_featured": false
     }
 ]
