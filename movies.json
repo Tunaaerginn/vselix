@@ -214,5 +214,17 @@
         "desc": "Küp Serisi 3/3",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "Terminatör 1",
+        "title": "Terminatör 1",
+        "img": "https://m.media-amazon.com/images/M/MV5BMjAyMTk3ODA2MF5BMl5BanBnXkFtZTcwMTkzNDQyNA@@._V1_.jpg",
+        "video_url": "https://drive.google.com/file/d/1_zxDIfYEgZvFp4TRGfcDHbAd_oFROqMY/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Terminatör Serisi",
+        "imdb": "9.7",
+        "desc": "Terminatör 1",
+        "is_active": true,
+        "is_featured": false
     }
 ]
