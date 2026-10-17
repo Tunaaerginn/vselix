@@ -1,0 +1,14 @@
+[
+    {
+        "id": "dag2",
+        "title": "Dağ 2",
+        "img": "https://tr.web.img4.acsta.net/pictures/16/09/27/15/22/017772.jpg",
+        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "trailer_url": "https://www.youtube.com/watch?v=519u2895Djc",
+        "genre": "Aksiyon",
+        "imdb": "8.9",
+        "desc": "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu.",
+        "is_active": true,
+        "is_featured": true
+    }
+]
