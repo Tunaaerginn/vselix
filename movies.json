@@ -34,5 +34,17 @@
         "desc": "Furiosa- Bir Mad Max Destan",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "Indiana Jones- Kutsal Hazine Avcıları",
+        "title": "Indiana Jones- Kutsal Hazine Avcıları",
+        "img": "https://m.media-amazon.com/images/M/MV5BYTFiMDk2NzItZDU5Ni00ZjBjLTkzYWQtYzcwZDIwMWZjMmZiXkEyXkFqcGc@._V1_.jpg",
+        "video_url": "https://drive.google.com/file/d/141cDKO5jXHzNM--A-dmNoENniwcbKonK/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Dram",
+        "imdb": "7.0",
+        "desc": "Indiana Jones- Kutsal Hazine Avcıları",
+        "is_active": true,
+        "is_featured": false
     }
 ]
