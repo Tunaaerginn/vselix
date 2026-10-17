@@ -202,5 +202,17 @@
         "desc": "Küp Serisi 2/3",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "Küp 3 (ZERO)",
+        "title": "Küp 3 (ZERO)",
+        "img": "https://m.media-amazon.com/images/M/MV5BN2VmMWNjMTUtNjkyNy00MTYzLThkNmUtYzI4ZTZiZDI0Mjg1XkEyXkFqcGc@._V1_.jpg",
+        "video_url": "https://drive.google.com/file/d/1orU7eQhgwwYP-NEyW6XkLq8-4b5VEErR/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Küp Serisi",
+        "imdb": "9.1",
+        "desc": "Küp Serisi 3/3",
+        "is_active": true,
+        "is_featured": false
     }
 ]
