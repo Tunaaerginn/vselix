@@ -22,5 +22,17 @@
         "desc": "T34 TANK",
         "is_active": true,
         "is_featured": true
+    },
+    {
+        "id": "Furiosa- Bir Mad Max Destan",
+        "title": "Furiosa- Bir Mad Max Destan",
+        "img": "https://m.media-amazon.com/images/M/MV5BNTcwYWE1NTYtOWNiYy00NzY3LWIwY2MtNjJmZDkxNDNmOWE1XkEyXkFqcGc@._V1_.jpg",
+        "video_url": "https://drive.google.com/file/d/1TUm3LXEPzZovdMFlAp0Mysda-2wZkIX5/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Dram",
+        "imdb": "7.0",
+        "desc": "Furiosa- Bir Mad Max Destan",
+        "is_active": true,
+        "is_featured": false
     }
 ]
