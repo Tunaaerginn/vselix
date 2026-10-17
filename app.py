@@ -100,7 +100,7 @@ if "admin_logged" not in st.session_state:
 if "show_add_profile" not in st.session_state:
     st.session_state.show_add_profile = False
 
-# --- CSS TASARIMI ---
+# --- DÜZGÜN VE SABİTLENMİŞ CSS ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -119,7 +119,7 @@ st.markdown("""
         letter-spacing: 6px;
         margin: 0;
         line-height: 1;
-        text-shadow: 0 0 30px rgba(229, 9, 20, 0.6), 0 0 60px rgba(229, 9, 20, 0.2);
+        text-shadow: 0 0 30px rgba(229, 9, 20, 0.6);
     }
 
     .netflix-login-card {
@@ -143,7 +143,6 @@ st.markdown("""
         text-align: center;
     }
 
-    /* Genel Butonlar */
     div.stButton > button {
         background: linear-gradient(135deg, #E50914 0%, #b20710 100%);
         color: white;
@@ -164,26 +163,22 @@ st.markdown("""
         box-shadow: 0 8px 25px rgba(229, 9, 20, 0.6);
     }
 
-    /* Sadece Kutu / Avatar Butonu Özel Stili */
-    .avatar-only-btn button {
-        border-radius: 20px !important;
-        padding: 0px !important;
-        height: 140px !important;
-        width: 140px !important;
-        margin: 0 auto !important;
-        font-size: 58px !important;
-        border: 3px solid rgba(255, 255, 255, 0.15) !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+    /* Profil Seçim Ekranı Kartları */
+    .profile-box {
+        background: rgba(255, 255, 255, 0.03);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 30px 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+        margin-bottom: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
-
-    .avatar-only-btn button:hover {
-        border-color: #E50914 !important;
-        transform: translateY(-8px) scale(1.05) !important;
-        box-shadow: 0 15px 35px rgba(229, 9, 20, 0.5) !important;
+    .profile-box:hover {
+        border-color: #E50914;
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(229, 9, 20, 0.4);
+        background: rgba(229, 9, 20, 0.05);
     }
 
     .hero-container {
@@ -213,7 +208,6 @@ st.markdown("""
         width: fit-content;
         margin-bottom: 14px;
         letter-spacing: 2px;
-        box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
     }
 
     .hero-title {
@@ -319,7 +313,7 @@ if not st.session_state.is_authenticated:
                     else:
                         st.error("❌ Hatalı yönetici parolası!")
 
-# --- 2. AŞAMA: PROFİL SEÇİM EKRANI (TAM AVATAR KUTUSUNA TIKLAMA) ---
+# --- 2. AŞAMA: PROFİL SEÇİMİ (NETFLIX DÜZENİ) ---
 elif "profile" not in st.session_state or st.session_state.profile is None:
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("<h1 style='font-family: Bebas Neue; font-size: 95px; text-align: center; color: #E50914; margin-bottom: 0; letter-spacing: 8px; text-shadow: 0 5px 35px rgba(229, 9, 20, 0.6);'>VSELIX</h1>", unsafe_allow_html=True)
@@ -333,41 +327,34 @@ elif "profile" not in st.session_state or st.session_state.profile is None:
             bg_color = prof.get('color', '#333')
             icon = prof.get('icon', '🍿')
             
-            # Arka plan rengini ve ikonu doğrudan butona veriyoruz
             st.markdown(f"""
-                <style>
-                div[data-testid="stColumn"]:nth-child({idx+1}) .avatar-only-btn button {{
-                    background: {bg_color} !important;
-                }}
-                </style>
+                <div class="profile-box">
+                    <div style="width: 110px; height: 110px; border-radius: 16px; background-color: {bg_color}; display: flex; justify-content: center; align-items: center; font-size: 50px; margin: 0 auto 15px auto; box-shadow: 0 8px 20px rgba(0,0,0,0.5);">
+                        {icon}
+                    </div>
+                    <div style="font-size: 18px; color: #ffffff; font-weight: 700; margin-bottom: 15px;">{prof['name']}</div>
             """, unsafe_allow_html=True)
             
-            st.markdown('<div class="avatar-only-btn">', unsafe_allow_html=True)
-            if st.button(icon, key=f"prof_btn_{idx}"):
+            if st.button(f"Seç: {prof['name']}", key=f"prof_btn_{idx}"):
                 st.session_state.profile = prof['name']
                 st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
-            
-            # Sadece profil adı altında şık bir yazı olarak durur
-            st.markdown(f"<p style='text-align: center; color: #e5e5e5; font-weight: 600; font-size: 18px; margin-top: 14px;'>{prof['name']}</p>", unsafe_allow_html=True)
+                
+            st.markdown("</div>", unsafe_allow_html=True)
 
     with cols[-1]:
-        st.markdown(f"""
-            <style>
-            div[data-testid="stColumn"]:nth-child({total_slots}) .avatar-only-btn button {{
-                background: rgba(255,255,255,0.03) !important;
-                border: 2px dashed rgba(255,255,255,0.2) !important;
-                color: #777 !important;
-            }}
-            </style>
+        st.markdown("""
+            <div class="profile-box" style="border: 2px dashed rgba(255,255,255,0.2);">
+                <div style="width: 110px; height: 110px; border-radius: 16px; background: rgba(255,255,255,0.03); display: flex; justify-content: center; align-items: center; font-size: 45px; margin: 0 auto 15px auto; color: #777;">
+                    +
+                </div>
+                <div style="font-size: 18px; color: #888; font-weight: 700; margin-bottom: 15px;">Yeni Profil</div>
         """, unsafe_allow_html=True)
         
-        st.markdown('<div class="avatar-only-btn">', unsafe_allow_html=True)
-        if st.button("➕", key="add_prof_main_btn"):
+        if st.button("➕ Profil Ekle", key="add_prof_main_btn"):
             st.session_state.show_add_profile = True
             st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
-        st.markdown("<p style='text-align: center; color: #888; font-weight: 600; font-size: 18px; margin-top: 14px;'>Profil Ekle</p>", unsafe_allow_html=True)
+            
+        st.markdown("</div>", unsafe_allow_html=True)
 
     if st.session_state.show_add_profile:
         st.markdown("<br>", unsafe_allow_html=True)
