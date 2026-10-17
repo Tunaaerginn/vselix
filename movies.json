@@ -106,5 +106,17 @@
         "desc": "Kâinatın Hâkimleri",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "John Wick Dünyasından Ballerina",
+        "title": "John Wick Dünyasından Ballerina",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjRgpeb22c-mXbOiBkh9-W6oAEgEtFvWGtB83A7btgn2QPM-F1QEj0fLE&s=10",
+        "video_url": "https://drive.google.com/file/d/1VfShuw5SeuUx3H6KgmFNLcHo9xbqOpB5/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Dram",
+        "imdb": "9.4",
+        "desc": "John Wick Dünyasından Ballerina",
+        "is_active": true,
+        "is_featured": false
     }
 ]
