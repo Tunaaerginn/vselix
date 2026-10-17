@@ -10,17 +10,5 @@
         "desc": "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu.",
         "is_active": true,
         "is_featured": true
-    },
-    {
-        "id": "p",
-        "title": "purna",
-        "img": "p",
-        "video_url": "p",
-        "trailer_url": "p",
-        "genre": "Aksiyon",
-        "imdb": "7.0",
-        "desc": "",
-        "is_active": true,
-        "is_featured": false
     }
 ]
