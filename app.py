@@ -101,12 +101,11 @@ if "admin_logged" not in st.session_state:
 if "show_add_profile" not in st.session_state:
     st.session_state.show_add_profile = False
 
-# --- ULTRA KOZMETİK CSS VE SINEMATİK ARAYÜZ ---
+# --- ULTRA KOZMETİK CSS VE İNTERAKTİF PROFİL KARTLARI ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-    /* Ana Arka Plan ve Tipografi */
     .stApp {
         background: #0f0f12;
         background-image: radial-gradient(circle at 50% -20%, #1f080a 0%, #0f0f12 80%);
@@ -114,7 +113,6 @@ st.markdown("""
         font-family: 'Inter', sans-serif;
     }
     
-    /* Netflix Tarzı Glow Logo */
     .vselix-logo {
         font-family: 'Bebas Neue', sans-serif;
         color: #E50914;
@@ -125,7 +123,6 @@ st.markdown("""
         text-shadow: 0 0 30px rgba(229, 9, 20, 0.6), 0 0 60px rgba(229, 9, 20, 0.2);
     }
 
-    /* Giriş Kartı */
     .netflix-login-card {
         background: rgba(18, 18, 22, 0.75);
         padding: 50px 45px;
@@ -147,44 +144,7 @@ st.markdown("""
         text-align: center;
     }
 
-    /* Profil Seçim Kutuları */
-    .profile-card-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        cursor: pointer;
-        margin-bottom: 25px;
-    }
-
-    .profile-avatar-box {
-        width: 150px;
-        height: 150px;
-        border-radius: 16px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 64px;
-        border: 2px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-        background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.4) 100%);
-    }
-
-    .profile-card-container:hover .profile-avatar-box {
-        border-color: #E50914;
-        transform: translateY(-10px) scale(1.06);
-        box-shadow: 0 15px 35px rgba(229, 9, 20, 0.4);
-    }
-
-    .profile-name {
-        margin-top: 16px;
-        font-size: 18px;
-        color: #e5e5e5;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-    }
-
-    /* Özel Buton Tasarımları */
+    /* Profil Seçim Butonu Özelleştirmesi (Direk Kutuya Tıklama Hissi) */
     div.stButton > button {
         background: linear-gradient(135deg, #E50914 0%, #b20710 100%);
         color: white;
@@ -205,7 +165,22 @@ st.markdown("""
         box-shadow: 0 8px 25px rgba(229, 9, 20, 0.6);
     }
 
-    /* Öne Çıkan Hero Banner */
+    /* Profil Kartı Özel Stili */
+    .profile-card-box {
+        background: rgba(255, 255, 255, 0.02);
+        border: 2px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+        margin-bottom: 10px;
+    }
+    .profile-card-box:hover {
+        border-color: #E50914;
+        transform: translateY(-8px);
+        box-shadow: 0 12px 30px rgba(229, 9, 20, 0.4);
+    }
+
     .hero-container {
         position: relative;
         background-size: cover;
@@ -246,7 +221,6 @@ st.markdown("""
         text-shadow: 0 5px 25px rgba(0,0,0,0.95);
     }
 
-    /* Kategori Başlıkları */
     .row-title {
         font-family: 'Bebas Neue', sans-serif;
         font-size: 34px;
@@ -271,7 +245,6 @@ st.markdown("""
         box-shadow: 0 0 15px rgba(229, 9, 20, 0.3) !important;
     }
 
-    /* IMDb Badge */
     .imdb-badge {
         background: #f5c518;
         color: #000;
@@ -341,7 +314,7 @@ if not st.session_state.is_authenticated:
                     else:
                         st.error("❌ Hatalı yönetici parolası!")
 
-# --- 2. AŞAMA: PROFİL SEÇİM EKRANI ---
+# --- 2. AŞAMA: PROFİL SEÇİM EKRANI (DOĞRUDAN PROFİLE TIKLAMA) ---
 elif "profile" not in st.session_state or st.session_state.profile is None:
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("<h1 style='font-family: Bebas Neue; font-size: 95px; text-align: center; color: #E50914; margin-bottom: 0; letter-spacing: 8px; text-shadow: 0 5px 35px rgba(229, 9, 20, 0.6);'>VSELIX</h1>", unsafe_allow_html=True)
@@ -354,21 +327,29 @@ elif "profile" not in st.session_state or st.session_state.profile is None:
         with cols[idx]:
             bg_color = prof.get('color', '#333')
             icon = prof.get('icon', '👤')
+            
+            # Şık Profil Kutusu Görseli
             st.markdown(f"""
-                <div class="profile-card-container">
-                    <div class="profile-avatar-box" style="background-color: {bg_color};">{icon}</div>
-                    <div class="profile-name">{prof['name']}</div>
+                <div class="profile-card-box">
+                    <div style="width: 120px; height: 120px; border-radius: 16px; background-color: {bg_color}; display: flex; justify-content: center; align-items: center; font-size: 52px; margin: 0 auto; box-shadow: 0 8px 25px rgba(0,0,0,0.6);">
+                        {icon}
+                    </div>
+                    <div style="margin-top: 15px; font-size: 18px; color: #ffffff; font-weight: 700;">{prof['name']}</div>
                 </div>
             """, unsafe_allow_html=True)
-            if st.button(f"👉 {prof['name']}", key=f"prof_btn_{idx}"):
+            
+            # Doğrudan profili seçme butonu
+            if st.button(f"✨ {prof['name']} ile İzle", key=f"prof_btn_{idx}"):
                 st.session_state.profile = prof['name']
                 st.rerun()
 
     with cols[-1]:
         st.markdown(f"""
-            <div class="profile-card-container">
-                <div class="profile-avatar-box" style="background-color: rgba(255,255,255,0.03); border: 2px dashed rgba(255,255,255,0.2); color: #888;">+</div>
-                <div class="profile-name">Profil Ekle</div>
+            <div class="profile-card-box" style="border: 2px dashed rgba(255,255,255,0.2);">
+                <div style="width: 120px; height: 120px; border-radius: 16px; background: rgba(255,255,255,0.03); display: flex; justify-content: center; align-items: center; font-size: 52px; margin: 0 auto; color: #777;">
+                    +
+                </div>
+                <div style="margin-top: 15px; font-size: 18px; color: #888; font-weight: 700;">Yeni Profil</div>
             </div>
         """, unsafe_allow_html=True)
         if st.button("➕ Profil Ekle", key="add_prof_main_btn"):
