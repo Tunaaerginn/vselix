@@ -226,5 +226,17 @@
         "desc": "Terminatör 1",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "Terminatör 2",
+        "title": "Terminatör 2",
+        "img": "https://m.media-amazon.com/images/M/MV5BNGMyMGNkMDUtMjc2Ni00NWFlLTgyODEtZTY2MzBiZTg0OWZiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        "video_url": "https://drive.google.com/file/d/1tUPg4ZauHINpTFxkXf65RItpGe_DNysh/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Terminatör Serisi",
+        "imdb": "9.7",
+        "desc": "Terminatör 2",
+        "is_active": true,
+        "is_featured": false
     }
 ]
