@@ -130,5 +130,17 @@
         "desc": "SuperGirl ",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "Nuremberg",
+        "title": "Nuremberg",
+        "img": "https://m.media-amazon.com/images/M/MV5BZDMyMzdmYjktN2Y2Zi00NzlmLWE5YzMtN2U2NjgyOWJjNDYzXkEyXkFqcGc@._V1_.jpg",
+        "video_url": "https://drive.google.com/file/d/1jiuOEfiacDVbgh26eoOROQgiWewlJcrq/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Aksiyon",
+        "imdb": "8.4",
+        "desc": "Nuremberg 2025",
+        "is_active": true,
+        "is_featured": false
     }
 ]
