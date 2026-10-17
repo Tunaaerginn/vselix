@@ -3,6 +3,8 @@ import json
 import os
 import random
 import string
+import requests
+import base64
 
 # Sayfa Yapılandırması
 st.set_page_config(
@@ -16,6 +18,9 @@ DB_FILE = "movies.json"
 PROFILE_FILE = "profiles.json"
 ACCESS_CODES_FILE = "access_codes.json"
 
+GITHUB_REPO = "Tunaaerginn/vselix"
+GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN", "")
+
 default_movies = [
     {
         "id": "dag2",
@@ -28,30 +33,43 @@ default_movies = [
         "desc": "Birinci Özel Kuvvet Tugayı'na bağlı 8 kişilik Fırtına Getirenler Timi'nin sınır ötesi operasyonu.",
         "is_active": True,
         "is_featured": True
-    },
-    {
-        "id": "furiosa",
-        "title": "Furiosa: Bir Mad Max Destanı",
-        "img": "https://tr.web.img4.acsta.net/pictures/24/03/19/12/12/3221371.jpg",
-        "video_url": "https://www.w3schools.com/html/mov_bbb.mp4",
-        "trailer_url": "https://www.youtube.com/watch?v=XJMek08brmg",
-        "genre": "Bilim Kurgu",
-        "imdb": "7.6",
-        "desc": "Dünyanın çöküşünden yıllar sonra genç Furiosa, Yeşil Diyar'dan koparılır.",
-        "is_active": True,
-        "is_featured": False
     }
 ]
 
-default_profiles = [
-    {"name": "Misafir", "color": "#eab308", "icon": "🍿"}
-]
-
+default_profiles = [{"name": "Misafir", "color": "#eab308", "icon": "🍿"}]
 default_codes = ["123456", "654321"]
+
+def push_to_github(filename, data_list):
+    """Veriyi GitHub Deposuna Otomatik Push Eder (Kalıcı Kayıt)"""
+    if not GITHUB_TOKEN:
+        return False
+    
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{filename}"
+    headers = {
+        "Authorization": f"token {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github.v3+json"
+    }
+    
+    res = requests.get(url, headers=headers)
+    sha = res.json().get("sha") if res.status_code == 200 else None
+    
+    content = json.dumps(data_list, ensure_ascii=False, indent=4)
+    encoded_content = base64.b64encode(content.encode("utf-8")).decode("utf-8")
+    
+    payload = {
+        "message": f"Auto-update {filename} via Vselix Admin Panel",
+        "content": encoded_content
+    }
+    if sha:
+        payload["sha"] = sha
+        
+    response = requests.put(url, headers=headers, json=payload)
+    return response.status_code in [200, 201]
 
 def save_data(filename, data_list):
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data_list, f, ensure_ascii=False, indent=4)
+    push_to_github(filename, data_list)
 
 def load_data(filename, default_val):
     if os.path.exists(filename):
@@ -450,7 +468,7 @@ else:
                         }
                         st.session_state.movies.append(new_m)
                         save_data(DB_FILE, st.session_state.movies)
-                        st.success(f"'{n_title}' başarıyla eklendi ve yayınlandı!")
+                        st.success(f"'{n_title}' eklendi ve GitHub'a kaydedildi!")
                         st.rerun()
                     else:
                         st.warning("Eksik alanları doldurun.")
@@ -491,7 +509,7 @@ else:
                         target_movie["desc"] = ed_desc
                         
                         save_data(DB_FILE, st.session_state.movies)
-                        st.success("Film güncellendi!")
+                        st.success("Film güncellendi ve GitHub'a kaydedildi!")
                         st.rerun()
                 
                 if st.button("🗑️ Bu Filmi Sil", key="del_movie_btn"):
