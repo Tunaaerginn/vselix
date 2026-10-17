@@ -190,5 +190,17 @@
         "desc": "Küp Serisi",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "Küp 2",
+        "title": "Küp 2",
+        "img": "https://m.media-amazon.com/images/M/MV5BN2E0ZmI1NWEtMTViZS00ZTA4LTkwZmMtOTY5OTljNjZkZmE5XkEyXkFqcGc@._V1_.jpg",
+        "video_url": "https://drive.google.com/file/d/11BdBTHV9lR4BwaP4x_hKzE1VxMAsn3hl/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Küp Serisi",
+        "imdb": "9.1",
+        "desc": "Küp Serisi 2/3",
+        "is_active": true,
+        "is_featured": false
     }
 ]
