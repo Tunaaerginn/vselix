@@ -142,5 +142,17 @@
         "desc": "Nuremberg 2025",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "The Pilot",
+        "title": "The Pilot",
+        "img": "https://m.media-amazon.com/images/M/MV5BN2NmMmFkMmMtOWYyZi00YTM4LWFmMWUtNDc0MDU2NWVjOTlkXkEyXkFqcGc@._V1_.jpg",
+        "video_url": "https://drive.google.com/file/d/1-v4yLavxzPs3my-ibpA0uHAE7WNVjFjp/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Aksiyon",
+        "imdb": "7.4",
+        "desc": "The Pilot",
+        "is_active": true,
+        "is_featured": false
     }
 ]
