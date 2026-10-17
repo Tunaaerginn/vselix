@@ -82,5 +82,17 @@
         "desc": "Ketenpere Dalavere",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "G_O_R_A (Cem Yılmaz)",
+        "title": "G_O_R_A (Cem Yılmaz)",
+        "img": "https://m.media-amazon.com/images/M/MV5BMjE0MTY2MDI3NV5BMl5BanBnXkFtZTcwNTc1MzEzMQ@@._V1_FMjpg_UX1000_.jpg",
+        "video_url": "https://drive.google.com/file/d/1b5XeV4trKl4a7nJRF7M96DIF0aehwlpa/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Komedi",
+        "imdb": "7.1",
+        "desc": "G_O_R_A (Cem Yılmaz)",
+        "is_active": true,
+        "is_featured": false
     }
 ]
