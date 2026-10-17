@@ -118,5 +118,17 @@
         "desc": "John Wick Dünyasından Ballerina",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "SuperGirl ",
+        "title": "SuperGirl ",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb_mbZVPajzBu8WX0iuJD78QhM1CJb_h29Q5O54YUdiquIjiE3XHJOQsc&s=10",
+        "video_url": "https://drive.google.com/file/d/1RvoRXgLZbm52vtDH2oEIm-yGQ9wKIxGs/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Bilim Kurgu",
+        "imdb": "8.4",
+        "desc": "SuperGirl ",
+        "is_active": true,
+        "is_featured": false
     }
 ]
