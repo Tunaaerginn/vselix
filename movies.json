@@ -141,7 +141,7 @@
         "imdb": "8.4",
         "desc": "Nuremberg 2025",
         "is_active": true,
-        "is_featured": false
+        "is_featured": true
     },
     {
         "id": "The Pilot",
