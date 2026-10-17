@@ -178,5 +178,17 @@
         "desc": "#Alive (HAYATTA)",
         "is_active": true,
         "is_featured": false
+    },
+    {
+        "id": "Küp 1",
+        "title": "Küp 1",
+        "img": "https://m.media-amazon.com/images/M/MV5BM2U1NjBiNDItYzBhNC00MWU3LWI1Y2QtNmM4MmRjZGY1MmU3XkEyXkFqcGc@._V1_.jpg",
+        "video_url": "https://drive.google.com/file/d/1f5DOzR5hROF1q1JQ2t_gLmg4dng_Y2S2/view?usp=drive_link",
+        "trailer_url": "",
+        "genre": "Küp Serisi",
+        "imdb": "9.6",
+        "desc": "Küp Serisi",
+        "is_active": true,
+        "is_featured": false
     }
 ]
